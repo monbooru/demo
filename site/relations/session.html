@@ -1,0 +1,800 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" data-app="monbooru" data-demo-root="../" data-demo-version="v1.23.0">
+<head>
+
+
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, noimageindex">
+  <meta name="htmx-config" content='{"historyEnabled":false}'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Session - Monbooru</title>
+  <meta name="csrf-token" content="demo">
+  <link rel="icon" type="image/png" href="../static/favicon.png">
+  <link rel="stylesheet" href="../static/shared/base.css?v=f1bf4f227d">
+  <link rel="stylesheet" href="../static/main.css?v=f53bf38008">
+  <link rel="stylesheet" href="../_demo/demo.css?v=4306714f76">
+  
+
+  <link rel="manifest" href="../manifest.json">
+
+  <script src="../_demo/index.js?v=23863755c3" defer></script>
+  <script src="../_demo/shim.js?v=dd6688d25d" defer></script>
+  <script src="../static/shared/htmx.min.js" defer></script>
+  <script src="../static/shared/base.js?v=538cda393b" defer></script>
+  <script src="../static/main.js?v=0cca1aa876" defer></script>
+</head>
+<body data-gallery="default">
+<div id="demo-banner" role="note"><span class="demo-banner-title">Read-only demo of monbooru <b>v1.23.0</b></span><span class="demo-banner-note">Some features are disabled or a bit off.</span><span class="demo-banner-links"><a href="https://monbooru.github.io/mondocs/getting-started/install.html">Install</a><a href="https://monbooru.github.io/mondocs/index.html">Docs</a><a href="https://github.com/monbooru/monbooru">GitHub</a></span><span class="demo-banner-try"><span class="demo-banner-label">Try:</span><a href="../index.html?q=hakurei_reimu+smile">hakurei_reimu smile</a><a href="../index.html?q=touhou+-hakurei_reimu">touhou -hakurei_reimu</a><a href="../index.html?q=%2A_hair">*_hair</a><a href="../index.html?q=blonde_hair+OR+blue_hair">blonde_hair OR blue_hair</a><a href="../index.html?q=ai%3Aany">ai:any</a></span><span class="demo-banner-credit">Artwork by the credited artists, linked on each image.</span></div>
+  <div id="topbar">
+    <button id="sidebar-toggle" aria-label="Toggle sidebar">☰</button>
+    <a href="../index.html" id="logo">
+      <img src="../static/logo.png" alt="" class="topbar-logo">
+      <span>Mon<span class="wordmark-accent">booru</span></span>
+    </a>
+    <nav id="nav">
+      <a href="../index.html" class="nav-images">Images</a>
+      <a id="inbox-nav" href="../index.html?q=inbox:true" class="nav-inbox">Inbox<span id="inbox-nav-count"> (8)</span></a>
+      <a href="../categories.html" class="nav-categories">Categories</a>
+      <a href="../tags.html" class="nav-tags">Tags</a>
+      <a href="../collections.html" class="nav-collections">Collections</a>
+      <a href="../relations.html" class="nav-relations active">Relations</a>
+      <a href="../settings.html" class="nav-settings">Settings</a>
+      <a id="pair-notice" class="pair-notice" href="../settings.html#plugins" hidden></a>
+    </nav>
+    <div id="topbar-right">
+      <div id="job-status"
+           hx-get="/internal/job/status"
+           hx-trigger="load, every 2s"
+           hx-swap="outerHTML"
+           hx-vals='{"pair":""}'></div>
+      
+      <span id="sync-flash"></span>
+      <form id="sync-form" hx-post="/internal/sync" hx-swap="none"
+            hx-on:htmx:before-request="document.getElementById('job-status').innerHTML='<span class=&quot;job-running&quot;>syncing…</span>'"
+            hx-on:sync-started="document.getElementById('job-status').setAttribute('hx-trigger','every 2s');htmx.process('#job-status')"
+            hx-on:htmx:response-error="document.getElementById('sync-flash').innerHTML=event.detail.xhr.responseText;refreshJobStatus();setTimeout(function(){var el=document.getElementById('sync-flash');if(el)el.innerHTML='';},5000)"
+            style="display:inline">
+        <button type="submit" class="topbar-action" title="Look for files added, moved or deleted in the gallery folder (Y)">[⟳ sync]</button>
+      </form>
+      
+      
+    </div>
+  </div>
+  
+  <div id="page-notice" class="degraded-banner" data-login-url="/login" hidden></div>
+  <div id="main-layout">
+    <aside id="sidebar">
+
+<div id="sidebar-inner"></div>
+
+    </aside>
+    <button id="sidebar-rail" type="button" aria-label="Toggle sidebar"></button>
+    <main id="content">
+
+
+
+<div id="relations-session-page" class="relations-session" data-esc-back="../relations.html">
+  <div class="detail-topbar">
+    <div class="detail-nav-group">
+      <a class="back-link" href="../relations.html">‹ Relations</a>
+      <span class="detail-nav-sep">/</span>
+      <strong class="walker-page-title">Relations session</strong>
+      
+      <span class="detail-nav-sep">·</span>
+      <span class="field-hint"><strong>1</strong> pair remaining</span>
+      
+    </div>
+    
+    <form method="get" action="../relations/session.html" class="session-order-form session-detector-form">
+      <span class="field-hint">Found by</span>
+      <label><input type="radio" name="detector" value="both" onchange="this.form.submit()" checked> Both</label>
+      <label><input type="radio" name="detector" value="phash" onchange="this.form.submit()" > Looks alike</label>
+      <label><input type="radio" name="detector" value="tags" onchange="this.form.submit()" > Shares rare tags</label>
+    </form>
+    
+    <form method="get" action="../relations/session.html" class="session-order-form">
+      <span class="field-hint">Order</span>
+      <label><input type="radio" name="order" value="smallest_distance_first" onchange="this.form.submit()" checked> Most alike</label>
+      <label><input type="radio" name="order" value="largest_file_first" onchange="this.form.submit()" > Largest file</label>
+      <label><input type="radio" name="order" value="random" onchange="this.form.submit()" > Random</label>
+    </form>
+  </div>
+
+  <div id="flash-relations" data-action-flash></div>
+
+  <section class="session-pair" data-a="13" data-b="47"
+           data-a-type="jpeg" data-b-type="jpeg">
+    <div class="session-cells">
+      <div class="session-cell" data-side="A">
+        <h4 class="session-role" data-role="left">Left</h4>
+        <a href="../images/13.html" target="_blank">
+          <img src="../images/13/view.jpg" alt="image 13" class="session-cell-img" loading="lazy">
+        </a>
+        <div class="session-cell-meta">
+          <strong class="session-cell-filename">danbooru_2619062_17c87340c4c9e4629d6d20b4e8b799f4.jpg</strong>
+          <div class="session-facts mono-small">#13</div>
+        </div>
+      </div>
+      <div class="session-bridge">
+        <div class="session-distance" aria-hidden="true">
+          <span class="session-distance-line"></span>
+          
+          <span class="session-distance-label">difference <strong>0</strong> (0 = identical)</span>
+          
+          <span class="session-distance-line"></span>
+        </div>
+        <div class="session-controls">
+          <button type="button" id="session-swap" title="Swap which side is left (W)">Swap sides (W)</button>
+          <button type="button" id="session-compare" title="Compare the two images (C)">Compare (C)</button>
+        </div>
+        
+      </div>
+      <div class="session-cell" data-side="B">
+        <h4 class="session-role" data-role="right">Right</h4>
+        <a href="../images/47.html" target="_blank">
+          <img src="../images/47/view.jpg" alt="image 47" class="session-cell-img" loading="lazy">
+        </a>
+        <div class="session-cell-meta">
+          <strong class="session-cell-filename">marisa_alice_small.jpg</strong>
+          <div class="session-facts mono-small">#47</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="session-prompt"><span id="session-prompt-text" data-default="How is the right image related to the left one? Hover a choice to see what it does.">How is the right image related to the left one? Hover a choice to see what it does.</span></p>
+
+    <form id="session-decision-form" hx-post="/relations/session/decide" hx-target="#flash-relations" hx-swap="innerHTML"
+          hx-on::after-request="onSessionDecideResponse(event)">
+      <input type="hidden" name="a" value="13">
+      <input type="hidden" name="b" value="47">
+      <input type="hidden" name="left" id="session-left" value="13">
+      <input type="hidden" name="order" value="smallest_distance_first">
+      <input type="hidden" name="detector" value="both">
+
+      <div class="session-buttons">
+        <button type="submit" name="type" value="duplicate"
+                data-prompt-sentence="{right} is the same image as {left} ({left} is the original)."
+                title="Right is the same image as left (1)">1 Same image (Duplicate)</button>
+        <button type="submit" name="type" value="alternate"
+                data-prompt-sentence="{left} and {right} are variants."
+                title="Right is a variant of left (2)">2 Variant (Alternate)</button>
+        <button type="submit" name="type" value="version"
+                data-prompt-sentence="{right} is a newer revision of {left}."
+                title="Right is a newer revision of left (3)">3 Newer revision (Version)</button>
+        <button type="submit" name="type" value="derivative"
+                data-prompt-sentence="{right} is based on {left}."
+                title="Right is based on left (4)">4 Based on (Derivative)</button>
+      </div>
+      <div class="session-buttons session-buttons-secondary">
+        
+        <button type="submit" name="type" value="not_related"
+                data-prompt-sentence="{left} and {right} are not related; the pair stays out of every future session."
+                title="Not related (5)">5 Not related</button>
+        
+        <button type="submit" name="type" value="skip"
+                data-prompt-sentence="Skip this pair - it leaves this session until you reset skipped pairs."
+                title="Skip (6 / Space)">6 Skip</button>
+      </div>
+    </form>
+
+    <table class="relations-compare-table">
+  <thead>
+    <tr><th>Field</th><th>Left <span class="cmp-col-id">#13</span></th><th>Right <span class="cmp-col-id">#47</span></th></tr>
+  </thead>
+  <tbody><tr>
+      <th>Resolution</th>
+      <td class="cmp-win" title="Higher resolution">1827×1000 ←</td>
+      <td>913×500</td>
+    </tr>
+    
+    <tr>
+      <th>File size</th>
+      <td class="cmp-win" title="Larger file">698.2 KiB ←</td>
+      <td>131.4 KiB</td>
+    </tr>
+    
+    
+    
+    <tr>
+      <th>Tag count</th>
+      <td class="cmp-win" title="More tags">105 ←</td>
+      <td>28</td>
+    </tr>
+    
+    
+    <tr>
+      <th>Tags only here</th>
+      <td class="cmp-tag-cell">
+        
+          <span style="color:var(--cat-3d90e3,#3d90e3)" title="general:5girls">5girls</span>, <span style="color:var(--cat-3d90e3,#3d90e3)" title="general:absurdly_detailed_composition">absurdly_detailed_composition</span>, <span style="color:var(--cat-3d90e3,#3d90e3)" title="general:analogous_colors">analogous_colors</span>, <span style="color:var(--cat-3d90e3,#3d90e3)" title="general:basket">basket</span>, <span style="color:var(--cat-3d90e3,#3d90e3)" title="general:bell">bell</span>, <span class="field-hint">+81 more</span>
+        
+      </td>
+      <td class="cmp-tag-cell">
+        
+          <span style="color:var(--cat-3d90e3,#3d90e3)" title="general:1girl">1girl</span>, <span style="color:var(--cat-3d90e3,#3d90e3)" title="general:blonde_hair">blonde_hair</span>, <span style="color:var(--cat-3d90e3,#3d90e3)" title="general:blue_dress">blue_dress</span>, <span style="color:var(--cat-3d90e3,#3d90e3)" title="general:curtains">curtains</span>, <span style="color:var(--cat-3d90e3,#3d90e3)" title="general:gem">gem</span>, <span class="field-hint">+4 more</span>
+        
+      </td>
+    </tr>
+    
+    
+    
+    
+  </tbody>
+</table>
+
+
+    <dialog id="session-compare-dialog" class="compare-dialog">
+      <div class="compare-captions" aria-hidden="true">
+        <span class="compare-caption">Left <span class="mono-small" id="compare-caption-left-id">#?</span></span>
+        <span class="compare-caption">Right <span class="mono-small" id="compare-caption-right-id">#?</span></span>
+      </div>
+      <div class="compare-stage" id="compare-stage">
+        <div class="compare-slot compare-slot-left"  id="compare-slot-left"></div>
+        <div class="compare-slot compare-slot-right" id="compare-slot-right"></div>
+        <div class="compare-divider" id="compare-divider" aria-hidden="true">
+          <span class="compare-divider-handle">&#x21d4;</span>
+        </div>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" id="compare-close">Close</button>
+      </div>
+    </dialog>
+
+    <dialog id="session-postdecide-delete-dialog">
+      <h4 class="dlg-title"><span id="postdecide-dup-id">#?</span> has been marked as a duplicate of <span id="postdecide-original-id">#?</span><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></h4>
+      <p>Delete <span id="postdecide-dup-id-body">#?</span> from the gallery now?</p>
+      <p class="field-hint">The original stays; the duplicate leaves the gallery and its file is removed from disk. This cannot be undone.</p>
+      <label id="postdecide-copy-tags-label" hidden>
+        <input type="checkbox" id="postdecide-copy-tags">
+        Copy unique tags onto the original first
+      </label>
+      <div id="postdecide-flash"></div>
+      <div class="dialog-actions">
+        <button type="button" id="postdecide-keep" class="btn-sm" autofocus>Keep file</button>
+        <button type="button" id="postdecide-delete" class="btn-danger btn-sm">Delete now</button>
+      </div>
+    </dialog>
+
+  </section>
+  
+</div>
+
+<script>
+(function() {
+  var form = document.getElementById('session-decision-form');
+  if (!form) {
+    return;
+  }
+  var pair = document.querySelector('.session-pair');
+  var leftInput = document.getElementById('session-left');
+
+  
+  
+  function currentLeftID() {
+    var v = leftInput ? leftInput.value : null;
+    return v === pair.dataset.b ? pair.dataset.b : pair.dataset.a;
+  }
+
+  function flipSides() {
+    var cells = pair.querySelector('.session-cells');
+    if (!cells) return;
+    var left = cells.children[0];
+    var bridge = cells.children[1];
+    var right = cells.children[2];
+    if (!left || !bridge || !right) return;
+    cells.insertBefore(right, left);
+    cells.insertBefore(bridge, left);
+    var newLeftCell = cells.children[0];
+    var newRightCell = cells.children[2];
+    var lh = newLeftCell.querySelector('.session-role');
+    var rh = newRightCell.querySelector('.session-role');
+    if (lh) { lh.textContent = 'Left'; lh.dataset.role = 'left'; }
+    if (rh) { rh.textContent = 'Right'; rh.dataset.role = 'right'; }
+    var newLeftSide = newLeftCell.dataset.side;
+    var aID = pair.dataset.a, bID = pair.dataset.b;
+    leftInput.value = (newLeftSide === 'A') ? aID : bID;
+    var table = pair.querySelector('.relations-compare-table');
+    if (table) {
+      var ids = table.querySelectorAll('thead .cmp-col-id');
+      if (ids.length === 2) {
+        var tmpID = ids[0].textContent;
+        ids[0].textContent = ids[1].textContent;
+        ids[1].textContent = tmpID;
+      }
+      table.querySelectorAll('tbody tr').forEach(function(tr) {
+        if (tr.children.length === 3) tr.insertBefore(tr.children[2], tr.children[1]);
+      });
+    }
+  }
+
+  var swap = document.getElementById('session-swap');
+  if (swap) swap.addEventListener('click', flipSides);
+
+  var prompt = document.getElementById('session-prompt-text');
+  if (prompt) {
+    var defaultPrompt = prompt.getAttribute('data-default') || prompt.textContent;
+    function resolvePrompt(template) {
+      if (!leftInput || !pair) return template;
+      var leftID = currentLeftID();
+      var rightID = (leftID === pair.dataset.a) ? pair.dataset.b : pair.dataset.a;
+      return template.replace(/{left}/g, '#' + leftID).replace(/{right}/g, '#' + rightID);
+    }
+    var promptButtons = form.querySelectorAll('button[data-prompt-sentence]');
+    promptButtons.forEach(function(btn) {
+      var tmpl = btn.getAttribute('data-prompt-sentence');
+      btn.addEventListener('mouseenter', function() { prompt.textContent = resolvePrompt(tmpl); });
+      btn.addEventListener('focus',      function() { prompt.textContent = resolvePrompt(tmpl); });
+      btn.addEventListener('mouseleave', function() { prompt.textContent = defaultPrompt; });
+      btn.addEventListener('blur',       function() { prompt.textContent = defaultPrompt; });
+    });
+  }
+
+  var compareBtn = document.getElementById('session-compare');
+  var compareDlg = document.getElementById('session-compare-dialog');
+  var compareStage = document.getElementById('compare-stage');
+  var slotLeft = document.getElementById('compare-slot-left');
+  var slotRight = document.getElementById('compare-slot-right');
+  var divider = document.getElementById('compare-divider');
+  function setSplit(pct) {
+    if (pct < 0) pct = 0; else if (pct > 100) pct = 100;
+    if (slotRight) slotRight.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+    if (divider) divider.style.left = pct + '%';
+  }
+  function mountMedia(slot, id, fileType) {
+    if (!slot) return;
+    while (slot.firstChild) slot.removeChild(slot.firstChild);
+    var isVideo = fileType === 'mp4' || fileType === 'webm';
+    
+    var src = __demo.url('/images/' + id + (isVideo ? '/file' : fileType === 'cbz' ? '/page/1' : '/view'));
+    var el = document.createElement(isVideo ? 'video' : 'img');
+    if (isVideo) {
+      el.autoplay = true;
+      el.loop = true;
+      el.muted = true;
+      el.playsInline = true;
+      el.preload = 'auto';
+    } else {
+      el.alt = slot.id === 'compare-slot-left' ? 'left' : 'right';
+    }
+    el.src = src;
+    slot.appendChild(el);
+  }
+  function openCompare() {
+    if (!compareDlg || !compareStage) return;
+    var aID = pair.dataset.a, bID = pair.dataset.b;
+    var aType = pair.dataset.aType || '';
+    var bType = pair.dataset.bType || '';
+    var leftID = currentLeftID();
+    var rightID = (leftID === aID) ? bID : aID;
+    var leftType = (leftID === aID) ? aType : bType;
+    var rightType = (leftID === aID) ? bType : aType;
+    mountMedia(slotLeft, leftID, leftType);
+    mountMedia(slotRight, rightID, rightType);
+    var capL = document.getElementById('compare-caption-left-id');
+    var capR = document.getElementById('compare-caption-right-id');
+    if (capL) capL.textContent = '#' + leftID;
+    if (capR) capR.textContent = '#' + rightID;
+    setSplit(50);
+    compareDlg.showModal();
+  }
+  if (compareBtn) compareBtn.addEventListener('click', openCompare);
+  function clearCompareSlots() {
+    [slotLeft, slotRight].forEach(function(slot) {
+      if (!slot) return;
+      
+      var v = slot.querySelector('video');
+      if (v) { try { v.pause(); } catch (_) {} v.removeAttribute('src'); v.load(); }
+      while (slot.firstChild) slot.removeChild(slot.firstChild);
+    });
+  }
+  var compareClose = document.getElementById('compare-close');
+  if (compareClose) compareClose.addEventListener('click', function() {
+    if (compareDlg) compareDlg.close();
+  });
+  if (compareDlg) compareDlg.addEventListener('close', clearCompareSlots);
+  function trackSplit(evt) {
+    if (!compareStage) return;
+    var rect = compareStage.getBoundingClientRect();
+    var x = (evt.touches ? evt.touches[0].clientX : evt.clientX) - rect.left;
+    setSplit((x / rect.width) * 100);
+  }
+  if (compareStage) {
+    var dragging = false;
+    compareStage.addEventListener('mousedown', function(e) { dragging = true; trackSplit(e); });
+    compareStage.addEventListener('mousemove', function(e) { if (dragging) trackSplit(e); });
+    document.addEventListener('mouseup', function() { dragging = false; });
+    compareStage.addEventListener('touchstart', function(e) { trackSplit(e); }, {passive: true});
+    compareStage.addEventListener('touchmove',  function(e) { trackSplit(e); }, {passive: true});
+  }
+
+  var postdecideDlg = document.getElementById('session-postdecide-delete-dialog');
+  var pdFlash = document.getElementById('postdecide-flash');
+  var pdState = { dupID: 0, originalID: 0, groupID: 0 };
+  window.onSessionDecideResponse = function(evt) {
+    var detail = evt.detail || {};
+    var xhr = detail.xhr;
+    if (!detail.successful || !xhr) return;
+    if (xhr.getResponseHeader('X-Relations-Post-Decision') === 'duplicate-cleanup') {
+      pdState.dupID = parseInt(xhr.getResponseHeader('X-Relations-Duplicate-ID') || '0', 10);
+      pdState.originalID = parseInt(xhr.getResponseHeader('X-Relations-Duplicate-OriginalID') || '0', 10);
+      pdState.groupID = parseInt(xhr.getResponseHeader('X-Relations-Duplicate-GroupID') || '0', 10);
+      var hasUnique = xhr.getResponseHeader('X-Relations-Duplicate-HasUniqueTags') === '1';
+      var dupHeaderEl = document.getElementById('postdecide-dup-id');
+      var dupBodyEl = document.getElementById('postdecide-dup-id-body');
+      var origEl = document.getElementById('postdecide-original-id');
+      var copyLabel = document.getElementById('postdecide-copy-tags-label');
+      var copyBox = document.getElementById('postdecide-copy-tags');
+      if (dupHeaderEl) dupHeaderEl.textContent = '#' + pdState.dupID;
+      if (dupBodyEl) dupBodyEl.textContent = '#' + pdState.dupID;
+      if (origEl) origEl.textContent = '#' + pdState.originalID;
+      if (copyBox) copyBox.checked = false;
+      if (copyLabel) copyLabel.hidden = !hasUnique;
+      if (pdFlash) pdFlash.innerHTML = '';
+      if (postdecideDlg) postdecideDlg.showModal();
+      return;
+    }
+    if (xhr.status === 204) {
+      window.location.reload();
+    }
+  };
+  function pdDone() {
+    if (postdecideDlg) postdecideDlg.close();
+    window.location.reload();
+  }
+  
+  function pdCopyTags(next) {
+    var copyBox = document.getElementById('postdecide-copy-tags');
+    if (!copyBox || !copyBox.checked || pdState.groupID <= 0) { next(); return; }
+    postForm('/relations/dup-group/' + pdState.groupID + '/copy-tags', {}, {
+      hx: true, flashId: 'postdecide-flash',
+      onOK: function(res) {
+        res.text().then(function(t) {
+          if (t.indexOf('flash-err') !== -1) { pdFlash.innerHTML = t; return; }
+          next();
+        });
+      },
+    });
+  }
+  var pdKeep = document.getElementById('postdecide-keep');
+  if (pdKeep) pdKeep.addEventListener('click', function() {
+    
+    
+    pdCopyTags(pdDone);
+  });
+  var pdDelete = document.getElementById('postdecide-delete');
+  if (pdDelete) pdDelete.addEventListener('click', function() {
+    pdCopyTags(function() {
+      postForm('/relations/duplicates/marked/delete-one', {image_id: String(pdState.dupID)}, {
+        hx: true, flashId: 'postdecide-flash',
+        onOK: function(res) {
+          
+          
+          var f = JSON.parse(res.headers.get('HX-Trigger') || '{}')['action-flash'];
+          if (f) stashActionFlash(f.text, f.kind);
+          pdDone();
+        },
+      });
+    });
+  });
+  
+  if (postdecideDlg) postdecideDlg.addEventListener('cancel', function(e) {
+    e.preventDefault();
+    postdecideDlg.close();
+    window.location.reload();
+  });
+  if (postdecideDlg) postdecideDlg.addEventListener('keydown', function(e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+    if (e.key === 'd' || e.key === 'D') {
+      e.preventDefault();
+      if (pdDelete) pdDelete.click();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (pdKeep) pdKeep.click();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.defaultPrevented || document.querySelector('.chord-leader-hint')) return;
+    
+    if (compareDlg && compareDlg.open) {
+      if (e.key === 'Escape') { e.preventDefault(); compareDlg.close(); }
+      return;
+    }
+    if (document.querySelector('dialog[open]')) return;
+    var btnIndex = -1;
+    if (e.key >= '1' && e.key <= '6') btnIndex = parseInt(e.key, 10) - 1;
+    else if (e.key === ' ') { btnIndex = 5; e.preventDefault(); }
+    else if (e.key === 'w' || e.key === 'W') { flipSides(); return; }
+    else if (e.key === 'c' || e.key === 'C') { openCompare(); return; }
+    else if (e.key === 'Escape') { e.preventDefault(); window.location.href = __demo.url('/relations'); return; }
+    if (btnIndex < 0) return;
+    var btn = form.querySelectorAll('button[type="submit"]')[btnIndex];
+    if (btn) btn.click();
+  });
+})();
+</script>
+
+
+    </main>
+  </div>
+  <footer id="footer">
+    <div id="footer-left">
+      
+      <span class="footer-gallery">[default]</span>
+      
+      <span class="footer-wide">
+      <span class="footer-sep">·</span>
+      <span id="footer-count-images">59 img</span>
+      <span class="footer-sep">·</span>
+      <span id="footer-count-tags">1376 tags</span>
+      <span class="footer-sep">·</span>
+      <span id="footer-count-collections">5 collections</span>
+      </span>
+      
+      <span class="footer-sep-strong">::</span>
+      <span class="footer-rating-label footer-wide">show up to:</span>
+      <form hx-post="/internal/rating-ceiling?level=general" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above sfw (this browser only)">sfw</button></form><span class="footer-sep">·</span><form hx-post="/internal/rating-ceiling?level=sensitive" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above sensitive (this browser only)">sensitive</button></form><span class="footer-sep">·</span><form hx-post="/internal/rating-ceiling?level=questionable" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above questionable (this browser only)">questionable</button></form><span class="footer-sep">·</span><span class="footer-rating-active" title="Show every rating (this browser only)">[explicit]</span>
+      <span id="footer-hidden" class="footer-hidden"></span>
+    </div>
+    <div id="footer-right">
+      <span id="peer-light" class="footer-conn" data-conn="ok" data-peer-off="" hx-get="/internal/monloader-status" hx-trigger="load delay:1s, every 15s" hx-vals='{"seen":"true,false,false,false,0"}' hx-swap="outerHTML"><button type="button" class="footer-dot footer-dot-ok footer-conn-kill" title="Pause the connection to monloader" hx-post="/internal/monloader/disconnect" hx-target="#peer-light" hx-swap="outerHTML"></button>connected to monloader v1.13.4</span><span class="footer-peer-sep"> · </span><span class="footer-wide"><span id="footer-version"><a href="https://github.com/monbooru/monbooru" target="_blank" rel="noopener">monbooru (tarball)</a> v1.23.0</span> · <a href="#" id="footer-shortcuts" onclick="openShortcutSheet();return false">shortcuts</a> · </span><a href="https://monbooru.github.io/mondocs/index.html" target="_blank" rel="noopener">help</a><span class="footer-wide"> · <a href="../api/v1/docs.html" target="_blank" rel="noopener">API</a></span>
+    </div>
+  </footer>
+  
+  <dialog id="confirm-dialog">
+    <p class="dlg-title"><span id="confirm-dialog-msg"></span><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+    <p id="confirm-dialog-danger" class="confirm-dialog-danger"></p>
+    <div class="dialog-actions">
+      <button type="button" id="confirm-dialog-ok" class="btn-danger">OK</button>
+      <button type="button" id="confirm-dialog-alt" hidden></button>
+      <button type="button" id="confirm-dialog-cancel">Cancel</button>
+    </div>
+  </dialog>
+
+  <dialog id="shortcuts-help">
+    <h3 class="dlg-title">Keyboard Shortcuts<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></h3>
+    <div class="shortcuts-help-grid">
+      <section data-surface="anywhere">
+        <h4>Anywhere</h4>
+        <ul>
+          <li><kbd>?</kbd><span>Toggle this overlay</span></li>
+          <li data-when="#search-input, #sidebar-inner input[name=&#34;q&#34;]"><kbd>s</kbd><kbd>/</kbd><span>Focus search</span></li>
+          <li><kbd>b</kbd><span>Show / hide sidebar</span></li>
+          <li><kbd>Esc</kbd><span>Close dialog &middot; back</span></li>
+          <li><kbd>g</kbd><kbd>g</kbd><span>Gallery</span></li>
+          <li><kbd>g</kbd><kbd>i</kbd><span>Inbox</span></li>
+          <li><kbd>g</kbd><kbd>c</kbd><kbd>a</kbd><span>Categories</span></li>
+          <li><kbd>g</kbd><kbd>c</kbd><kbd>o</kbd><span>Collections</span></li>
+          <li><kbd>g</kbd><kbd>t</kbd><span>Tags</span></li>
+          <li><kbd>g</kbd><kbd>r</kbd><span>Relations</span></li>
+          <li><kbd>g</kbd><kbd>s</kbd><span>Settings</span></li>
+          <li data-when="form[hx-post=&#34;/internal/sync&#34;]"><kbd>Y</kbd><span>Sync gallery</span></li>
+          <li><kbd>,</kbd><kbd>.</kbd><span>Rating ceiling switch</span></li>
+          <li data-when="#gallery-switch-dialog"><kbd>\</kbd><span>Switch gallery</span></li>
+          <li data-when=".pagination"><kbd>[</kbd><kbd>]</kbd><span>Previous / next page</span></li>
+          <li data-when=".pagination"><kbd>G</kbd><span>Last page</span></li>
+          <li data-when=".pagination"><kbd>p</kbd><span>Page-jump dialog</span></li>
+        </ul>
+      </section>
+      <section data-surface="gallery">
+        <h4>Gallery</h4>
+        <ul>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Move grid cursor</span></li>
+          <li><kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd><span>Move grid cursor</span></li>
+          <li><kbd>Enter</kbd><kbd>o</kbd><span>Open focused image</span></li>
+          <li><kbd>Space</kbd><span>Toggle selection</span></li>
+          <li><kbd>Drag</kbd><span>Rubber-band select</span></li>
+          <li><kbd>Alt</kbd>+<kbd>Drag</kbd><span>Rubber-band remove</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last visible</span></li>
+          <li><kbd>F</kbd><span>Toggle favorites filter</span></li>
+          <li><kbd>R</kbd><span>Random sort</span></li>
+          <li data-when="#slideshow-btn"><kbd>w</kbd><span>Slideshow</span></li>
+          <li><kbd>O</kbd><span>Cycle sort</span></li>
+          <li><kbd>D</kbd><span>Flip direction</span></li>
+          <li data-when="#thumb-size-ramp"><kbd>-</kbd><kbd>=</kbd><span>Thumbnail size</span></li>
+          <li data-when="#select-mode-btn"><kbd>V</kbd><span>Select mode</span></li>
+          <li data-when="#batch-bar:not(.visible)"><kbd>S</kbd><span>Save search dialog</span></li>
+          <li><kbd>Ctrl</kbd>+<kbd>A</kbd><span>Select page</span></li>
+          <li data-when="#batch-select-all-matching:not([hidden])"><kbd>A</kbd><span>Select all matching</span></li>
+        </ul>
+      </section>
+      <section data-surface="selection">
+        <h4>Selection active</h4>
+        <ul>
+          <li data-when="#batch-bar.visible"><kbd>a</kbd><span>Add tags</span></li>
+          <li data-when="#batch-bar.visible"><kbd>r</kbd><span>Remove tags</span></li>
+          <li data-when="#batch-bar.visible .btn-autotag:not([disabled])"><kbd>t</kbd><span>Auto-tag</span></li>
+          <li data-when="#batch-bar.visible"><kbd>m</kbd><span>Rename / move</span></li>
+          <li data-when="#batch-bar.visible"><kbd>i</kbd><span>Toggle archive</span></li>
+          <li data-when="#batch-bar.visible"><kbd>f</kbd><span>Toggle favorite</span></li>
+          <li data-when="#batch-bar.visible"><kbd>c</kbd><span>Set collection</span></li>
+          <li data-when="#batch-bar.visible"><kbd>d</kbd><span>Download as a zip</span></li>
+          <li data-when="#batch-bar.visible #batch-transfer"><kbd>T</kbd><span>Transfer</span></li>
+          <li data-when="#batch-invert"><kbd>I</kbd><span>Invert</span></li>
+          <li data-when="#batch-bar.visible .peer-accent:not([disabled])"><kbd>L</kbd><span>Find tags (monloader)</span></li>
+          <li data-when="#batch-bar.visible"><kbd>Delete</kbd><span>Delete</span></li>
+          <li><kbd>Shift</kbd>+<kbd>click</kbd><span>Extend the selection</span></li>
+          <li data-when=".plugin-card .plugin-btn, #plugin-batch-bar.visible .plugin-btn"><kbd>x</kbd><kbd>1-9</kbd><span>Run Nth plugin</span></li>
+          <li><kbd>Esc</kbd><span>Clear selection</span></li>
+        </ul>
+      </section>
+      <section data-surface="detail">
+        <h4>Image detail</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><kbd>j</kbd><kbd>k</kbd><span>Previous / next</span></li>
+          <li data-when=".coll-nav-keyed .coll-step"><kbd>[</kbd><kbd>]</kbd><span>Previous / next in collection</span></li>
+          <li data-when="#slideshow-btn"><kbd>w</kbd><span>Slideshow from here</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to gallery</span></li>
+          <li><kbd>o</kbd><span>Open in tab</span></li>
+          <li data-when=".detail-actions a[download]"><kbd>d</kbd><span>Download</span></li>
+          <li data-when=".tag-mode-toggle"><kbd>B</kbd><span>Group tags by...</span></li>
+          <li><kbd>a</kbd><span>Focus tag input</span></li>
+          <li><kbd>r</kbd><span>Tag-focus mode</span></li>
+          <li data-when=".btn-autotag:not([disabled])"><kbd>t</kbd><span>Auto-tag dialog</span></li>
+          <li><kbd>f</kbd><kbd>i</kbd><span>Toggle fav / inbox</span></li>
+          <li><kbd>m</kbd><span>Rename / move dialog</span></li>
+          <li><kbd>Delete</kbd><span>Delete image</span></li>
+          <li data-when=".detail-video"><kbd>Space</kbd><span>Play / pause</span></li>
+          <li><kbd>e</kbd><kbd>s</kbd><span>Edit Source</span></li>
+          <li><kbd>e</kbd><kbd>c</kbd><span>Add to collection</span></li>
+          <li><kbd>e</kbd><kbd>n</kbd><span>Edit Note</span></li>
+          <li data-when=".btn-add-annotation"><kbd>e</kbd><kbd>a</kbd><span>Add annotation</span></li>
+          <li data-when="[data-relations-add]"><kbd>e</kbd><kbd>r</kbd><span>Add a relation</span></li>
+          <li data-when="#remove-tags-btn"><kbd>e</kbd><kbd>t</kbd><span>Remove tags</span></li>
+          <li data-when="#transfer-image-btn"><kbd>e</kbd><kbd>g</kbd><span>Transfer gallery</span></li>
+          <li data-when=".btn-edit-collection"><kbd>e</kbd><kbd>1-9</kbd><span>Edit Nth collection</span></li>
+          <li data-when=".add-tag-form .btn-hash-lookup:not([disabled])"><kbd>L</kbd><span>Lookup online boorus</span></li>
+          <li data-when=".btn-manga-action.btn-read"><kbd>R</kbd><span>Open in reader</span></li>
+          <li data-when=".btn-manga-action.btn-pages"><kbd>P</kbd><span>See all pages</span></li>
+          <li data-when=".btn-manga-action.btn-generate-collection"><kbd>C</kbd><span>Generate collection</span></li>
+          <li data-when=".plugin-card .plugin-btn, #plugin-batch-bar.visible .plugin-btn"><kbd>x</kbd><kbd>1-9</kbd><span>Run Nth plugin</span></li>
+          <li data-when=".detail-img-link"><kbd>v</kbd><span>Open image viewer</span></li>
+        </ul>
+      </section>
+      <section data-surface="lightbox">
+        <h4>Image viewer</h4>
+        <ul>
+          <li><kbd>Wheel</kbd><span>Zoom toward cursor</span></li>
+          <li><kbd>Drag</kbd><span>Pan</span></li>
+          <li><kbd>Double click</kbd><span>Toggle fit / 1:1</span></li>
+          <li><kbd>+</kbd><kbd>-</kbd><span>Zoom in / out</span></li>
+          <li><kbd>0</kbd><kbd>1</kbd><span>Fit / 1:1</span></li>
+          <li><kbd>Esc</kbd><kbd>Click outside</kbd><span>Close</span></li>
+        </ul>
+      </section>
+      <section data-surface="slideshow">
+        <h4>Slideshow</h4>
+        <ul>
+          <li><kbd>Space</kbd><span>Play / pause</span></li>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Previous / next</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last</span></li>
+          <li><kbd>r</kbd><span>Restart video</span></li>
+          <li><kbd>l</kbd><span>Loop videos</span></li>
+          <li><kbd>m</kbd><span>Sound on / off</span></li>
+          <li><kbd>f</kbd><span>Fullscreen</span></li>
+          <li><kbd>Esc</kbd><span>Exit slideshow</span></li>
+        </ul>
+      </section>
+      <section data-surface="tags">
+        <h4>Tags page</h4>
+        <ul>
+          <li><kbd>s</kbd><span>Focus filter</span></li>
+          <li data-when=".tag-row"><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>j</kbd><kbd>k</kbd><span>Move row cursor</span></li>
+          <li data-when=".tag-row"><kbd>Space</kbd><span>Toggle selection</span></li>
+          <li data-when=".tag-row"><kbd>Enter</kbd><span>Open the tag</span></li>
+          <li data-when="#tag-select-page"><kbd>Ctrl</kbd>+<kbd>A</kbd><span>Select page</span></li>
+          <li><kbd>n</kbd><kbd>N</kbd><span>New tag / alias</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-category"><kbd>t</kbd><kbd>c</kbd><span>Change category</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-merge"><kbd>t</kbd><kbd>m</kbd><span>Merge</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-alias"><kbd>t</kbd><kbd>a</kbd><span>Alias to</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-imply"><kbd>t</kbd><kbd>i</kbd><span>Imply</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-merge-folded"><kbd>t</kbd><kbd>f</kbd><span>Merge old spellings</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-distinct"><kbd>t</kbd><kbd>d</kbd><span>Mark distinct</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-undistinct"><kbd>t</kbd><kbd>d</kbd><span>Unmark distinct</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-ptr:not([disabled])"><kbd>t</kbd><kbd>p</kbd><span>Find aliases (PTR)</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-delete"><kbd>Delete</kbd><span>Delete selected</span></li>
+        </ul>
+      </section>
+      <section data-surface="tag-detail">
+        <h4>Tag detail</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><span>Previous / next tag</span></li>
+          <li data-when="#btn-detail-rename"><kbd>t</kbd><kbd>r</kbd><span>Rename</span></li>
+          <li data-when="#btn-detail-category"><kbd>t</kbd><kbd>c</kbd><span>Change category</span></li>
+          <li data-when="#btn-detail-alias"><kbd>t</kbd><kbd>a</kbd><span>Alias / repoint</span></li>
+          <li data-when="#btn-detail-note"><kbd>t</kbd><kbd>n</kbd><span>Note</span></li>
+          <li data-when="#btn-detail-delete"><kbd>Delete</kbd><span>Delete tag</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to the listing</span></li>
+        </ul>
+      </section>
+      <section data-surface="categories">
+        <h4>Categories page</h4>
+        <ul>
+          <li><kbd>n</kbd><span>Focus Add category</span></li>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><span>Move the category whose &equiv; has focus</span></li>
+        </ul>
+      </section>
+      <section data-surface="settings">
+        <h4>Settings page</h4>
+        <ul>
+          <li><kbd>1-9</kbd><kbd>0</kbd><span>Jump to section</span></li>
+        </ul>
+      </section>
+      <section data-surface="reader">
+        <h4>Manga reader</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><kbd>Space</kbd><span>Previous / next page</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last page</span></li>
+          <li><kbd>p</kbd><span>Jump to page</span></li>
+          <li><kbd>P</kbd><span>See all pages</span></li>
+          <li><kbd>o</kbd><span>Open page in new tab</span></li>
+          <li><kbd>e</kbd><span>Extract page as image</span></li>
+          <li><kbd>v</kbd><span>Zoom page in viewer</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back</span></li>
+        </ul>
+      </section>
+      <section data-surface="pages">
+        <h4>Archive pages grid</h4>
+        <ul>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Move grid cursor</span></li>
+          <li><kbd>Enter</kbd><kbd>o</kbd><span>Open in the reader</span></li>
+          <li><kbd>R</kbd><span>Read from page 1</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last cell</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to detail</span></li>
+        </ul>
+      </section>
+      <section data-surface="relations">
+        <h4>Relations session</h4>
+        <ul>
+          <li><kbd>1</kbd><span>Right duplicates left</span></li>
+          <li><kbd>2</kbd><span>Right is an alternate</span></li>
+          <li><kbd>3</kbd><span>Right is newer version</span></li>
+          <li><kbd>4</kbd><span>Right is based on left</span></li>
+          <li><kbd>5</kbd><span>Not related</span></li>
+          <li><kbd>6</kbd><kbd>Space</kbd><span>Skip</span></li>
+          <li><kbd>W</kbd><span>Swap sides</span></li>
+          <li><kbd>C</kbd><span>Open compare slider</span></li>
+          <li><kbd>Esc</kbd><span>Back to Relations</span></li>
+        </ul>
+      </section>
+    </div>
+    <div class="dialog-actions">
+      <button type="button" id="shortcuts-all" class="btn-link-accent">[all surfaces]</button>
+      <button type="button" onclick="document.getElementById('shortcuts-help').close()">Close</button>
+    </div>
+  </dialog>
+  <dialog id="page-jump-dialog">
+    <form id="page-jump-form" onsubmit="event.preventDefault(); submitPageJump();">
+      <p class="dlg-title">Go to page (1–<span id="page-jump-total">1</span>):<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <input type="number" id="page-jump-input" name="page" min="1" required>
+      </div>
+      <div class="dialog-actions">
+  <button type="submit">Go</button>
+  <button type="button" onclick="document.getElementById('page-jump-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+  
+<dialog id="image-lightbox" class="lightbox-dialog" aria-label="Image viewer">
+  <div class="lightbox-stage" id="lightbox-stage">
+    <img id="lightbox-img" class="lightbox-img" alt="">
+  </div>
+  <div class="lightbox-bar">
+    <button type="button" id="lightbox-close" title="Close (Esc)">× Close</button>
+    <span class="lightbox-zoom" id="lightbox-zoom">100%</span>
+    <a id="lightbox-open" class="lightbox-open" href="" target="_blank" rel="noopener" title="Open original in new tab">↗</a>
+  </div>
+</dialog>
+
+  
+</body>
+</html>
+

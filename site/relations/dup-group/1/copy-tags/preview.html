@@ -1,0 +1,38 @@
+
+<p>
+  
+  These <strong>2</strong> tags will be copied onto the original (image #23):
+  
+</p>
+
+<div class="copy-tags-preview-groups">
+  
+  
+  <div class="copy-tags-preview-group">
+    <h5 style="color:var(--cat-ffaa00,#ffaa00)">meta</h5>
+    <ul class="copy-tags-preview-list">
+      <li class="mono-small" style="color:var(--cat-ffaa00,#ffaa00)">twitter_username</li>
+    </ul>
+  </div>
+  
+  
+  <div class="copy-tags-preview-group">
+    <h5 style="color:var(--cat-3d90e3,#3d90e3)">general</h5>
+    <ul class="copy-tags-preview-list">
+      <li class="mono-small" style="color:var(--cat-3d90e3,#3d90e3)">red_ribbon</li>
+    </ul>
+  </div>
+  
+</div>
+
+<div class="dialog-actions">
+  
+  <form hx-post="/relations/dup-group/1/copy-tags"
+        hx-target="#flash-walker-marked" hx-swap="innerHTML"
+        hx-on::after-request="if(event.detail.successful){document.getElementById('copy-tags-preview-dialog').close();if(event.detail.xhr.responseText.indexOf('flash-err') === -1)setTimeout(function(){window.location.reload()},1500)}"
+        style="display:inline">
+    <button type="submit">Copy 2 tags</button>
+  </form>
+  
+  <button type="button" onclick="document.getElementById('copy-tags-preview-dialog').close()">Cancel</button>
+</div>

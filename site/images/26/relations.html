@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-app="monbooru" data-demo-root="../../" data-demo-version="v1.23.0">
+<head>
+
+
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, noimageindex">
+  <meta name="htmx-config" content='{"historyEnabled":false}'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relations - gallery/danbooru_7299656_df5dd07012b27a3c7bdcb4c2b4085fd6.jpg - Monbooru</title>
+  <meta name="csrf-token" content="demo">
+  <link rel="icon" type="image/png" href="../../static/favicon.png">
+  <link rel="stylesheet" href="../../static/shared/base.css?v=f1bf4f227d">
+  <link rel="stylesheet" href="../../static/main.css?v=f53bf38008">
+  <link rel="stylesheet" href="../../_demo/demo.css?v=4306714f76">
+  
+
+  <link rel="manifest" href="../../manifest.json">
+
+  <script src="../../_demo/index.js?v=23863755c3" defer></script>
+  <script src="../../_demo/shim.js?v=dd6688d25d" defer></script>
+  <script src="../../static/shared/htmx.min.js" defer></script>
+  <script src="../../static/shared/base.js?v=538cda393b" defer></script>
+  <script src="../../static/main.js?v=0cca1aa876" defer></script>
+</head>
+<body data-gallery="default">
+<div id="demo-banner" role="note"><span class="demo-banner-title">Read-only demo of monbooru <b>v1.23.0</b></span><span class="demo-banner-note">Some features are disabled or a bit off.</span><span class="demo-banner-links"><a href="https://monbooru.github.io/mondocs/getting-started/install.html">Install</a><a href="https://monbooru.github.io/mondocs/index.html">Docs</a><a href="https://github.com/monbooru/monbooru">GitHub</a></span><span class="demo-banner-try"><span class="demo-banner-label">Try:</span><a href="../../index.html?q=hakurei_reimu+smile">hakurei_reimu smile</a><a href="../../index.html?q=touhou+-hakurei_reimu">touhou -hakurei_reimu</a><a href="../../index.html?q=%2A_hair">*_hair</a><a href="../../index.html?q=blonde_hair+OR+blue_hair">blonde_hair OR blue_hair</a><a href="../../index.html?q=ai%3Aany">ai:any</a></span><span class="demo-banner-credit">Artwork by the credited artists, linked on each image.</span></div>
+  <div id="topbar">
+    <button id="sidebar-toggle" aria-label="Toggle sidebar">☰</button>
+    <a href="../../index.html" id="logo">
+      <img src="../../static/logo.png" alt="" class="topbar-logo">
+      <span>Mon<span class="wordmark-accent">booru</span></span>
+    </a>
+    <nav id="nav">
+      <a href="../../index.html" class="nav-images active">Images</a>
+      <a id="inbox-nav" href="../../index.html?q=inbox:true" class="nav-inbox">Inbox<span id="inbox-nav-count"> (8)</span></a>
+      <a href="../../categories.html" class="nav-categories">Categories</a>
+      <a href="../../tags.html" class="nav-tags">Tags</a>
+      <a href="../../collections.html" class="nav-collections">Collections</a>
+      <a href="../../relations.html" class="nav-relations">Relations</a>
+      <a href="../../settings.html" class="nav-settings">Settings</a>
+      <a id="pair-notice" class="pair-notice" href="../../settings.html#plugins" hidden></a>
+    </nav>
+    <div id="topbar-right">
+      <div id="job-status"
+           hx-get="/internal/job/status"
+           hx-trigger="load, every 2s"
+           hx-swap="outerHTML"
+           hx-vals='{"pair":""}'></div>
+      
+      <span id="sync-flash"></span>
+      <form id="sync-form" hx-post="/internal/sync" hx-swap="none"
+            hx-on:htmx:before-request="document.getElementById('job-status').innerHTML='<span class=&quot;job-running&quot;>syncing…</span>'"
+            hx-on:sync-started="document.getElementById('job-status').setAttribute('hx-trigger','every 2s');htmx.process('#job-status')"
+            hx-on:htmx:response-error="document.getElementById('sync-flash').innerHTML=event.detail.xhr.responseText;refreshJobStatus();setTimeout(function(){var el=document.getElementById('sync-flash');if(el)el.innerHTML='';},5000)"
+            style="display:inline">
+        <button type="submit" class="topbar-action" title="Look for files added, moved or deleted in the gallery folder (Y)">[⟳ sync]</button>
+      </form>
+      
+      
+    </div>
+  </div>
+  
+  <div id="page-notice" class="degraded-banner" data-login-url="/login" hidden></div>
+  <div id="main-layout">
+    <aside id="sidebar">
+
+
+    </aside>
+    <button id="sidebar-rail" type="button" aria-label="Toggle sidebar"></button>
+    <main id="content">
+
+
+<div id="relations-image-page" data-image-id="26" data-esc-back="../../images/26.html">
+  <div id="detail-flash" data-action-flash></div>
+  <div class="detail-topbar">
+    <div class="detail-nav-group">
+      <a href="../../images/26.html" class="back-link">‹ Image</a>
+      <span class="detail-nav-sep">/</span>
+      <span class="detail-filename mono-small">image 26</span>
+    </div>
+  </div>
+
+  
+
+  
+  <section class="relations-section">
+    <h3>Same collection</h3>
+    <ul class="manga-pages-grid">
+      
+      <li class="manga-page-cell">
+        <a href="../../images/1.html" class="manga-page-link" title="Image 1">
+          <img src="../../thumbnails/default/1.jpg" alt="image 1" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/2.html" class="manga-page-link" title="Image 2">
+          <img src="../../thumbnails/default/2.jpg" alt="image 2" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/3.html" class="manga-page-link" title="Image 3">
+          <img src="../../thumbnails/default/3.jpg" alt="image 3" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/6.html" class="manga-page-link" title="Image 6">
+          <img src="../../thumbnails/default/6.jpg" alt="image 6" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/7.html" class="manga-page-link" title="Image 7">
+          <img src="../../thumbnails/default/7.jpg" alt="image 7" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/8.html" class="manga-page-link" title="Image 8">
+          <img src="../../thumbnails/default/8.jpg" alt="image 8" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/12.html" class="manga-page-link" title="Image 12">
+          <img src="../../thumbnails/default/12.jpg" alt="image 12" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/21.html" class="manga-page-link" title="Image 21">
+          <img src="../../thumbnails/default/21.jpg" alt="image 21" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/22.html" class="manga-page-link" title="Image 22">
+          <img src="../../thumbnails/default/22.jpg" alt="image 22" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/26.html" class="manga-page-link relations-tree-current" title="Image 26 (this image)">
+          <img src="../../thumbnails/default/26.jpg" alt="image 26" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+        <div class="relations-actions-row">
+          <span class="relations-inline-label">^ This image</span>
+        </div>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/29.html" class="manga-page-link" title="Image 29">
+          <img src="../../thumbnails/default/29.jpg" alt="image 29" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/30.html" class="manga-page-link" title="Image 30">
+          <img src="../../thumbnails/default/30.jpg" alt="image 30" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/52.html" class="manga-page-link" title="Image 52">
+          <img src="../../thumbnails/default/52.jpg" alt="image 52" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/53.html" class="manga-page-link" title="Image 53">
+          <img src="../../thumbnails/default/53.jpg" alt="image 53" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/54.html" class="manga-page-link" title="Image 54">
+          <img src="../../thumbnails/default/54.jpg" alt="image 54" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/57.html" class="manga-page-link" title="Image 57">
+          <img src="../../thumbnails/default/57.jpg" alt="image 57" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/59.html" class="manga-page-link" title="Image 59">
+          <img src="../../thumbnails/default/59.jpg" alt="image 59" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/62.html" class="manga-page-link" title="Image 62">
+          <img src="../../thumbnails/default/62.jpg" alt="image 62" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/63.html" class="manga-page-link" title="Image 63">
+          <img src="../../thumbnails/default/63.jpg" alt="image 63" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/64.html" class="manga-page-link" title="Image 64">
+          <img src="../../thumbnails/default/64.jpg" alt="image 64" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/68.html" class="manga-page-link" title="Image 68">
+          <img src="../../thumbnails/default/68.jpg" alt="image 68" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+      <li class="manga-page-cell">
+        <a href="../../images/70.html" class="manga-page-link" title="Image 70">
+          <img src="../../thumbnails/default/70.jpg" alt="image 70" loading="lazy" class="manga-page-thumb">
+          <span class="manga-page-num">reimu</span>
+        </a>
+        
+      </li>
+      
+    </ul>
+  </section>
+  
+
+  
+
+  
+
+  
+
+  
+</div>
+
+
+
+    </main>
+  </div>
+  <footer id="footer">
+    <div id="footer-left">
+      
+      <span class="footer-gallery">[default]</span>
+      
+      <span class="footer-wide">
+      <span class="footer-sep">·</span>
+      <span id="footer-count-images">59 img</span>
+      <span class="footer-sep">·</span>
+      <span id="footer-count-tags">1376 tags</span>
+      <span class="footer-sep">·</span>
+      <span id="footer-count-collections">5 collections</span>
+      </span>
+      
+      <span class="footer-sep-strong">::</span>
+      <span class="footer-rating-label footer-wide">show up to:</span>
+      <form hx-post="/internal/rating-ceiling?level=general" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above sfw (this browser only)">sfw</button></form><span class="footer-sep">·</span><form hx-post="/internal/rating-ceiling?level=sensitive" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above sensitive (this browser only)">sensitive</button></form><span class="footer-sep">·</span><form hx-post="/internal/rating-ceiling?level=questionable" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above questionable (this browser only)">questionable</button></form><span class="footer-sep">·</span><span class="footer-rating-active" title="Show every rating (this browser only)">[explicit]</span>
+      <span id="footer-hidden" class="footer-hidden"></span>
+    </div>
+    <div id="footer-right">
+      <span id="peer-light" class="footer-conn" data-conn="ok" data-peer-off="" hx-get="/internal/monloader-status" hx-trigger="load delay:1s, every 15s" hx-vals='{"seen":"true,false,false,false,0"}' hx-swap="outerHTML"><button type="button" class="footer-dot footer-dot-ok footer-conn-kill" title="Pause the connection to monloader" hx-post="/internal/monloader/disconnect" hx-target="#peer-light" hx-swap="outerHTML"></button>connected to monloader v1.13.4</span><span class="footer-peer-sep"> · </span><span class="footer-wide"><span id="footer-version"><a href="https://github.com/monbooru/monbooru" target="_blank" rel="noopener">monbooru (tarball)</a> v1.23.0</span> · <a href="#" id="footer-shortcuts" onclick="openShortcutSheet();return false">shortcuts</a> · </span><a href="https://monbooru.github.io/mondocs/index.html" target="_blank" rel="noopener">help</a><span class="footer-wide"> · <a href="../../api/v1/docs.html" target="_blank" rel="noopener">API</a></span>
+    </div>
+  </footer>
+  
+  <dialog id="confirm-dialog">
+    <p class="dlg-title"><span id="confirm-dialog-msg"></span><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+    <p id="confirm-dialog-danger" class="confirm-dialog-danger"></p>
+    <div class="dialog-actions">
+      <button type="button" id="confirm-dialog-ok" class="btn-danger">OK</button>
+      <button type="button" id="confirm-dialog-alt" hidden></button>
+      <button type="button" id="confirm-dialog-cancel">Cancel</button>
+    </div>
+  </dialog>
+
+  <dialog id="shortcuts-help">
+    <h3 class="dlg-title">Keyboard Shortcuts<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></h3>
+    <div class="shortcuts-help-grid">
+      <section data-surface="anywhere">
+        <h4>Anywhere</h4>
+        <ul>
+          <li><kbd>?</kbd><span>Toggle this overlay</span></li>
+          <li data-when="#search-input, #sidebar-inner input[name=&#34;q&#34;]"><kbd>s</kbd><kbd>/</kbd><span>Focus search</span></li>
+          <li><kbd>b</kbd><span>Show / hide sidebar</span></li>
+          <li><kbd>Esc</kbd><span>Close dialog &middot; back</span></li>
+          <li><kbd>g</kbd><kbd>g</kbd><span>Gallery</span></li>
+          <li><kbd>g</kbd><kbd>i</kbd><span>Inbox</span></li>
+          <li><kbd>g</kbd><kbd>c</kbd><kbd>a</kbd><span>Categories</span></li>
+          <li><kbd>g</kbd><kbd>c</kbd><kbd>o</kbd><span>Collections</span></li>
+          <li><kbd>g</kbd><kbd>t</kbd><span>Tags</span></li>
+          <li><kbd>g</kbd><kbd>r</kbd><span>Relations</span></li>
+          <li><kbd>g</kbd><kbd>s</kbd><span>Settings</span></li>
+          <li data-when="form[hx-post=&#34;/internal/sync&#34;]"><kbd>Y</kbd><span>Sync gallery</span></li>
+          <li><kbd>,</kbd><kbd>.</kbd><span>Rating ceiling switch</span></li>
+          <li data-when="#gallery-switch-dialog"><kbd>\</kbd><span>Switch gallery</span></li>
+          <li data-when=".pagination"><kbd>[</kbd><kbd>]</kbd><span>Previous / next page</span></li>
+          <li data-when=".pagination"><kbd>G</kbd><span>Last page</span></li>
+          <li data-when=".pagination"><kbd>p</kbd><span>Page-jump dialog</span></li>
+        </ul>
+      </section>
+      <section data-surface="gallery">
+        <h4>Gallery</h4>
+        <ul>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Move grid cursor</span></li>
+          <li><kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd><span>Move grid cursor</span></li>
+          <li><kbd>Enter</kbd><kbd>o</kbd><span>Open focused image</span></li>
+          <li><kbd>Space</kbd><span>Toggle selection</span></li>
+          <li><kbd>Drag</kbd><span>Rubber-band select</span></li>
+          <li><kbd>Alt</kbd>+<kbd>Drag</kbd><span>Rubber-band remove</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last visible</span></li>
+          <li><kbd>F</kbd><span>Toggle favorites filter</span></li>
+          <li><kbd>R</kbd><span>Random sort</span></li>
+          <li data-when="#slideshow-btn"><kbd>w</kbd><span>Slideshow</span></li>
+          <li><kbd>O</kbd><span>Cycle sort</span></li>
+          <li><kbd>D</kbd><span>Flip direction</span></li>
+          <li data-when="#thumb-size-ramp"><kbd>-</kbd><kbd>=</kbd><span>Thumbnail size</span></li>
+          <li data-when="#select-mode-btn"><kbd>V</kbd><span>Select mode</span></li>
+          <li data-when="#batch-bar:not(.visible)"><kbd>S</kbd><span>Save search dialog</span></li>
+          <li><kbd>Ctrl</kbd>+<kbd>A</kbd><span>Select page</span></li>
+          <li data-when="#batch-select-all-matching:not([hidden])"><kbd>A</kbd><span>Select all matching</span></li>
+        </ul>
+      </section>
+      <section data-surface="selection">
+        <h4>Selection active</h4>
+        <ul>
+          <li data-when="#batch-bar.visible"><kbd>a</kbd><span>Add tags</span></li>
+          <li data-when="#batch-bar.visible"><kbd>r</kbd><span>Remove tags</span></li>
+          <li data-when="#batch-bar.visible .btn-autotag:not([disabled])"><kbd>t</kbd><span>Auto-tag</span></li>
+          <li data-when="#batch-bar.visible"><kbd>m</kbd><span>Rename / move</span></li>
+          <li data-when="#batch-bar.visible"><kbd>i</kbd><span>Toggle archive</span></li>
+          <li data-when="#batch-bar.visible"><kbd>f</kbd><span>Toggle favorite</span></li>
+          <li data-when="#batch-bar.visible"><kbd>c</kbd><span>Set collection</span></li>
+          <li data-when="#batch-bar.visible"><kbd>d</kbd><span>Download as a zip</span></li>
+          <li data-when="#batch-bar.visible #batch-transfer"><kbd>T</kbd><span>Transfer</span></li>
+          <li data-when="#batch-invert"><kbd>I</kbd><span>Invert</span></li>
+          <li data-when="#batch-bar.visible .peer-accent:not([disabled])"><kbd>L</kbd><span>Find tags (monloader)</span></li>
+          <li data-when="#batch-bar.visible"><kbd>Delete</kbd><span>Delete</span></li>
+          <li><kbd>Shift</kbd>+<kbd>click</kbd><span>Extend the selection</span></li>
+          <li data-when=".plugin-card .plugin-btn, #plugin-batch-bar.visible .plugin-btn"><kbd>x</kbd><kbd>1-9</kbd><span>Run Nth plugin</span></li>
+          <li><kbd>Esc</kbd><span>Clear selection</span></li>
+        </ul>
+      </section>
+      <section data-surface="detail">
+        <h4>Image detail</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><kbd>j</kbd><kbd>k</kbd><span>Previous / next</span></li>
+          <li data-when=".coll-nav-keyed .coll-step"><kbd>[</kbd><kbd>]</kbd><span>Previous / next in collection</span></li>
+          <li data-when="#slideshow-btn"><kbd>w</kbd><span>Slideshow from here</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to gallery</span></li>
+          <li><kbd>o</kbd><span>Open in tab</span></li>
+          <li data-when=".detail-actions a[download]"><kbd>d</kbd><span>Download</span></li>
+          <li data-when=".tag-mode-toggle"><kbd>B</kbd><span>Group tags by...</span></li>
+          <li><kbd>a</kbd><span>Focus tag input</span></li>
+          <li><kbd>r</kbd><span>Tag-focus mode</span></li>
+          <li data-when=".btn-autotag:not([disabled])"><kbd>t</kbd><span>Auto-tag dialog</span></li>
+          <li><kbd>f</kbd><kbd>i</kbd><span>Toggle fav / inbox</span></li>
+          <li><kbd>m</kbd><span>Rename / move dialog</span></li>
+          <li><kbd>Delete</kbd><span>Delete image</span></li>
+          <li data-when=".detail-video"><kbd>Space</kbd><span>Play / pause</span></li>
+          <li><kbd>e</kbd><kbd>s</kbd><span>Edit Source</span></li>
+          <li><kbd>e</kbd><kbd>c</kbd><span>Add to collection</span></li>
+          <li><kbd>e</kbd><kbd>n</kbd><span>Edit Note</span></li>
+          <li data-when=".btn-add-annotation"><kbd>e</kbd><kbd>a</kbd><span>Add annotation</span></li>
+          <li data-when="[data-relations-add]"><kbd>e</kbd><kbd>r</kbd><span>Add a relation</span></li>
+          <li data-when="#remove-tags-btn"><kbd>e</kbd><kbd>t</kbd><span>Remove tags</span></li>
+          <li data-when="#transfer-image-btn"><kbd>e</kbd><kbd>g</kbd><span>Transfer gallery</span></li>
+          <li data-when=".btn-edit-collection"><kbd>e</kbd><kbd>1-9</kbd><span>Edit Nth collection</span></li>
+          <li data-when=".add-tag-form .btn-hash-lookup:not([disabled])"><kbd>L</kbd><span>Lookup online boorus</span></li>
+          <li data-when=".btn-manga-action.btn-read"><kbd>R</kbd><span>Open in reader</span></li>
+          <li data-when=".btn-manga-action.btn-pages"><kbd>P</kbd><span>See all pages</span></li>
+          <li data-when=".btn-manga-action.btn-generate-collection"><kbd>C</kbd><span>Generate collection</span></li>
+          <li data-when=".plugin-card .plugin-btn, #plugin-batch-bar.visible .plugin-btn"><kbd>x</kbd><kbd>1-9</kbd><span>Run Nth plugin</span></li>
+          <li data-when=".detail-img-link"><kbd>v</kbd><span>Open image viewer</span></li>
+        </ul>
+      </section>
+      <section data-surface="lightbox">
+        <h4>Image viewer</h4>
+        <ul>
+          <li><kbd>Wheel</kbd><span>Zoom toward cursor</span></li>
+          <li><kbd>Drag</kbd><span>Pan</span></li>
+          <li><kbd>Double click</kbd><span>Toggle fit / 1:1</span></li>
+          <li><kbd>+</kbd><kbd>-</kbd><span>Zoom in / out</span></li>
+          <li><kbd>0</kbd><kbd>1</kbd><span>Fit / 1:1</span></li>
+          <li><kbd>Esc</kbd><kbd>Click outside</kbd><span>Close</span></li>
+        </ul>
+      </section>
+      <section data-surface="slideshow">
+        <h4>Slideshow</h4>
+        <ul>
+          <li><kbd>Space</kbd><span>Play / pause</span></li>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Previous / next</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last</span></li>
+          <li><kbd>r</kbd><span>Restart video</span></li>
+          <li><kbd>l</kbd><span>Loop videos</span></li>
+          <li><kbd>m</kbd><span>Sound on / off</span></li>
+          <li><kbd>f</kbd><span>Fullscreen</span></li>
+          <li><kbd>Esc</kbd><span>Exit slideshow</span></li>
+        </ul>
+      </section>
+      <section data-surface="tags">
+        <h4>Tags page</h4>
+        <ul>
+          <li><kbd>s</kbd><span>Focus filter</span></li>
+          <li data-when=".tag-row"><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>j</kbd><kbd>k</kbd><span>Move row cursor</span></li>
+          <li data-when=".tag-row"><kbd>Space</kbd><span>Toggle selection</span></li>
+          <li data-when=".tag-row"><kbd>Enter</kbd><span>Open the tag</span></li>
+          <li data-when="#tag-select-page"><kbd>Ctrl</kbd>+<kbd>A</kbd><span>Select page</span></li>
+          <li><kbd>n</kbd><kbd>N</kbd><span>New tag / alias</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-category"><kbd>t</kbd><kbd>c</kbd><span>Change category</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-merge"><kbd>t</kbd><kbd>m</kbd><span>Merge</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-alias"><kbd>t</kbd><kbd>a</kbd><span>Alias to</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-imply"><kbd>t</kbd><kbd>i</kbd><span>Imply</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-merge-folded"><kbd>t</kbd><kbd>f</kbd><span>Merge old spellings</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-distinct"><kbd>t</kbd><kbd>d</kbd><span>Mark distinct</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-undistinct"><kbd>t</kbd><kbd>d</kbd><span>Unmark distinct</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-ptr:not([disabled])"><kbd>t</kbd><kbd>p</kbd><span>Find aliases (PTR)</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-delete"><kbd>Delete</kbd><span>Delete selected</span></li>
+        </ul>
+      </section>
+      <section data-surface="tag-detail">
+        <h4>Tag detail</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><span>Previous / next tag</span></li>
+          <li data-when="#btn-detail-rename"><kbd>t</kbd><kbd>r</kbd><span>Rename</span></li>
+          <li data-when="#btn-detail-category"><kbd>t</kbd><kbd>c</kbd><span>Change category</span></li>
+          <li data-when="#btn-detail-alias"><kbd>t</kbd><kbd>a</kbd><span>Alias / repoint</span></li>
+          <li data-when="#btn-detail-note"><kbd>t</kbd><kbd>n</kbd><span>Note</span></li>
+          <li data-when="#btn-detail-delete"><kbd>Delete</kbd><span>Delete tag</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to the listing</span></li>
+        </ul>
+      </section>
+      <section data-surface="categories">
+        <h4>Categories page</h4>
+        <ul>
+          <li><kbd>n</kbd><span>Focus Add category</span></li>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><span>Move the category whose &equiv; has focus</span></li>
+        </ul>
+      </section>
+      <section data-surface="settings">
+        <h4>Settings page</h4>
+        <ul>
+          <li><kbd>1-9</kbd><kbd>0</kbd><span>Jump to section</span></li>
+        </ul>
+      </section>
+      <section data-surface="reader">
+        <h4>Manga reader</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><kbd>Space</kbd><span>Previous / next page</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last page</span></li>
+          <li><kbd>p</kbd><span>Jump to page</span></li>
+          <li><kbd>P</kbd><span>See all pages</span></li>
+          <li><kbd>o</kbd><span>Open page in new tab</span></li>
+          <li><kbd>e</kbd><span>Extract page as image</span></li>
+          <li><kbd>v</kbd><span>Zoom page in viewer</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back</span></li>
+        </ul>
+      </section>
+      <section data-surface="pages">
+        <h4>Archive pages grid</h4>
+        <ul>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Move grid cursor</span></li>
+          <li><kbd>Enter</kbd><kbd>o</kbd><span>Open in the reader</span></li>
+          <li><kbd>R</kbd><span>Read from page 1</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last cell</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to detail</span></li>
+        </ul>
+      </section>
+      <section data-surface="relations">
+        <h4>Relations session</h4>
+        <ul>
+          <li><kbd>1</kbd><span>Right duplicates left</span></li>
+          <li><kbd>2</kbd><span>Right is an alternate</span></li>
+          <li><kbd>3</kbd><span>Right is newer version</span></li>
+          <li><kbd>4</kbd><span>Right is based on left</span></li>
+          <li><kbd>5</kbd><span>Not related</span></li>
+          <li><kbd>6</kbd><kbd>Space</kbd><span>Skip</span></li>
+          <li><kbd>W</kbd><span>Swap sides</span></li>
+          <li><kbd>C</kbd><span>Open compare slider</span></li>
+          <li><kbd>Esc</kbd><span>Back to Relations</span></li>
+        </ul>
+      </section>
+    </div>
+    <div class="dialog-actions">
+      <button type="button" id="shortcuts-all" class="btn-link-accent">[all surfaces]</button>
+      <button type="button" onclick="document.getElementById('shortcuts-help').close()">Close</button>
+    </div>
+  </dialog>
+  <dialog id="page-jump-dialog">
+    <form id="page-jump-form" onsubmit="event.preventDefault(); submitPageJump();">
+      <p class="dlg-title">Go to page (1–<span id="page-jump-total">1</span>):<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <input type="number" id="page-jump-input" name="page" min="1" required>
+      </div>
+      <div class="dialog-actions">
+  <button type="submit">Go</button>
+  <button type="button" onclick="document.getElementById('page-jump-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+  
+<dialog id="image-lightbox" class="lightbox-dialog" aria-label="Image viewer">
+  <div class="lightbox-stage" id="lightbox-stage">
+    <img id="lightbox-img" class="lightbox-img" alt="">
+  </div>
+  <div class="lightbox-bar">
+    <button type="button" id="lightbox-close" title="Close (Esc)">× Close</button>
+    <span class="lightbox-zoom" id="lightbox-zoom">100%</span>
+    <a id="lightbox-open" class="lightbox-open" href="" target="_blank" rel="noopener" title="Open original in new tab">↗</a>
+  </div>
+</dialog>
+
+  
+</body>
+</html>
+

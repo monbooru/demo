@@ -1,0 +1,29 @@
+/* The demo banner, drawn with the app's own theme variables. */
+#demo-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 14px;
+  padding: 4px 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--fg-dim);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  flex: none;
+}
+#demo-banner b { color: var(--fg); font-weight: 600; }
+#demo-banner a { color: var(--link); }
+#demo-banner .demo-banner-links a + a,
+#demo-banner .demo-banner-try a + a { margin-left: 10px; }
+#demo-banner .demo-banner-label { margin-right: 6px; }
+#demo-banner .demo-banner-try a { font-family: var(--font-mono); white-space: nowrap; }
+#demo-banner .demo-banner-note { color: var(--fg-dim); }
+#demo-banner .demo-banner-credit { margin-left: auto; opacity: .8; }
+@media (max-width: 768px) {
+  #demo-banner { padding: 4px 8px; gap: 0 10px; font-size: 11px; }
+  #demo-banner .demo-banner-credit, #demo-banner .demo-banner-note { display: none; }
+  /* The banner stays on screen while the page scrolls, so it keeps to two
+     lines here; the example searches scroll sideways. */
+  #demo-banner .demo-banner-try { width: 100%; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+}

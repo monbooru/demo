@@ -1,0 +1,32 @@
+
+<div class="ptr-contrib-card peer-accent">
+  <div class="ptr-contrib-head">
+    <span class="ptr-contrib-title">Public Tag Repository</span>
+  </div>
+  
+  
+  <div class="ptr-contrib-row">
+    <div class="ptr-contrib-lines">
+      
+      <ul>
+        <li><span class="ptr-contrib-plus">++</span> <span class="ptr-count" title="artist:higa_(gominami)
+meta:commentary_request">2</span> of this image's tags are new to the Public Tag Repository.</li>
+        <li><span class="ptr-contrib-minus">--</span> the Public Tag Repository holds <span class="ptr-count" title="artist:gomi_na_mi
+artist:gominami">2</span> tags this image does not carry.</li>
+      </ul>
+      
+    </div>
+    <div class="ptr-contrib-actions">
+      
+      <button type="button" class="btn-ptr-pull peer-accent"
+              hx-post="/images/54/lookup" hx-vals='{"backend":"ptr"}'
+              hx-target="#fetch-pending" hx-swap="innerHTML"
+              hx-confirm="Pull this file's tags from the Public Tag Repository?"
+              title="Add the tags it holds and record it as a source for the ones this image already carries"
+              data-confirm-ok="Pull tags">Pull tags</button>
+      
+      <button type="button" class="btn-ptr-contribute"
+        disabled title="a contribution account in monloader is required to contribute">Contribute...</button>
+    </div>
+  </div>
+</div>

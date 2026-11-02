@@ -1,0 +1,3363 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-app="monbooru" data-demo-root="../" data-demo-version="v1.23.0">
+<head>
+
+
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, noimageindex">
+  <meta name="htmx-config" content='{"historyEnabled":false}'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>danbooru_6264715_039d07416a656918a96fb302c27c0eaf.jpg - Monbooru</title>
+  <meta name="csrf-token" content="demo">
+  <link rel="icon" type="image/png" href="../static/favicon.png">
+  <link rel="stylesheet" href="../static/shared/base.css?v=f1bf4f227d">
+  <link rel="stylesheet" href="../static/main.css?v=f53bf38008">
+  <link rel="stylesheet" href="../_demo/demo.css?v=4306714f76">
+  
+
+  <link rel="manifest" href="../manifest.json">
+
+  <script src="../_demo/index.js?v=23863755c3" defer></script>
+  <script src="../_demo/shim.js?v=dd6688d25d" defer></script>
+  <script src="../static/shared/htmx.min.js" defer></script>
+  <script src="../static/shared/base.js?v=538cda393b" defer></script>
+  <script src="../static/main.js?v=0cca1aa876" defer></script>
+</head>
+<body data-gallery="default">
+<div id="demo-banner" role="note"><span class="demo-banner-title">Read-only demo of monbooru <b>v1.23.0</b></span><span class="demo-banner-note">Some features are disabled or a bit off.</span><span class="demo-banner-links"><a href="https://monbooru.github.io/mondocs/getting-started/install.html">Install</a><a href="https://monbooru.github.io/mondocs/index.html">Docs</a><a href="https://github.com/monbooru/monbooru">GitHub</a></span><span class="demo-banner-try"><span class="demo-banner-label">Try:</span><a href="../index.html?q=hakurei_reimu+smile">hakurei_reimu smile</a><a href="../index.html?q=touhou+-hakurei_reimu">touhou -hakurei_reimu</a><a href="../index.html?q=%2A_hair">*_hair</a><a href="../index.html?q=blonde_hair+OR+blue_hair">blonde_hair OR blue_hair</a><a href="../index.html?q=ai%3Aany">ai:any</a></span><span class="demo-banner-credit">Artwork by the credited artists, linked on each image.</span></div>
+  <div id="topbar">
+    <button id="sidebar-toggle" aria-label="Toggle sidebar">☰</button>
+    <a href="../index.html" id="logo">
+      <img src="../static/logo.png" alt="" class="topbar-logo">
+      <span>Mon<span class="wordmark-accent">booru</span></span>
+    </a>
+    <nav id="nav">
+      <a href="../index.html" class="nav-images active">Images</a>
+      <a id="inbox-nav" href="../index.html?q=inbox:true" class="nav-inbox">Inbox<span id="inbox-nav-count"> (8)</span></a>
+      <a href="../categories.html" class="nav-categories">Categories</a>
+      <a href="../tags.html" class="nav-tags">Tags</a>
+      <a href="../collections.html" class="nav-collections">Collections</a>
+      <a href="../relations.html" class="nav-relations">Relations</a>
+      <a href="../settings.html" class="nav-settings">Settings</a>
+      <a id="pair-notice" class="pair-notice" href="../settings.html#plugins" hidden></a>
+    </nav>
+    <div id="topbar-right">
+      <div id="job-status"
+           hx-get="/internal/job/status"
+           hx-trigger="load, every 2s"
+           hx-swap="outerHTML"
+           hx-vals='{"pair":""}'></div>
+      
+      <span id="sync-flash"></span>
+      <form id="sync-form" hx-post="/internal/sync" hx-swap="none"
+            hx-on:htmx:before-request="document.getElementById('job-status').innerHTML='<span class=&quot;job-running&quot;>syncing…</span>'"
+            hx-on:sync-started="document.getElementById('job-status').setAttribute('hx-trigger','every 2s');htmx.process('#job-status')"
+            hx-on:htmx:response-error="document.getElementById('sync-flash').innerHTML=event.detail.xhr.responseText;refreshJobStatus();setTimeout(function(){var el=document.getElementById('sync-flash');if(el)el.innerHTML='';},5000)"
+            style="display:inline">
+        <button type="submit" class="topbar-action" title="Look for files added, moved or deleted in the gallery folder (Y)">[⟳ sync]</button>
+      </form>
+      
+      
+    </div>
+  </div>
+  
+  <div id="page-notice" class="degraded-banner" data-login-url="/login" hidden></div>
+  <div id="main-layout">
+    <aside id="sidebar">
+
+<div id="sidebar-inner" class="detail-sidebar-inner">
+  
+  
+  
+  <div id="tags-section" hx-target="#image-tags" hx-swap="outerHTML">
+    <div class="sidebar-section-header">
+      <span class="sidebar-section-title">Tags</span>
+      <button id="tags-toggle" class="folder-toggle-btn" data-target="tag-groups">▼</button>
+    </div>
+    <div id="tag-groups" class="detail-tag-groups" data-mode="category">
+      
+      <div class="tag-mode-switch">
+        <span class="tag-mode-sep">group by:</span>
+        <span class="tag-mode-current">[category]</span>
+        
+        <span class="tag-mode-sep">/</span>
+        <button type="button" class="tag-mode-toggle"
+                hx-get="/images/71/tags?tagmode=source"
+                title="Group by the sources that applied each tag">[source]</button>
+      </div>
+      
+      
+      
+      
+      <div class="tag-group" data-cat="rating">
+        <div class="tag-category-label">
+          <span class="tag-group-name" style="color:var(--cat-996666,#996666)">rating</span>
+          
+          <button type="button" class="tag-group-delete"
+                  hx-delete="/images/71/category-tags?cat=rating"
+                  
+                  hx-confirm="Remove the 1 rating tag on this image?"
+                  title="Remove every rating tag on this image"
+                  
+                  data-confirm-ok="Remove">[x]</button>
+          
+        </div>
+        <ul class="tag-list-sidebar">
+          
+          <li class="tag-entry"
+              data-name="general" data-tag-id="1" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=rating:general" class="tag-link" style="color:var(--cat-996666,#996666)"
+               title="general">general</a>
+            
+            
+            <span class="tag-count" title="55 images in the library with this tag">55</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+        </ul>
+      </div>
+      
+      <div class="tag-group" data-cat="meta">
+        <div class="tag-category-label">
+          <span class="tag-group-name" style="color:var(--cat-ffaa00,#ffaa00)">meta</span>
+          
+          <button type="button" class="tag-group-delete"
+                  hx-delete="/images/71/category-tags?cat=meta"
+                  
+                  hx-confirm="Remove the 2 meta tags on this image?"
+                  title="Remove every meta tag on this image"
+                  
+                  data-confirm-ok="Remove">[x]</button>
+          
+        </div>
+        <ul class="tag-list-sidebar">
+          
+          <li class="tag-entry"
+              data-name="commentary_request" data-tag-id="169" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/169.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=meta:commentary_request" class="tag-link" style="color:var(--cat-ffaa00,#ffaa00)"
+               title="commentary_request">commentary_request</a>
+            
+            
+            <span class="tag-count" title="17 images in the library with this tag">17</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/169"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="photo_(medium)" data-tag-id="1137" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1137.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=meta:photo_%28medium%29" class="tag-link" style="color:var(--cat-ffaa00,#ffaa00)"
+               title="photo_(medium)">photo_(medium)</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1137"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+        </ul>
+      </div>
+      
+      <div class="tag-group" data-cat="copyright">
+        <div class="tag-category-label">
+          <span class="tag-group-name" style="color:var(--cat-aa00aa,#aa00aa)">copyright</span>
+          
+          <button type="button" class="tag-group-delete"
+                  hx-delete="/images/71/category-tags?cat=copyright"
+                  
+                  hx-confirm="Remove the 3 copyright tags on this image?"
+                  title="Remove every copyright tag on this image"
+                  
+                  data-confirm-ok="Remove">[x]</button>
+          
+        </div>
+        <ul class="tag-list-sidebar">
+          
+          <li class="tag-entry"
+              data-name="real_life" data-tag-id="1371" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1371.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=copyright:real_life" class="tag-link" style="color:var(--cat-aa00aa,#aa00aa)"
+               title="real_life">real_life</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1371"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="touhou" data-tag-id="13" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/13.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=copyright:touhou" class="tag-link" style="color:var(--cat-aa00aa,#aa00aa)"
+               title="touhou
+aliases: touhou">touhou</a>
+            
+            
+            <span class="tag-count" title="56 images in the library with this tag">56</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/13"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="vocaloid" data-tag-id="578" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/578.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=copyright:vocaloid" class="tag-link" style="color:var(--cat-aa00aa,#aa00aa)"
+               title="vocaloid">vocaloid</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/578"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+        </ul>
+      </div>
+      
+      <div class="tag-group" data-cat="character">
+        <div class="tag-category-label">
+          <span class="tag-group-name" style="color:var(--cat-00aa00,#00aa00)">character</span>
+          
+          <button type="button" class="tag-group-delete"
+                  hx-delete="/images/71/category-tags?cat=character"
+                  
+                  hx-confirm="Remove the 16 character tags on this image?"
+                  title="Remove every character tag on this image"
+                  
+                  data-confirm-ok="Remove">[x]</button>
+          
+        </div>
+        <ul class="tag-list-sidebar">
+          
+          <li class="tag-entry"
+              data-name="flandre_scarlet" data-tag-id="334" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/334.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:flandre_scarlet" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="flandre_scarlet">flandre_scarlet</a>
+            
+            
+            <span class="tag-count" title="10 images in the library with this tag">10</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/334"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="hakurei_reimu" data-tag-id="10" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/10.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:hakurei_reimu" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="hakurei_reimu
+aliases: hakurei_reimu">hakurei_reimu</a>
+            
+            
+            <span class="tag-count" title="23 images in the library with this tag">23</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/10"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="hakurei_reimu_(god-summoning_shaman)" data-tag-id="1364" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1364.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:hakurei_reimu_%28god-summoning_shaman%29" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="hakurei_reimu_(god-summoning_shaman)">hakurei_reimu_(god-summoning_shaman)</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1364"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="hatsune_miku" data-tag-id="576" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/576.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:hatsune_miku" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="hatsune_miku">hatsune_miku</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/576"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="izayoi_sakuya" data-tag-id="309" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/309.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:izayoi_sakuya" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="izayoi_sakuya">izayoi_sakuya</a>
+            
+            
+            <span class="tag-count" title="11 images in the library with this tag">11</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/309"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="kagamine_len" data-tag-id="1365" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1365.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:kagamine_len" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="kagamine_len">kagamine_len</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1365"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="kagamine_rin" data-tag-id="1366" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1366.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:kagamine_rin" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="kagamine_rin">kagamine_rin</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1366"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="kaito_(vocaloid)" data-tag-id="1367" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1367.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:kaito_%28vocaloid%29" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="kaito_(vocaloid)">kaito_(vocaloid)</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1367"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="kirisame_marisa" data-tag-id="282" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/282.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:kirisame_marisa" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="kirisame_marisa
+aliases: kirisame_marisa">kirisame_marisa</a>
+            
+            
+            <span class="tag-count" title="15 images in the library with this tag">15</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/282"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="kirisame_marisa_(witch_of_scarlet_dreams)" data-tag-id="1368" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1368.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:kirisame_marisa_%28witch_of_scarlet_dreams%29" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="kirisame_marisa_(witch_of_scarlet_dreams)">kirisame_marisa_(witch_of_scarlet_dreams)</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1368"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="kochiya_sanae" data-tag-id="158" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/158.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:kochiya_sanae" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="kochiya_sanae">kochiya_sanae</a>
+            
+            
+            <span class="tag-count" title="4 images in the library with this tag">4</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/158"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="komeiji_satori" data-tag-id="615" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/615.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:komeiji_satori" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="komeiji_satori">komeiji_satori</a>
+            
+            
+            <span class="tag-count" title="4 images in the library with this tag">4</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/615"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="megurine_luka" data-tag-id="1369" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1369.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:megurine_luka" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="megurine_luka">megurine_luka</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1369"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="meiko_(vocaloid)" data-tag-id="1370" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1370.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:meiko_%28vocaloid%29" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="meiko_(vocaloid)">meiko_(vocaloid)</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1370"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="remilia_scarlet" data-tag-id="254" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/254.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:remilia_scarlet" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="remilia_scarlet">remilia_scarlet</a>
+            
+            
+            <span class="tag-count" title="10 images in the library with this tag">10</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/254"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="zun" data-tag-id="876" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/876.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=character:zun" class="tag-link" style="color:var(--cat-00aa00,#00aa00)"
+               title="zun">zun</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/876"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+        </ul>
+      </div>
+      
+      <div class="tag-group" data-cat="general">
+        <div class="tag-category-label">
+          <span class="tag-group-name" style="color:var(--cat-3d90e3,#3d90e3)">general</span>
+          
+          <button type="button" class="tag-group-delete"
+                  hx-delete="/images/71/category-tags?cat=general"
+                  
+                  hx-confirm="Remove the 65 general tags on this image?"
+                  title="Remove every general tag on this image"
+                  
+                  data-confirm-ok="Remove">[x]</button>
+          
+        </div>
+        <ul class="tag-list-sidebar">
+          
+          <li class="tag-entry"
+              data-name="1boy" data-tag-id="815" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/815.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:1boy" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="1boy">1boy</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/815"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="apron" data-tag-id="467" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/467.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:apron" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="apron">apron</a>
+            
+            
+            <span class="tag-count" title="5 images in the library with this tag">5</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/467"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="ascot" data-tag-id="7" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/7.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:ascot" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="ascot">ascot</a>
+            
+            
+            <span class="tag-count" title="13 images in the library with this tag">13</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/7"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="black_hat" data-tag-id="280" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/280.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:black_hat" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="black_hat">black_hat</a>
+            
+            
+            <span class="tag-count" title="3 images in the library with this tag">3</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/280"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="black_skirt" data-tag-id="470" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/470.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:black_skirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="black_skirt">black_skirt</a>
+            
+            
+            <span class="tag-count" title="5 images in the library with this tag">5</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/470"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="black_vest" data-tag-id="1038" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1038.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:black_vest" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="black_vest">black_vest</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1038"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="blonde_hair" data-tag-id="50" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/50.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:blonde_hair" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="blonde_hair">blonde_hair</a>
+            
+            
+            <span class="tag-count" title="22 images in the library with this tag">22</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/50"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="blue-framed_eyewear" data-tag-id="1362" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1362.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:blue-framed_eyewear" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="blue-framed_eyewear">blue-framed_eyewear</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1362"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="blue_eyes" data-tag-id="306" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/306.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:blue_eyes" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="blue_eyes">blue_eyes</a>
+            
+            
+            <span class="tag-count" title="12 images in the library with this tag">12</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/306"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="blue_hair" data-tag-id="307" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/307.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:blue_hair" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="blue_hair">blue_hair</a>
+            
+            
+            <span class="tag-count" title="12 images in the library with this tag">12</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/307"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="blue_skirt" data-tag-id="1363" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1363.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:blue_skirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="blue_skirt">blue_skirt</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1363"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="bow" data-tag-id="8" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/8.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:bow" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="bow">bow</a>
+            
+            
+            <span class="tag-count" title="32 images in the library with this tag">32</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/8"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="bowtie" data-tag-id="570" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/570.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:bowtie" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="bowtie">bowtie</a>
+            
+            
+            <span class="tag-count" title="5 images in the library with this tag">5</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/570"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="brown_hat" data-tag-id="1216" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1216.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:brown_hat" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="brown_hat">brown_hat</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1216"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="chair" data-tag-id="390" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/390.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:chair" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="chair">chair</a>
+            
+            
+            <span class="tag-count" title="9 images in the library with this tag">9</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/390"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="collared_shirt" data-tag-id="188" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/188.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:collared_shirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="collared_shirt">collared_shirt</a>
+            
+            
+            <span class="tag-count" title="9 images in the library with this tag">9</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/188"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="curtains" data-tag-id="1203" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1203.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:curtains" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="curtains">curtains</a>
+            
+            
+            <span class="tag-count" title="3 images in the library with this tag">3</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1203"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="detached_sleeves" data-tag-id="15" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/15.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:detached_sleeves" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="detached_sleeves">detached_sleeves</a>
+            
+            
+            <span class="tag-count" title="19 images in the library with this tag">19</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/15"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="display_case" data-tag-id="1372" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1372.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:display_case" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="display_case">display_case</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1372"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="east_asian" data-tag-id="1373" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1373.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:east_asian" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="east_asian">east_asian</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1373"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="frog_hair_ornament" data-tag-id="760" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/760.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:frog_hair_ornament" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="frog_hair_ornament">frog_hair_ornament</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/760"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="full_body" data-tag-id="72" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/72.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:full_body" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="full_body">full_body</a>
+            
+            
+            <span class="tag-count" title="7 images in the library with this tag">7</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/72"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="fumo_(doll)" data-tag-id="17" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/17.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:fumo_%28doll%29" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="fumo_(doll)">fumo_(doll)</a>
+            
+            
+            <span class="tag-count" title="14 images in the library with this tag">14</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/17"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="glasses" data-tag-id="551" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/551.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:glasses" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="glasses">glasses</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/551"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="green_bow" data-tag-id="844" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/844.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:green_bow" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="green_bow">green_bow</a>
+            
+            
+            <span class="tag-count" title="3 images in the library with this tag">3</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/844"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="green_bowtie" data-tag-id="1374" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1374.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:green_bowtie" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="green_bowtie">green_bowtie</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1374"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="green_eyes" data-tag-id="764" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/764.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:green_eyes" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="green_eyes">green_eyes</a>
+            
+            
+            <span class="tag-count" title="7 images in the library with this tag">7</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/764"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="green_hair" data-tag-id="939" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/939.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:green_hair" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="green_hair">green_hair</a>
+            
+            
+            <span class="tag-count" title="7 images in the library with this tag">7</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/939"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="grey_hair" data-tag-id="366" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/366.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:grey_hair" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="grey_hair">grey_hair</a>
+            
+            
+            <span class="tag-count" title="10 images in the library with this tag">10</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/366"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="hair_ornament" data-tag-id="78" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/78.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:hair_ornament" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="hair_ornament">hair_ornament</a>
+            
+            
+            <span class="tag-count" title="9 images in the library with this tag">9</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/78"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="hat" data-tag-id="81" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/81.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:hat" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="hat">hat</a>
+            
+            
+            <span class="tag-count" title="27 images in the library with this tag">27</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/81"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="indoors" data-tag-id="342" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/342.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:indoors" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="indoors">indoors</a>
+            
+            
+            <span class="tag-count" title="10 images in the library with this tag">10</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/342"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="open_mouth" data-tag-id="94" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/94.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:open_mouth" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="open_mouth">open_mouth</a>
+            
+            
+            <span class="tag-count" title="20 images in the library with this tag">20</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/94"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="pink_hat" data-tag-id="1375" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1375.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:pink_hat" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="pink_hat">pink_hat</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1375"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="pink_shirt" data-tag-id="1211" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1211.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:pink_shirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="pink_shirt">pink_shirt</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1211"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="pink_skirt" data-tag-id="1376" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1376.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:pink_skirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="pink_skirt">pink_skirt</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1376"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="print_shirt" data-tag-id="1311" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1311.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:print_shirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="print_shirt">print_shirt</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1311"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="puffy_short_sleeves" data-tag-id="100" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/100.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:puffy_short_sleeves" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="puffy_short_sleeves">puffy_short_sleeves</a>
+            
+            
+            <span class="tag-count" title="9 images in the library with this tag">9</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/100"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="puffy_sleeves" data-tag-id="101" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/101.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:puffy_sleeves" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="puffy_sleeves">puffy_sleeves</a>
+            
+            
+            <span class="tag-count" title="13 images in the library with this tag">13</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/101"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="red_eyes" data-tag-id="29" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/29.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:red_eyes" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="red_eyes">red_eyes</a>
+            
+            
+            <span class="tag-count" title="18 images in the library with this tag">18</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/29"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="red_ribbon" data-tag-id="104" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/104.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:red_ribbon" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="red_ribbon">red_ribbon</a>
+            
+            
+            <span class="tag-count" title="13 images in the library with this tag">13</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/104"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="red_skirt" data-tag-id="108" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/108.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:red_skirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="red_skirt">red_skirt</a>
+            
+            
+            <span class="tag-count" title="13 images in the library with this tag">13</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/108"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="red_vest" data-tag-id="145" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/145.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:red_vest" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="red_vest">red_vest</a>
+            
+            
+            <span class="tag-count" title="4 images in the library with this tag">4</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/145"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="ribbon" data-tag-id="109" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/109.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:ribbon" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="ribbon">ribbon</a>
+            
+            
+            <span class="tag-count" title="23 images in the library with this tag">23</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/109"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="ribbon-trimmed_headwear" data-tag-id="1377" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1377.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:ribbon-trimmed_headwear" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="ribbon-trimmed_headwear">ribbon-trimmed_headwear</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1377"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="ribbon-trimmed_skirt" data-tag-id="1378" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1378.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:ribbon-trimmed_skirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="ribbon-trimmed_skirt">ribbon-trimmed_skirt</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1378"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="ribbon_trim" data-tag-id="31" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/31.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:ribbon_trim" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="ribbon_trim">ribbon_trim</a>
+            
+            
+            <span class="tag-count" title="14 images in the library with this tag">14</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/31"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="shirt" data-tag-id="111" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/111.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:shirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="shirt">shirt</a>
+            
+            
+            <span class="tag-count" title="18 images in the library with this tag">18</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/111"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="shoes" data-tag-id="112" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/112.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:shoes" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="shoes">shoes</a>
+            
+            
+            <span class="tag-count" title="7 images in the library with this tag">7</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/112"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="short_hair" data-tag-id="32" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/32.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:short_hair" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="short_hair">short_hair</a>
+            
+            
+            <span class="tag-count" title="27 images in the library with this tag">27</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/32"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="short_sleeves" data-tag-id="113" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/113.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:short_sleeves" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="short_sleeves">short_sleeves</a>
+            
+            
+            <span class="tag-count" title="14 images in the library with this tag">14</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/113"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="sitting" data-tag-id="446" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/446.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:sitting" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="sitting">sitting</a>
+            
+            
+            <span class="tag-count" title="17 images in the library with this tag">17</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/446"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="skirt" data-tag-id="114" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/114.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:skirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="skirt">skirt</a>
+            
+            
+            <span class="tag-count" title="20 images in the library with this tag">20</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/114"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="skirt_set" data-tag-id="115" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/115.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:skirt_set" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="skirt_set">skirt_set</a>
+            
+            
+            <span class="tag-count" title="10 images in the library with this tag">10</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/115"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="snake_hair_ornament" data-tag-id="1379" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1379.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:snake_hair_ornament" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="snake_hair_ornament">snake_hair_ornament</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1379"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="sneakers" data-tag-id="1380" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1380.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:sneakers" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="sneakers">sneakers</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1380"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="teeth" data-tag-id="37" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/37.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:teeth" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="teeth">teeth</a>
+            
+            
+            <span class="tag-count" title="4 images in the library with this tag">4</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/37"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="upper_teeth_only" data-tag-id="1201" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1201.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:upper_teeth_only" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="upper_teeth_only">upper_teeth_only</a>
+            
+            
+            <span class="tag-count" title="2 images in the library with this tag">2</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1201"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="very_short_hair" data-tag-id="1381" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/1381.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:very_short_hair" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="very_short_hair">very_short_hair</a>
+            
+            
+            <span class="tag-count" title="1 images in the library with this tag">1</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/1381"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="vest" data-tag-id="150" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/150.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:vest" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="vest">vest</a>
+            
+            
+            <span class="tag-count" title="10 images in the library with this tag">10</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/150"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="waist_apron" data-tag-id="862" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/862.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:waist_apron" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="waist_apron">waist_apron</a>
+            
+            
+            <span class="tag-count" title="3 images in the library with this tag">3</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/862"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="white_apron" data-tag-id="864" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/864.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:white_apron" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="white_apron">white_apron</a>
+            
+            
+            <span class="tag-count" title="3 images in the library with this tag">3</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/864"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="white_shirt" data-tag-id="506" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/506.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:white_shirt" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="white_shirt">white_shirt</a>
+            
+            
+            <span class="tag-count" title="8 images in the library with this tag">8</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/506"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="witch_hat" data-tag-id="286" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/286.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:witch_hat" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="witch_hat">witch_hat</a>
+            
+            
+            <span class="tag-count" title="7 images in the library with this tag">7</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/286"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+          <li class="tag-entry"
+              data-name="yellow_ascot" data-tag-id="41" data-source="danbooru" data-depth="0">
+            
+            <a href="../tags/41.html" class="tag-wiki" title="Tag details">?</a>
+            <a href="../index.html?q=general:yellow_ascot" class="tag-link" style="color:var(--cat-3d90e3,#3d90e3)"
+               title="yellow_ascot">yellow_ascot</a>
+            
+            
+            <span class="tag-count" title="9 images in the library with this tag">9</span>
+            
+            <button type="button" class="tag-entry-remove"
+                    hx-delete="/images/71/tags/41"
+                    title="Remove tag">[x]</button>
+            
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  <div id="detail-sidebar-browse"
+       hx-get="/internal/sidebar-browse?q="
+       hx-trigger="load"></div>
+
+</div>
+
+    </aside>
+    <button id="sidebar-rail" type="button" aria-label="Toggle sidebar"></button>
+    <main id="content">
+
+
+<div id="detail-page">
+  <div id="gallery-header">
+    <form id="search-form" action="../index.html" method="GET">
+      
+<div class="search-input-wrap">
+  <input type="text" name="q" id="search-input" value="" placeholder="Search tags… (type system: for filters)" autocomplete="off"
+         hx-get="/internal/search/suggest"
+         hx-trigger="input changed delay:200ms"
+         hx-target="#search-suggest"
+         hx-push-url="false"
+         hx-include="this"
+         onkeydown="handleSuggestKey(event, 'search-suggest', 'search-input')">
+  <div id="search-suggest" class="suggest-dropdown search-suggest-dropdown"></div>
+</div>
+
+      <span class="search-controls">
+        <select name="sort" id="search-sort" aria-label="Sort">
+          <option value="newest"   >Date added</option>
+          <option value="filesize" >File size</option>
+          <option value="order"    >Collection order</option>
+        </select>
+        <select name="order" aria-label="Sort direction">
+          <option value="desc" selected>↓</option>
+          <option value="asc"  >↑</option>
+        </select>
+        <button type="submit">Search</button>
+      </span>
+    </form>
+  </div>
+
+  
+
+  <div id="detail-flash" data-action-flash></div>
+  <div id="fetch-status" class="fetch-status"></div>
+
+  <div class="detail-topbar">
+    <div class="detail-nav-group">
+      
+      <a href="../index.html#img-71" class="back-link">‹ Search</a>
+      
+      
+      <span class="detail-nav-sep">/</span>
+      <span class="detail-filename mono-small" title="danbooru_6264715_039d07416a656918a96fb302c27c0eaf.jpg">danbooru_6264715_039d07416a656918a96fb302c27c0eaf.jpg</span>
+      
+    </div>
+    <div class="detail-topbar-right">
+      <div class="detail-meta-nav">
+        
+        <span class="nav-arrow nav-arrow-placeholder" aria-hidden="true">← Prev</span>
+        
+        
+        <span class="nav-arrow nav-arrow-placeholder" aria-hidden="true">Next →</span>
+        
+        
+      </div>
+      <div class="detail-actions">
+        <form id="inbox-form" hx-post="/images/71/inbox"
+              hx-target="#inbox-btn" hx-swap="outerHTML"
+              style="display:inline">
+          <button type="submit" id="inbox-btn" class="btn-inbox active"
+                  title="Archive (i)">
+            Archive
+          </button>
+        </form>
+        <form id="fav-form" hx-post="/images/71/favorite"
+              hx-target="#fav-btn" hx-swap="outerHTML"
+              style="display:inline">
+          <button type="submit" id="fav-btn" class="btn-fav"
+                  title="Favorite (f)">
+            ♡
+          </button>
+        </form>
+        
+        <button type="button" class="btn-sm btn-view" title="View image (v)"
+                onclick="lightbox.open(null, '../images/71/view.jpg')">⛶</button>
+        
+        <a href="../images/71/view.jpg" download class="btn-sm" title="Download image">⤓</a>
+      </div>
+    </div>
+  </div>
+
+  
+  <dialog id="source-dialog">
+    <form id="source-form" hx-post="/images/71/sources/set"
+          hx-target="#source-error"
+          hx-on::after-request="onExternalEditResponse(event, 'source-dialog')">
+
+      <input type="hidden" id="source-has-prev" name="has_prev" value="">
+      <input type="hidden" id="source-prev-site" name="prev_site" value="">
+      <input type="hidden" id="source-prev-post" name="prev_post" value="">
+      <input type="hidden" id="source-post" name="post_id" value="">
+      <p class="dlg-title">Source: <strong id="source-dialog-title">add</strong><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <label>Source label (max 200 chars)</label>
+        
+      <div class="series-input-wrap">
+        <input type="text" name="site" id="source-site-input" maxlength="200"
+               autocomplete="off"
+               hx-get="/internal/source/suggest"
+               hx-trigger="input changed delay:200ms"
+               hx-target="#source-suggest"
+               hx-vals='js:{prefix: document.getElementById("source-site-input").value}'
+               onkeydown="handleSuggestKey(event, 'source-suggest', 'source-site-input')">
+        <div id="source-suggest" class="suggest-dropdown series-suggest-dropdown"></div>
+      </div>
+
+      </div>
+      <div class="field">
+        <label>URL (must start with http:// or https://; max 2048 chars)</label>
+        <input id="source-url-input" type="url" name="url" maxlength="2048" placeholder="https://...">
+      </div>
+  
+      <div id="source-error"></div>
+      <div class="dialog-actions">
+  <button type="submit">Save</button>
+  <button type="button" onclick="document.getElementById('source-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+
+
+  
+  <dialog id="collection-dialog">
+    <form id="collection-form" hx-post="/images/71/collections/set"
+          hx-target="#collection-error"
+          hx-on::after-request="onExternalEditResponse(event, 'collection-dialog')">
+
+      <input type="hidden" id="collection-prev" name="prev" value="">
+      <p class="dlg-title">Collection: <strong id="collection-dialog-title">add</strong><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <label>Collection label (max 200 chars)</label>
+        
+      <div class="series-input-wrap">
+        <input type="text" name="collection" id="collection-name-input" maxlength="200"
+               autocomplete="off"
+               hx-get="/internal/collection/suggest"
+               hx-trigger="input changed delay:200ms"
+               hx-target="#collection-suggest"
+               hx-vals='js:{prefix: document.getElementById("collection-name-input").value}'
+               onkeydown="handleSuggestKey(event, 'collection-suggest', 'collection-name-input')">
+        <div id="collection-suggest" class="suggest-dropdown series-suggest-dropdown"></div>
+      </div>
+
+      </div>
+      <div class="field">
+        <label>Order within collection (optional, 1 or higher)</label>
+        <input id="collection-order-input" type="number" name="collection_order" min="1">
+      </div>
+  
+      <div id="collection-error"></div>
+      <div class="dialog-actions">
+  <button type="submit">Save</button>
+  <button type="button" onclick="document.getElementById('collection-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+
+
+  
+
+  
+  <dialog id="commentary-dialog">
+    <form id="commentary-form" hx-post="/images/71/commentary/set"
+          hx-target="#commentary-error"
+          hx-on::after-request="onExternalEditResponse(event, 'commentary-dialog')">
+
+      <input type="hidden" id="commentary-post" name="post_id" value="">
+      <input type="hidden" id="commentary-site" name="site" value="">
+      <p class="dlg-title">Commentary: <strong id="commentary-dialog-site"></strong><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <label>Commentary text</label>
+        <textarea id="commentary-body" name="commentary" rows="6" maxlength="10000"></textarea>
+        
+<div class="markup-bar" data-target="commentary-body">
+  <button type="button" class="btn-link-accent" data-wrap="b" title="Bold">[b]</button>
+  <button type="button" class="btn-link-accent" data-wrap="i" title="Italic">[i]</button>
+  <button type="button" class="btn-link-accent" data-wrap="u" title="Underline">[u]</button>
+  <button type="button" class="btn-link-accent" data-wrap="s" title="Struck through">[s]</button>
+  <button type="button" class="btn-link-accent" data-wrap="code" title="Code">[code]</button>
+  <button type="button" class="btn-link-accent" data-wrap="tn" title="Translator note">[tn]</button>
+  <span class="markup-bar-sep">|</span>
+  <button type="button" class="btn-link-accent" data-wrap="tag" title="Link a tag search">[tag]</button>
+  <button type="button" class="btn-link-accent" data-wrap="url" title="Link a URL">[link]</button>
+  <button type="button" class="btn-link-accent" data-wrap="image" title="Link an image in this gallery">[image]</button>
+  <span class="markup-bar-sep">|</span>
+  <button type="button" class="btn-link-accent"
+          hx-post="/images/71/markup/preview"
+          hx-include="closest form"
+          hx-vals='js:{body: document.getElementById("commentary-body").value}'
+          hx-target="#commentary-body-preview">[preview]</button>
+</div>
+<div id="commentary-body-preview" class="markup-preview"></div>
+
+      </div>
+  
+      <div id="commentary-error"></div>
+      <div class="dialog-actions">
+  <button type="submit">Save</button>
+  <button type="button" onclick="document.getElementById('commentary-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+
+
+  
+  <dialog id="translation-dialog">
+    <form id="translation-form" hx-post="/images/71/translation/set"
+          hx-target="#translation-error"
+          hx-on::after-request="onExternalEditResponse(event, 'translation-dialog')">
+
+      <input type="hidden" id="translation-post" name="post_id" value="">
+      <input type="hidden" id="translation-site" name="site" value="">
+      <p class="dlg-title">Translation: <strong id="translation-dialog-site"></strong><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <label>Translated commentary</label>
+        <textarea id="translation-body" name="commentary_translated" rows="6" maxlength="10000"></textarea>
+        
+<div class="markup-bar" data-target="translation-body">
+  <button type="button" class="btn-link-accent" data-wrap="b" title="Bold">[b]</button>
+  <button type="button" class="btn-link-accent" data-wrap="i" title="Italic">[i]</button>
+  <button type="button" class="btn-link-accent" data-wrap="u" title="Underline">[u]</button>
+  <button type="button" class="btn-link-accent" data-wrap="s" title="Struck through">[s]</button>
+  <button type="button" class="btn-link-accent" data-wrap="code" title="Code">[code]</button>
+  <button type="button" class="btn-link-accent" data-wrap="tn" title="Translator note">[tn]</button>
+  <span class="markup-bar-sep">|</span>
+  <button type="button" class="btn-link-accent" data-wrap="tag" title="Link a tag search">[tag]</button>
+  <button type="button" class="btn-link-accent" data-wrap="url" title="Link a URL">[link]</button>
+  <button type="button" class="btn-link-accent" data-wrap="image" title="Link an image in this gallery">[image]</button>
+  <span class="markup-bar-sep">|</span>
+  <button type="button" class="btn-link-accent"
+          hx-post="/images/71/markup/preview"
+          hx-include="closest form"
+          hx-vals='js:{body: document.getElementById("translation-body").value}'
+          hx-target="#translation-body-preview">[preview]</button>
+</div>
+<div id="translation-body-preview" class="markup-preview"></div>
+
+      </div>
+  
+      <div id="translation-error"></div>
+      <div class="dialog-actions">
+  <button type="submit">Save</button>
+  <button type="button" onclick="document.getElementById('translation-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+
+
+  
+  <dialog id="original-dialog">
+    <form id="original-form" hx-post="/images/71/original/set"
+          hx-target="#original-error"
+          hx-on::after-request="onExternalEditResponse(event, 'original-dialog')">
+
+      <input type="hidden" id="original-post" name="post_id" value="">
+      <input type="hidden" id="original-site" name="site" value="">
+      <p class="dlg-title">Original source: <strong id="original-dialog-site"></strong><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <label>Where the artist first posted it (one per line; max 2048 chars)</label>
+        <textarea id="original-body" name="original" rows="2" maxlength="2048"></textarea>
+      </div>
+  
+      <div id="original-error"></div>
+      <div class="dialog-actions">
+  <button type="submit">Save</button>
+  <button type="button" onclick="document.getElementById('original-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+
+
+  
+  <dialog id="annotation-dialog">
+    <form id="annotation-form" hx-post="/images/71/annotations/set"
+          hx-target="#annotation-error"
+          hx-on::after-request="onExternalEditResponse(event, 'annotation-dialog')">
+
+      <input type="hidden" id="annotation-id" name="id" value="">
+      <p><span id="annotation-dialog-title">Add</span> annotation</p>
+      <p class="field-hint">Position and size in original-image pixels (image is 1479 × 1109).</p>
+      <div class="field">
+        <label>x, y, width, height</label>
+        <div class="annotation-coord-row">
+          <input id="annotation-x" type="number" name="x" min="0" placeholder="x" autocomplete="off">
+          <input id="annotation-y" type="number" name="y" min="0" placeholder="y" autocomplete="off">
+          <input id="annotation-w" type="number" name="w" min="1" placeholder="width" autocomplete="off">
+          <input id="annotation-h" type="number" name="h" min="1" placeholder="height" autocomplete="off">
+        </div>
+      </div>
+      <div class="field">
+        <label>Text</label>
+        <textarea id="annotation-body" name="body" rows="3" maxlength="4000"></textarea>
+        
+<div class="markup-bar" data-target="annotation-body">
+  <button type="button" class="btn-link-accent" data-wrap="b" title="Bold">[b]</button>
+  <button type="button" class="btn-link-accent" data-wrap="i" title="Italic">[i]</button>
+  <button type="button" class="btn-link-accent" data-wrap="u" title="Underline">[u]</button>
+  <button type="button" class="btn-link-accent" data-wrap="s" title="Struck through">[s]</button>
+  <button type="button" class="btn-link-accent" data-wrap="code" title="Code">[code]</button>
+  <button type="button" class="btn-link-accent" data-wrap="tn" title="Translator note">[tn]</button>
+  <span class="markup-bar-sep">|</span>
+  <button type="button" class="btn-link-accent" data-wrap="tag" title="Link a tag search">[tag]</button>
+  <button type="button" class="btn-link-accent" data-wrap="url" title="Link a URL">[link]</button>
+  <button type="button" class="btn-link-accent" data-wrap="image" title="Link an image in this gallery">[image]</button>
+  <span class="markup-bar-sep">|</span>
+  <button type="button" class="btn-link-accent"
+          hx-post="/images/71/markup/preview"
+          hx-include="closest form"
+          hx-vals='js:{body: document.getElementById("annotation-body").value}'
+          hx-target="#annotation-body-preview">[preview]</button>
+</div>
+<div id="annotation-body-preview" class="markup-preview"></div>
+
+      </div>
+  
+      <div id="annotation-error"></div>
+      <div class="dialog-actions">
+  <button type="submit">Save</button>
+  <button type="button" onclick="document.getElementById('annotation-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+
+
+  
+  <dialog id="note-dialog">
+    <form id="note-form" hx-post="/images/71/note"
+          hx-target="#note-error"
+          hx-on::after-request="onExternalEditResponse(event, 'note-dialog')">
+
+      <p>Note</p>
+      <div class="field">
+        <label>Your note (max 10000 chars)</label>
+        <textarea id="note-body" name="note" rows="6" maxlength="10000"></textarea>
+        
+<div class="markup-bar" data-target="note-body">
+  <button type="button" class="btn-link-accent" data-wrap="b" title="Bold">[b]</button>
+  <button type="button" class="btn-link-accent" data-wrap="i" title="Italic">[i]</button>
+  <button type="button" class="btn-link-accent" data-wrap="u" title="Underline">[u]</button>
+  <button type="button" class="btn-link-accent" data-wrap="s" title="Struck through">[s]</button>
+  <button type="button" class="btn-link-accent" data-wrap="code" title="Code">[code]</button>
+  <button type="button" class="btn-link-accent" data-wrap="tn" title="Translator note">[tn]</button>
+  <span class="markup-bar-sep">|</span>
+  <button type="button" class="btn-link-accent" data-wrap="tag" title="Link a tag search">[tag]</button>
+  <button type="button" class="btn-link-accent" data-wrap="url" title="Link a URL">[link]</button>
+  <button type="button" class="btn-link-accent" data-wrap="image" title="Link an image in this gallery">[image]</button>
+  <span class="markup-bar-sep">|</span>
+  <button type="button" class="btn-link-accent"
+          hx-post="/images/71/markup/preview"
+          hx-include="closest form"
+          hx-vals='js:{body: document.getElementById("note-body").value}'
+          hx-target="#note-body-preview">[preview]</button>
+</div>
+<div id="note-body-preview" class="markup-preview"></div>
+
+      </div>
+  
+      <div id="note-error"></div>
+      <div class="dialog-actions">
+  <button type="submit">Save</button>
+  <button type="button" onclick="document.getElementById('note-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+
+
+  <script>
+  document.addEventListener('click', function(e) {
+    var stems = ['commentary', 'translation', 'original'];
+    for (var i = 0; i < stems.length; i++) {
+      var stem = stems[i];
+      var btn = e.target.closest('.btn-edit-' + stem);
+      if (!btn) continue;
+      document.getElementById(stem + '-site').value = btn.dataset.site || '';
+      document.getElementById(stem + '-dialog-site').textContent = btn.dataset.site || 'source';
+      document.getElementById(stem + '-post').value = btn.dataset.post || '';
+      document.getElementById(stem + '-body').value = btn.dataset[stem] || '';
+      clearSlots(stem + '-error');
+      document.getElementById(stem + '-dialog').showModal();
+      return;
+    }
+    var en = e.target.closest('.btn-edit-note');
+    if (en) {
+      document.getElementById('note-body').value = en.dataset.note || '';
+      clearSlots('note-error');
+      document.getElementById('note-dialog').showModal();
+      return;
+    }
+    if (e.target.closest('.btn-add-source')) { openSourceDialog('', '', ''); return; }
+    var es = e.target.closest('.btn-edit-source');
+    if (es) { openSourceDialog(es.dataset.site, es.dataset.post, es.dataset.url); return; }
+    if (e.target.closest('.btn-add-collection')) { openCollectionDialog('', ''); return; }
+    var ec = e.target.closest('.btn-edit-collection');
+    if (ec) { openCollectionDialog(ec.dataset.name, ec.dataset.order); return; }
+    if (e.target.closest('.btn-add-annotation')) { openAnnotationDialog('', '', '', '', '', ''); return; }
+    var ea = e.target.closest('.btn-edit-annotation');
+    if (ea) openAnnotationDialog(ea.dataset.id, ea.dataset.x, ea.dataset.y, ea.dataset.w, ea.dataset.h, ea.dataset.body);
+  });
+  </script>
+
+  
+  <dialog id="autotag-dialog">
+    <form hx-post="/images/71/autotag"
+          hx-target="#autotag-error"
+          hx-on::after-request="if(event.detail.xhr.status === 202)document.getElementById('autotag-dialog').close()">
+      <p class="dlg-title">Auto-tag this image. Pick which tagger to run.<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <label><input type="radio" name="tagger_name" value="" checked> All enabled taggers</label>
+        <label><input type="radio" name="tagger_name" value="wd-swinv2"> wd-swinv2</label>
+      </div>
+      <div id="autotag-error"></div>
+      <div class="dialog-actions">
+  <button type="submit">Auto-tag</button>
+  <button type="button" onclick="document.getElementById('autotag-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+  
+
+  <dialog id="relation-edit-dialog">
+    <form hx-post="/relations/add"
+          hx-target="#relation-edit-error"
+          hx-on::after-request="onRelationEditResponse(event)">
+      <input type="hidden" name="direction" id="relation-edit-direction" value="ab">
+      <p class="dlg-title">Declare a <strong>relation</strong> between this image and another.<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="relation-edit-grid" id="relation-edit-grid">
+        <div class="relation-edit-side" data-side="self">
+          <h4>This image</h4>
+          <div class="relation-edit-thumb-slot">
+            <img class="relation-edit-thumb" id="relation-edit-thumb-self"
+                 src="../thumbnails/default/71.jpg"
+                 alt="image 71" loading="lazy">
+          </div>
+          <input type="number" name="a" id="relation-parent-id" value="71" readonly required>
+        </div>
+        <div class="relation-edit-swap">
+          <button type="button" class="btn-link-accent" id="relation-edit-swap-btn"
+                  title="Swap which side is left" aria-label="Swap which side is left">⇄</button>
+        </div>
+        <div class="relation-edit-side" data-side="other">
+          <h4>Other image</h4>
+          <div class="relation-edit-thumb-slot">
+            <img class="relation-edit-thumb" id="relation-edit-thumb-other"
+                 alt="" loading="lazy" hidden>
+          </div>
+          <input type="text" name="b" id="relation-other-id" inputmode="numeric"
+                 pattern="[0-9]+" required
+                 placeholder="image id">
+        </div>
+      </div>
+      <p class="field-hint">The other image's ID is the first row of its Metadata panel (click to copy).</p>
+      <div class="field">
+        <label>Relation type</label>
+        <label><input type="radio" name="type" value="duplicate" checked> Same image (Duplicate)</label>
+        <label><input type="radio" name="type" value="alternate"> Variant (Alternate)</label>
+        <label><input type="radio" name="type" value="version"> Newer revision (Version)</label>
+        <label><input type="radio" name="type" value="derivative"> Based on (Derivative)</label>
+      </div>
+      <p class="relation-edit-summary field-hint" id="relation-edit-summary"
+         data-self-id="71">Pick the other image and a relation type.</p>
+      <div id="relation-edit-error"></div>
+      <div class="dialog-actions">
+        <button type="submit" name="force" value="true" id="relation-edit-overwrite-btn"
+                class="btn-danger" hidden>Overwrite existing relation</button>
+        <button type="submit">Add relation</button>
+        <button type="button" onclick="document.getElementById('relation-edit-dialog').close()">Cancel</button>
+      </div>
+    </form>
+    <script>
+    function onRelationEditResponse(event) {
+      var src = document.getElementById('relation-edit-error');
+      if (!src) return;
+      var overwrite = document.getElementById('relation-edit-overwrite-btn');
+      
+      
+      var answered = event && event.detail && event.detail.successful &&
+        src.querySelector('.flash-ok, .flash-err');
+      if (!answered) {
+        if (overwrite) overwrite.hidden = true;
+        setFlashText(src, 'err', 'The relation was not saved.');
+        return;
+      }
+      var success = src.querySelector('.flash-ok');
+      if (!success) {
+        
+        
+        var err = src.querySelector('.flash-err');
+        if (overwrite) {
+          var msg = err ? (err.textContent || '') : '';
+          if (/already has a different relation/i.test(msg)) {
+            overwrite.textContent = 'Overwrite existing relation';
+            overwrite.hidden = false;
+          } else if (/already has a version edge/i.test(msg)) {
+            overwrite.textContent = 'Replace existing version edge';
+            overwrite.hidden = false;
+          } else {
+            overwrite.hidden = true;
+          }
+        }
+        return;
+      }
+      if (overwrite) {
+        overwrite.hidden = true;
+        overwrite.textContent = 'Overwrite existing relation';
+      }
+      src.innerHTML = '';
+      var dlg = document.getElementById('relation-edit-dialog');
+      if (dlg) dlg.close();
+      if (window.htmx) {
+        var panel = document.getElementById('related-entries-panel');
+        if (panel) window.htmx.trigger(panel, 'relations-changed');
+      }
+    }
+    (function() {
+      var dlg = document.getElementById('relation-edit-dialog');
+      if (!dlg) return;
+      var grid = document.getElementById('relation-edit-grid');
+      var parentInput = document.getElementById('relation-parent-id');
+      var otherInput = document.getElementById('relation-other-id');
+      var dirInput = document.getElementById('relation-edit-direction');
+      var summary = document.getElementById('relation-edit-summary');
+      var swap = document.getElementById('relation-edit-swap-btn');
+      var otherThumb = document.getElementById('relation-edit-thumb-other');
+      var gallery = "default";
+      var selfID = summary && summary.dataset.selfId ? summary.dataset.selfId : '';
+
+      function sideLabel(input) {
+        if (!input) return '';
+        var v = (input.value || '').trim();
+        if (v === '' || v === '0') return v === '' ? '(other image)' : '#' + v;
+        if (v === selfID) return 'this image';
+        return '#' + v;
+      }
+      function selectedType() {
+        var r = dlg.querySelector('input[name="type"]:checked');
+        return r ? r.value : 'duplicate';
+      }
+      function refreshSummary() {
+        if (!summary) return;
+        
+        
+        var left = sideLabel(parentInput);
+        var right = sideLabel(otherInput);
+        if (dirInput && dirInput.value === 'ba') {
+          var tmp = left; left = right; right = tmp;
+        }
+        var t = selectedType();
+        var s;
+        switch (t) {
+          case 'alternate':
+            s = left + ' and ' + right + ' are variants.';
+            break;
+          case 'version':
+            s = right + ' is a newer revision of ' + left + '.';
+            break;
+          case 'derivative':
+            s = right + ' is based on ' + left + '.';
+            break;
+          default:
+            
+            s = right + ' is the same image as ' + left + ' (' + left + ' is the original).';
+        }
+        summary.textContent = s;
+      }
+      if (swap) swap.addEventListener('click', function() {
+        if (!dirInput || !grid) return;
+        dirInput.value = (dirInput.value === 'ba') ? 'ab' : 'ba';
+        grid.classList.toggle('relation-edit-grid-swapped', dirInput.value === 'ba');
+        refreshSummary();
+      });
+      function normaliseInput() {
+        if (!otherInput) return;
+        var raw = (otherInput.value || '').trim();
+        var m = raw.match(/\/images\/(\d+)(?:[\/?#]|$)/);
+        if (m && m[1] && m[1] !== raw) {
+          otherInput.value = m[1];
+        }
+      }
+      function refreshOtherThumb() {
+        if (!otherThumb || !otherInput) return;
+        var raw = (otherInput.value || '').trim();
+        if (!/^\d+$/.test(raw) || raw === '0') {
+          otherThumb.hidden = true;
+          otherThumb.removeAttribute('src');
+          otherThumb.alt = '';
+          return;
+        }
+        otherThumb.alt = 'image ' + raw;
+        otherThumb.hidden = false;
+        otherThumb.src = '/thumbnails/' + encodeURIComponent(gallery) + '/' + raw + '.jpg';
+      }
+      if (otherInput) otherInput.addEventListener('input', function() {
+        normaliseInput();
+        refreshOtherThumb();
+        refreshSummary();
+      });
+      if (otherThumb) otherThumb.addEventListener('error', function() {
+        otherThumb.hidden = true;
+      });
+      dlg.querySelectorAll('input[name="type"]').forEach(function(r) {
+        r.addEventListener('change', refreshSummary);
+      });
+      
+      
+      var open = dlg.showModal.bind(dlg);
+      dlg.showModal = function() {
+        if (dirInput) dirInput.value = 'ab';
+        if (grid) grid.classList.remove('relation-edit-grid-swapped');
+        open();
+        refreshOtherThumb();
+        refreshSummary();
+      };
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest('[data-relations-add]');
+        if (!btn) return;
+        e.preventDefault();
+        parentInput.value = btn.getAttribute('data-relations-add');
+        parentInput.readOnly = true;
+        otherInput.value = '';
+        otherInput.readOnly = false;
+        dlg.querySelector('input[name="type"][value="duplicate"]').checked = true;
+        clearSlots('relation-edit-error');
+        var overwrite = document.getElementById('relation-edit-overwrite-btn');
+        overwrite.hidden = true;
+        overwrite.textContent = 'Overwrite existing relation';
+        dlg.showModal();
+      });
+    })();
+    </script>
+  </dialog>
+
+  <div class="detail-body">
+    <div class="detail-main">
+      <div class="detail-media">
+        
+        <div class="detail-media-frame">
+          <a href="../images/71/view.jpg" target="_blank" class="detail-img-link" onclick="return lightbox.open(event, this.href)">
+            <img src="../images/71/view.jpg" alt="image 71" class="detail-img"
+                 onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='../thumbnails/default/71.jpg';}else{this.onerror=null;}">
+          </a>
+          
+          <div class="annotation-overlay">
+            
+            <div class="annotation-box" data-ann-id="210" style="left:2.4341%;top:78.4491%;width:2.9750%;height:3.4265%"><span class="annotation-body">Kirisame Marisa</span></div>
+            
+            <div class="annotation-box" data-ann-id="211" style="left:27.8567%;top:71.8665%;width:3.5159%;height:3.4265%"><span class="annotation-body">Remilia Scarlet</span></div>
+            
+            <div class="annotation-box" data-ann-id="212" style="left:39.6890%;top:76.6456%;width:2.9750%;height:3.6069%"><span class="annotation-body">ZUN</span></div>
+            
+            <div class="annotation-box" data-ann-id="213" style="left:68.8979%;top:22.1821%;width:1.6227%;height:1.4427%"><span class="annotation-body">Kagamine Len</span></div>
+            
+            <div class="annotation-box" data-ann-id="214" style="left:51.6565%;top:73.0388%;width:3.0426%;height:3.5167%"><span class="annotation-body">Izayoi Sakuya</span></div>
+            
+            <div class="annotation-box" data-ann-id="215" style="left:73.0899%;top:72.2272%;width:3.3130%;height:3.9675%"><span class="annotation-body">Flandre Scarlet</span></div>
+            
+            <div class="annotation-box" data-ann-id="216" style="left:92.3597%;top:70.2435%;width:2.7045%;height:3.3363%"><span class="annotation-body">Kochiya Sanae</span></div>
+            
+            <div class="annotation-box" data-ann-id="217" style="left:0.0000%;top:41.2985%;width:2.5693%;height:2.9757%"><span class="annotation-body">Hakurei Reimu</span></div>
+            
+            <div class="annotation-box" data-ann-id="218" style="left:63.0832%;top:42.5609%;width:2.3665%;height:2.7953%"><span class="annotation-body">Komeiji Satori</span></div>
+            
+            <div class="annotation-box" data-ann-id="219" style="left:57.2008%;top:22.1821%;width:1.4875%;height:1.3526%"><span class="annotation-body">Hatsune Miku</span></div>
+            
+            <div class="annotation-box" data-ann-id="220" style="left:62.9479%;top:22.0018%;width:1.4875%;height:1.4427%"><span class="annotation-body">Kagamine Rin</span></div>
+            
+            <div class="annotation-box" data-ann-id="221" style="left:0.0000%;top:34.8061%;width:1.4199%;height:1.7133%"><span class="annotation-body">Hakurei Reimu (God-Summoning Shaman)</span></div>
+            
+            <div class="annotation-box" data-ann-id="222" style="left:4.7329%;top:35.1668%;width:1.1494%;height:1.8936%"><span class="annotation-body">Kirisame Marisa (Witch of Scarlet Dreams)</span></div>
+            
+          </div>
+          
+        </div>
+        
+        
+        <div class="annotation-controls"><button type="button" class="btn-link-accent annotation-toggle" onclick="toggleAnnotations(this)">[hide annotations]</button></div>
+        
+        
+      </div>
+
+      
+
+      <section class="detail-commentary">
+        <div class="commentary-block detail-note">
+          <div class="commentary-head">
+            <span class="commentary-label">Personal note</span>
+            
+            <button type="button" class="btn-link-accent btn-edit-note" data-note="" title="Add note">[+ add note]</button>
+            
+          </div>
+          
+        </div>
+        <div class="commentary-block detail-annotations">
+          <div class="commentary-head">
+            <span class="commentary-label">Annotations</span>
+            <button type="button" class="btn-link-accent btn-add-annotation" title="Add an annotation">[+ add annotation]</button>
+          </div>
+          
+        </div>
+      </section>
+
+      <div class="tag-editor-section">
+        
+<div id="image-tags" data-image-id="71">
+  
+  
+  
+</div>
+
+
+
+
+
+        <form id="add-tag-form" class="add-tag-form"
+              hx-post="/images/71/tags"
+              hx-target="#image-tags"
+              hx-swap="outerHTML">
+          <div class="add-tag-input-wrap">
+            
+      <input type="text" name="tag" id="tag-input" data-multi-tags="1"
+             placeholder="Add tags..." autocomplete="off"
+             hx-get="/internal/tags/suggest"
+             hx-trigger="input changed delay:200ms"
+             hx-target="#tag-suggest-dropdown"
+             hx-swap="innerHTML"
+             hx-vals='js:{ tag: wordAtCaret(document.getElementById("tag-input")).word}'
+             onkeydown="handleSuggestKey(event, 'tag-suggest-dropdown', 'tag-input')">
+      <div id="tag-suggest-dropdown" class="suggest-dropdown tag-suggest-dropdown"></div>
+
+          </div>
+          <button type="submit">Add</button>
+          
+          <button type="button" class="btn-autotag"
+                  title="Auto-tag this image (t)"
+                  onclick="clearSlots('autotag-error'); document.getElementById('autotag-dialog').showModal()">Auto-tag</button>
+          
+          
+          <button type="button" class="btn-hash-lookup peer-accent" data-peer-title="Find tags and sources for this file on online boorus via monloader"
+                  title="Find tags and sources for this file on online boorus via monloader"
+                  hx-post="/images/71/lookup" hx-vals='{"backend":"booru"}'
+                  hx-target="#fetch-pending" hx-swap="innerHTML"
+                  hx-confirm="Find tags for this file on online boorus?"
+                  data-confirm-ok="Lookup online boorus">Lookup online boorus</button>
+          
+        </form>
+        <h4 class="tag-list-added-title" hidden>Just added</h4>
+        <ul class="tag-list tag-list-added"></ul>
+        
+
+<div id="lookup-history">
+  
+  
+  
+  
+  
+</div>
+
+        <div id="fetch-pending" class="fetch-status"></div>
+      </div>
+
+      
+      <div id="ptr-contrib-panel" hx-get="/images/71/ptr-contrib-panel" hx-trigger="load, tags-changed from:body, ptr-contrib-closed from:body, monloader-status-changed from:body" hx-swap="innerHTML"></div>
+      <div id="ptr-contrib-dialog-host"></div>
+      <dialog id="ptr-contrib-loading" class="ptr-contrib-loading">
+  <p class="field-hint">reading the Public Tag Repository...</p>
+</dialog>
+      
+
+      
+
+      
+<div id="detail-danger-zone">
+  <div class="danger-zone">
+    
+    <button type="button" id="remove-tags-btn" class="btn-warning" onclick="openRemoveTagsDialog()">Remove tags...</button>
+    
+    
+    <button type="button" onclick="openPlaceImageDialog()">Rename / move...</button>
+    <button class="btn-danger"
+            id="delete-image-btn"
+            hx-delete="/images/71?ref="
+            hx-swap="none"
+            hx-confirm="Delete this image?"
+            data-confirm-danger="Files are permanently deleted from disk. This cannot be undone."
+            data-confirm-ok="Delete">Delete image</button>
+  </div>
+
+  
+  <dialog id="remove-tags-dialog" data-image-id="71">
+    <p class="dlg-title">Remove tags from this image:<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+    <form id="remove-tags-form" onsubmit="event.preventDefault(); confirmRemoveTags();">
+      <div class="field">
+        
+        <label><input type="radio" name="mode" value="source"> Tags from one source</label>
+        <div class="field" style="margin: 4px 0 8px 22px">
+          <select id="remove-tags-source" class="upload-wide-input">
+            <option value="danbooru">danbooru</option>
+          </select>
+        </div>
+        
+        
+        
+        
+        <label><input type="radio" name="mode" value="all"> All tags</label>
+      </div>
+      <div class="dialog-actions">
+  <button type="submit" class="btn-warning">Remove</button>
+  <button type="button" onclick="document.getElementById('remove-tags-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+  
+
+  <dialog id="place-image-dialog" data-filename="danbooru_6264715_039d07416a656918a96fb302c27c0eaf.jpg" data-current-folder="">
+    <p class="dlg-title">Rename / move this image:<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+    <form id="place-image-form"
+          hx-post="/images/71/place"
+          hx-target="#place-image-error" hx-swap="innerHTML">
+      <div class="field">
+        
+      <div class="dest-row">
+        <div class="dest-part">
+          <label for="place-image-folder">folder</label>
+          <input type="text" name="folder" id="place-image-folder" autocomplete="off"
+                 hx-get="/internal/folders/suggest"
+                 hx-trigger="input changed delay:200ms"
+                 hx-target="#place-image-suggest"
+                 hx-vals='js:{prefix: document.getElementById("place-image-folder").value}'
+                 onkeydown="handleSuggestKey(event, 'place-image-suggest', 'place-image-folder')">
+          <div id="place-image-suggest" class="suggest-dropdown folder-suggest-dropdown"></div>
+        </div>
+        <span class="dest-sep" aria-hidden="true">/</span>
+        <div class="dest-part">
+          <label for="place-image-name">name</label>
+          <input type="text" name="name" id="place-image-name" autocomplete="off">
+        </div>
+      </div>
+      <div class="dest-hints">
+        <span class="field-hint">Blank = the gallery root.</span>
+        <span class="field-hint">The extension is kept.</span>
+      </div>
+
+        
+
+<div class="tok-chips">
+  <button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{name}" title="current file name, no extension" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{name}</button><button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{ext}" title="extension, e.g. png" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{ext}</button><button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{id}" title="image ID, e.g. 1042" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{id}</button><button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{hash:8}" title="first 8 characters of the file hash, e.g. 3fa2c91b" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{hash:8}</button><button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{md5}" title="MD5 of the file" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{md5}</button><button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{date}" title="day the image was added, e.g. 2026-10-25" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{date}</button><button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{year}" title="year the image was added, e.g. 2026" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{year}</button><button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{month}" title="month the image was added, e.g. 10" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{month}</button><button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{gallery}" title="gallery name, e.g. default" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{gallery}</button><button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{type}" title="detected type, e.g. png, gif, cbz" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{type}</button>
+  <button type="button" class="tok-chip" data-targets="place-image-folder place-image-name" data-token="{folder}" title="the image&#39;s current folder" onmousedown="event.preventDefault()" onclick="insertToken(this)" tabindex="-1">{folder}</button>
+  
+  
+</div>
+
+        <div id="place-image-preview"
+             hx-get="/internal/name/preview"
+             hx-trigger="input delay:200ms from:#place-image-folder, input delay:200ms from:#place-image-name, preview"
+             hx-target="this"
+             hx-vals='js:{scope: "place", ids: "71", folder: document.getElementById("place-image-folder").value, name: document.getElementById("place-image-name").value}'></div>
+      </div>
+      <div id="place-image-error"></div>
+      <div class="dialog-actions">
+  <button type="submit">Rename / move</button>
+  <button type="button" onclick="document.getElementById('place-image-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+
+</div>
+
+      
+      <script>
+      function openTransferImageDialog() {
+        var dlg = document.getElementById('transfer-image-dialog');
+        if (!dlg) return;
+        var rm = document.getElementById('transfer-image-remove');
+        if (rm) rm.checked = false;
+        clearSlots('transfer-image-error');
+        dlg.showModal();
+      }
+      function openRemoveTagsDialog() {
+        var dlg = document.getElementById('remove-tags-dialog');
+        if (!dlg) return;
+        
+        
+        var pref = dlg.querySelector('input[name="mode"][value="user"]')
+                || dlg.querySelector('input[name="mode"]');
+        if (pref) pref.checked = true;
+        dlg.showModal();
+      }
+      function confirmRemoveTags() {
+        var dlg = document.getElementById('remove-tags-dialog');
+        if (!dlg) return;
+        var id = dlg.dataset.imageId;
+        var checked = dlg.querySelector('input[name="mode"]:checked');
+        var mode = checked ? checked.value : 'all';
+        var url;
+        switch (mode) {
+          case 'user':   url = '/images/' + id + '/user-tags'; break;
+          case 'stale':  url = '/images/' + id + '/stale-tags'; break;
+          case 'source': url = '/images/' + id + '/source-tags?sources=' + encodeURIComponent(document.getElementById('remove-tags-source').value); break;
+          case 'tagger': url = '/images/' + id + '/auto-tags?taggers=' + encodeURIComponent(document.getElementById('remove-tags-tagger').value); break;
+          default:       url = '/images/' + id + '/tags';
+        }
+        htmx.ajax('DELETE', url, {target: '#image-tags', swap: 'outerHTML'});
+        dlg.close();
+      }
+      function openPlaceImageDialog() {
+        var dlg = document.getElementById('place-image-dialog');
+        var folder = document.getElementById('place-image-folder');
+        var name = document.getElementById('place-image-name');
+        folder.value = dlg.dataset.currentFolder || '';
+        name.value = (dlg.dataset.filename || '').replace(/\.[^.]+$/, '');
+        clearSlots('place-image-suggest', 'place-image-error', 'place-image-preview');
+        dlg.showModal();
+        name.focus();
+        name.select();
+      }
+      function openSourceDialog(site, post, url) {
+        var dlg = document.getElementById('source-dialog');
+        document.getElementById('source-has-prev').value = (site || url) ? '1' : '';
+        document.getElementById('source-prev-site').value = site || '';
+        document.getElementById('source-prev-post').value = post || '';
+        document.getElementById('source-post').value = post || '';
+        document.getElementById('source-site-input').value = site || '';
+        document.getElementById('source-url-input').value = url || '';
+        document.getElementById('source-dialog-title').textContent = (site || url) ? 'edit' : 'add';
+        clearSlots('source-suggest', 'source-error');
+        dlg.showModal();
+        var input = document.getElementById('source-site-input');
+        input.focus();
+        input.select();
+      }
+      function openCollectionDialog(name, order) {
+        var dlg = document.getElementById('collection-dialog');
+        document.getElementById('collection-prev').value = name || '';
+        document.getElementById('collection-name-input').value = name || '';
+        document.getElementById('collection-order-input').value = order || '';
+        document.getElementById('collection-dialog-title').textContent = name ? 'edit ' + name : 'add';
+        clearSlots('collection-suggest', 'collection-error');
+        dlg.showModal();
+        var input = document.getElementById('collection-name-input');
+        input.focus();
+        input.select();
+      }
+      function openAnnotationDialog(id, x, y, w, h, body) {
+        var dlg = document.getElementById('annotation-dialog');
+        document.getElementById('annotation-id').value = id || '';
+        document.getElementById('annotation-x').value = x || '';
+        document.getElementById('annotation-y').value = y || '';
+        document.getElementById('annotation-w').value = w || '';
+        document.getElementById('annotation-h').value = h || '';
+        document.getElementById('annotation-body').value = body || '';
+        document.getElementById('annotation-dialog-title').textContent = id ? 'Edit' : 'Add';
+        clearSlots('annotation-error');
+        dlg.showModal();
+        document.getElementById('annotation-x').focus();
+      }
+      function setAnnHighlight(id, on) {
+        var box = document.querySelector('.annotation-box[data-ann-id="' + id + '"]');
+        if (box) box.classList.toggle('ann-highlight', on);
+      }
+      document.addEventListener('mouseover', function(e) {
+        var li = e.target.closest && e.target.closest('.annotation-entry[data-ann-id]');
+        if (li) setAnnHighlight(li.dataset.annId, true);
+      });
+      document.addEventListener('mouseout', function(e) {
+        var li = e.target.closest && e.target.closest('.annotation-entry[data-ann-id]');
+        if (li && (!e.relatedTarget || !li.contains(e.relatedTarget))) setAnnHighlight(li.dataset.annId, false);
+      });
+      </script>
+    </div>
+
+    <div class="detail-meta-col">
+    <details class="detail-meta-panel" open>
+      <summary>Metadata</summary>
+      <div class="detail-meta-content">
+
+        <table class="meta-table">
+          <tbody>
+            <tr><th>Image ID</th><td>
+              <button type="button" class="mono-small sha-copyable"
+                      data-copy="71" title="Click to copy">71</button>
+              <span class="copy-flash" hidden>copied</span>
+            </td></tr>
+            <tr><th>Path</th><td>
+              <button type="button" class="mono-small sha-truncated sha-copyable"
+                      data-copy="/gallery/danbooru_6264715_039d07416a656918a96fb302c27c0eaf.jpg" title="/gallery/danbooru_6264715_039d07416a656918a96fb302c27c0eaf.jpg (click to copy)">/gallery/danbooru_6264715_039d07416a656918a96fb302c27c0eaf.jpg</button>
+              <span class="copy-flash" hidden>copied</span>
+            </td></tr>
+            <tr><th>Type</th><td>jpeg
+              
+              
+            </td></tr>
+            
+            <tr><th>Resolution</th><td>1479 × 1109</td></tr>
+            
+            
+            <tr><th>File size</th><td>296.2 KiB</td></tr>
+            <tr><th>SHA-256</th><td>
+              <button type="button" class="mono-small sha-truncated sha-copyable"
+                      data-copy="66444b66b17ec71f297bb5f9dba7cec942a120c94d2c90805ad949156e560d58" title="66444b66b17ec71f297bb5f9dba7cec942a120c94d2c90805ad949156e560d58 (click to copy)">66444b66...6e560d58</button>
+              <span class="copy-flash" hidden>copied</span>
+            </td></tr>
+            <tr><th>MD5</th><td>
+              
+                <button type="button" class="mono-small sha-truncated sha-copyable"
+        data-copy="039d07416a656918a96fb302c27c0eaf" title="039d07416a656918a96fb302c27c0eaf (click to copy)">039d0741...c27c0eaf</button>
+<span class="copy-flash" hidden>copied</span>
+              
+            </td></tr>
+            
+            <tr><th>pHash</th><td>
+              
+                
+                <button type="button" class="mono-small sha-copyable" data-copy="329fce31f21f03c4" title="Click to copy">329fce31f21f03c4</button>
+                <a href="../index.html?q=phash:329fce31f21f03c4~4" class="btn-link-accent" title="Find images that look almost the same">[search near-duplicates]</a>
+                <span class="copy-flash" hidden>copied</span>
+              
+            </td></tr>
+            <tr><th>Ingested</th><td>2026-11-02 09:35:38</td></tr>
+            <tr><th>Added via</th><td>monloader</td></tr>
+            
+            
+            
+          </tbody>
+        </table>
+
+        <hr class="meta-editable-separator">
+        <table class="meta-table meta-editable">
+          <tbody>
+            <tr><th>Sources</th><td>
+              
+              <ul class="collection-list source-list">
+                
+                <li class="collection-item">
+                  <span class="source-line">
+                    <a href="../index.html?q=source%3A%22danbooru%22" class="meta-source-value" title="Search this source">danbooru</a><span class="source-line-sp"></span><a href="https://danbooru.donmai.us/posts/6264715" target="_blank" rel="noopener noreferrer" class="btn-link-accent" title="https://danbooru.donmai.us/posts/6264715">[open]</a>
+                  </span>
+                  <span class="source-actions">
+                    <span class="source-verbs">
+                      
+                      <button type="button" class="btn-link-accent btn-edit-source" data-site="danbooru" data-post="6264715" data-url="https://danbooru.donmai.us/posts/6264715" title="Edit">[edit]</button>
+                      
+<form method="POST" action="../images/71/sources/remove.html"
+      hx-post="/images/71/sources/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this source?"
+      data-confirm-danger="Its commentary, original link and pulled annotations go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="post_id" value="6264715">
+  <input type="hidden" name="site" value="danbooru">
+  <button type="submit" class="btn-link-accent" title="Remove this source">[×]</button>
+</form>
+
+                    </span>
+                    <span class="source-verbs">
+                      <form hx-post="/images/71/sources/fetch"
+                          hx-target="#fetch-status" hx-swap="innerHTML"
+                          style="display:inline">
+                      <input type="hidden" name="url" value="https://danbooru.donmai.us/posts/6264715">
+                      <button type="submit" class="btn-link-accent peer-accent" data-peer-title="Refresh tags from this source via monloader" title="Refresh tags from this source via monloader">[refresh]</button>
+                    </form>
+                      
+                      
+                    </span>
+                  </span>
+                </li>
+                
+              </ul>
+              
+              <div class="source-add-row">
+                
+                <button type="button" class="btn-link-accent btn-add-source" title="Add a source">[+ add]</button>
+              </div>
+            </td></tr>
+            
+            <tr><th>Collections</th><td>
+              
+              <ul class="collection-list">
+                
+                <li class="collection-item">
+                  <a href="../index.html?q=collection%3A%22fumo%22" class="meta-source-value" title="Search this collection">fumo</a>
+                  <button type="button" class="btn-link-accent btn-edit-collection" data-name="fumo" data-order="" title="Edit">[edit]</button>
+                  
+<form method="POST" action="../images/71/collections/remove.html"
+      hx-post="/images/71/collections/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this image from fumo?"
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="collection" value="fumo">
+  <button type="submit" class="btn-link-accent" title="Remove from collection">[×]</button>
+</form>
+
+                </li>
+                
+              </ul>
+              
+              <button type="button" class="btn-link-accent btn-add-collection" title="Add to a collection">[+ add]</button>
+            </td></tr>
+          </tbody>
+        </table>
+
+        
+
+        
+
+        
+
+        
+
+      </div>
+    </details>
+
+    
+    <details class="detail-meta-panel detail-source-panel" open>
+      <summary>danbooru</summary>
+      <div class="detail-meta-content">
+        <table class="meta-table meta-editable">
+          <tbody>
+            <tr><th>Original</th><td>
+              <ul class="collection-list">
+                
+                <li class="collection-item"><a href="https://twitter.com/korindo/status/1652221106554810368" target="_blank" rel="noopener noreferrer" class="meta-url-value" title="https://twitter.com/korindo/status/1652221106554810368">twitter.com</a></li>
+                
+              </ul>
+              <button type="button" class="btn-link-accent btn-edit-original" data-site="danbooru" data-post="6264715" data-original="https://twitter.com/korindo/status/1652221106554810368" title="Edit original source">[edit]</button>
+              
+<form method="POST" action="../images/71/original/remove.html"
+      hx-post="/images/71/original/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this original source?"
+      data-confirm-danger="Nothing else records this link."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="post_id" value="6264715">
+  <input type="hidden" name="site" value="danbooru">
+  <button type="submit" class="btn-link-accent" title="Remove original source">[×]</button>
+</form>
+
+            </td></tr>
+            <tr><th>Commentary</th><td>
+              <div class="commentary-body">ニコニコ超会議楽しかったです！
+四年ぶりということもあって、なんか懐かしい人とまた会えて幸せでした。
+写真はZUNビールとは関係なくゆっくりしているやつです</div>
+              <button type="button" class="btn-link-accent btn-edit-commentary" data-site="danbooru" data-post="6264715" data-commentary="ニコニコ超会議楽しかったです！
+四年ぶりということもあって、なんか懐かしい人とまた会えて幸せでした。
+写真はZUNビールとは関係なくゆっくりしているやつです" title="Edit commentary">[edit]</button>
+              
+<form method="POST" action="../images/71/commentary/remove.html"
+      hx-post="/images/71/commentary/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this commentary?"
+      data-confirm-danger="Nothing else stores this text."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="post_id" value="6264715">
+  <input type="hidden" name="site" value="danbooru">
+  <button type="submit" class="btn-link-accent" title="Remove commentary">[×]</button>
+</form>
+
+            </td></tr>
+            
+            <tr><th>Translation</th><td>
+              
+              <button type="button" class="btn-link-accent btn-edit-translation" data-site="danbooru" data-post="6264715" data-translation="" title="Add translation">[+ add]</button>
+              
+            </td></tr>
+            
+            
+            <tr><th>Annotations</th><td>
+              <ul class="collection-list">
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="210">
+  <span class="meta-annotation-body" title="Kirisame Marisa">Kirisame Marisa</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="210" data-x="36" data-y="870" data-w="44" data-h="38" data-body="Kirisame Marisa" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="210">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="211">
+  <span class="meta-annotation-body" title="Remilia Scarlet">Remilia Scarlet</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="211" data-x="412" data-y="797" data-w="52" data-h="38" data-body="Remilia Scarlet" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="211">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="212">
+  <span class="meta-annotation-body" title="ZUN">ZUN</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="212" data-x="587" data-y="850" data-w="44" data-h="40" data-body="ZUN" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="212">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="213">
+  <span class="meta-annotation-body" title="Kagamine Len">Kagamine Len</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="213" data-x="1019" data-y="246" data-w="24" data-h="16" data-body="Kagamine Len" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="213">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="214">
+  <span class="meta-annotation-body" title="Izayoi Sakuya">Izayoi Sakuya</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="214" data-x="764" data-y="810" data-w="45" data-h="39" data-body="Izayoi Sakuya" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="214">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="215">
+  <span class="meta-annotation-body" title="Flandre Scarlet">Flandre Scarlet</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="215" data-x="1081" data-y="801" data-w="49" data-h="44" data-body="Flandre Scarlet" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="215">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="216">
+  <span class="meta-annotation-body" title="Kochiya Sanae">Kochiya Sanae</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="216" data-x="1366" data-y="779" data-w="40" data-h="37" data-body="Kochiya Sanae" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="216">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="217">
+  <span class="meta-annotation-body" title="Hakurei Reimu">Hakurei Reimu</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="217" data-x="0" data-y="458" data-w="38" data-h="33" data-body="Hakurei Reimu" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="217">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="218">
+  <span class="meta-annotation-body" title="Komeiji Satori">Komeiji Satori</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="218" data-x="933" data-y="472" data-w="35" data-h="31" data-body="Komeiji Satori" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="218">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="219">
+  <span class="meta-annotation-body" title="Hatsune Miku">Hatsune Miku</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="219" data-x="846" data-y="246" data-w="22" data-h="15" data-body="Hatsune Miku" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="219">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="220">
+  <span class="meta-annotation-body" title="Kagamine Rin">Kagamine Rin</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="220" data-x="931" data-y="244" data-w="22" data-h="16" data-body="Kagamine Rin" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="220">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="221">
+  <span class="meta-annotation-body" title="Hakurei Reimu (God-Summoning Shaman)">Hakurei Reimu (God-Summoning Shaman)</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="221" data-x="0" data-y="386" data-w="21" data-h="19" data-body="Hakurei Reimu (God-Summoning Shaman)" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="221">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+                
+<li class="collection-item annotation-entry" data-ann-id="222">
+  <span class="meta-annotation-body" title="Kirisame Marisa (Witch of Scarlet Dreams)">Kirisame Marisa (Witch of Scarlet Dreams)</span>
+  <button type="button" class="btn-link-accent btn-edit-annotation" data-id="222" data-x="70" data-y="390" data-w="17" data-h="21" data-body="Kirisame Marisa (Witch of Scarlet Dreams)" title="Edit">[edit]</button>
+  
+<form method="POST" action="../images/71/annotations/remove.html"
+      hx-post="/images/71/annotations/remove" hx-target="#detail-flash"
+      hx-confirm="Remove this annotation?"
+      data-confirm-danger="The box and its text go with it."
+      data-confirm-ok="Remove"
+      style="display:inline">
+  <input type="hidden" name="_csrf" value="demo">
+  <input type="hidden" name="id" value="222">
+  <button type="submit" class="btn-link-accent" title="Remove annotation">[×]</button>
+</form>
+
+</li>
+
+                
+              </ul>
+            </td></tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+    <div id="related-entries-panel"
+         hx-get="/internal/images/71/related-entries"
+         hx-trigger="load, relations-changed"></div>
+    <div hx-get="/images/71/related" hx-trigger="load" hx-swap="outerHTML"></div>
+    <script>
+    function fitMiniGrid(grid) {
+      var tiles = Array.prototype.slice.call(grid.children);
+      tiles.forEach(function(t) { t.hidden = false; });
+      var cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+      var keep = tiles.length <= cols ? tiles.length : cols * Math.floor(tiles.length / cols);
+      var cur = tiles.findIndex(function(t) { return t.classList.contains('relations-tree-current'); });
+      var order = tiles.map(function(t, i) { return i; });
+      if (cur >= 0) order.sort(function(a, b) { return Math.abs(a - cur) - Math.abs(b - cur) || a - b; });
+      order.slice(keep).forEach(function(i) { tiles[i].hidden = true; });
+    }
+    var miniGridFit = new ResizeObserver(function(entries) {
+      entries.forEach(function(e) { fitMiniGrid(e.target); });
+    });
+    document.body.addEventListener('htmx:afterSettle', function() {
+      document.querySelectorAll('.related-mini-grid').forEach(function(g) { miniGridFit.observe(g); });
+    });
+    </script>
+    </div>
+  </div>
+</div>
+
+
+<dialog id="slideshow-dialog" class="slideshow-dialog" aria-label="Slideshow">
+  <div class="slideshow-stage">
+    <div class="slideshow-slot"></div>
+    <div class="slideshow-slot"></div>
+    <div id="slideshow-message" class="slideshow-message" aria-live="polite"></div>
+    <button type="button" class="reader-side reader-side-prev" data-slideshow="previous" title="Previous (&larr;)" aria-label="Previous">&lsaquo;</button>
+    <button type="button" class="reader-side reader-side-next" data-slideshow="next" title="Next (&rarr;)" aria-label="Next">&rsaquo;</button>
+  </div>
+  <nav class="reader-bar slideshow-bar">
+    <span class="slideshow-bar-group">
+      <button type="button" class="reader-back" data-slideshow="exit" title="Exit (Esc)">&larr; Exit</button>
+      <button type="button" data-slideshow="play" title="Play / pause (Space)" autofocus><span class="slideshow-play-label">Play</span> <span class="btn-key-hint">(Space)</span></button>
+    </span>
+    <span class="slideshow-bar-group">
+      <button type="button" class="reader-nav" data-slideshow="first" title="First (Home)">|&lt;</button>
+      <button type="button" class="reader-nav" data-slideshow="previous" title="Previous (&larr;)">&lt;</button>
+      <span id="slideshow-position" class="reader-counter"></span>
+      <button type="button" class="reader-nav" data-slideshow="next" title="Next (&rarr;)">&gt;</button>
+      <button type="button" class="reader-nav" data-slideshow="last" title="Last (End)">&gt;|</button>
+    </span>
+    <span class="slideshow-bar-group">
+      <select id="slideshow-duration" title="Seconds per image">
+        <option value="2">2 s</option>
+        <option value="3">3 s</option>
+        <option value="5">5 s</option>
+        <option value="10">10 s</option>
+        <option value="15">15 s</option>
+        <option value="30">30 s</option>
+      </select>
+      <button type="button" data-slideshow="restart" title="Restart video (r)">Restart</button>
+      <button type="button" data-slideshow="loop" aria-pressed="false" title="Loop videos (l)">Loop: off</button>
+      <button type="button" data-slideshow="mute" aria-pressed="false" title="Sound on / off (m)">Sound: off</button>
+      <button type="button" data-slideshow="fullscreen" title="Fullscreen (f)">&#x26F6; Fullscreen</button>
+    </span>
+  </nav>
+</dialog>
+
+
+
+    </main>
+  </div>
+  <footer id="footer">
+    <div id="footer-left">
+      
+      <span class="footer-gallery">[default]</span>
+      
+      <span class="footer-wide">
+      <span class="footer-sep">·</span>
+      <span id="footer-count-images">59 img</span>
+      <span class="footer-sep">·</span>
+      <span id="footer-count-tags">1376 tags</span>
+      <span class="footer-sep">·</span>
+      <span id="footer-count-collections">5 collections</span>
+      </span>
+      
+      <span class="footer-sep-strong">::</span>
+      <span class="footer-rating-label footer-wide">show up to:</span>
+      <form hx-post="/internal/rating-ceiling?level=general" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above sfw (this browser only)">sfw</button></form><span class="footer-sep">·</span><form hx-post="/internal/rating-ceiling?level=sensitive" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above sensitive (this browser only)">sensitive</button></form><span class="footer-sep">·</span><form hx-post="/internal/rating-ceiling?level=questionable" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above questionable (this browser only)">questionable</button></form><span class="footer-sep">·</span><span class="footer-rating-active" title="Show every rating (this browser only)">[explicit]</span>
+      <span id="footer-hidden" class="footer-hidden"></span>
+    </div>
+    <div id="footer-right">
+      <span id="peer-light" class="footer-conn" data-conn="ok" data-peer-off="" hx-get="/internal/monloader-status" hx-trigger="load delay:1s, every 15s" hx-vals='{"seen":"true,false,false,false,0"}' hx-swap="outerHTML"><button type="button" class="footer-dot footer-dot-ok footer-conn-kill" title="Pause the connection to monloader" hx-post="/internal/monloader/disconnect" hx-target="#peer-light" hx-swap="outerHTML"></button>connected to monloader v1.13.4</span><span class="footer-peer-sep"> · </span><span class="footer-wide"><span id="footer-version"><a href="https://github.com/monbooru/monbooru" target="_blank" rel="noopener">monbooru (tarball)</a> v1.23.0</span> · <a href="#" id="footer-shortcuts" onclick="openShortcutSheet();return false">shortcuts</a> · </span><a href="https://monbooru.github.io/mondocs/index.html" target="_blank" rel="noopener">help</a><span class="footer-wide"> · <a href="../api/v1/docs.html" target="_blank" rel="noopener">API</a></span>
+    </div>
+  </footer>
+  
+  <dialog id="confirm-dialog">
+    <p class="dlg-title"><span id="confirm-dialog-msg"></span><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+    <p id="confirm-dialog-danger" class="confirm-dialog-danger"></p>
+    <div class="dialog-actions">
+      <button type="button" id="confirm-dialog-ok" class="btn-danger">OK</button>
+      <button type="button" id="confirm-dialog-alt" hidden></button>
+      <button type="button" id="confirm-dialog-cancel">Cancel</button>
+    </div>
+  </dialog>
+
+  <dialog id="shortcuts-help">
+    <h3 class="dlg-title">Keyboard Shortcuts<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></h3>
+    <div class="shortcuts-help-grid">
+      <section data-surface="anywhere">
+        <h4>Anywhere</h4>
+        <ul>
+          <li><kbd>?</kbd><span>Toggle this overlay</span></li>
+          <li data-when="#search-input, #sidebar-inner input[name=&#34;q&#34;]"><kbd>s</kbd><kbd>/</kbd><span>Focus search</span></li>
+          <li><kbd>b</kbd><span>Show / hide sidebar</span></li>
+          <li><kbd>Esc</kbd><span>Close dialog &middot; back</span></li>
+          <li><kbd>g</kbd><kbd>g</kbd><span>Gallery</span></li>
+          <li><kbd>g</kbd><kbd>i</kbd><span>Inbox</span></li>
+          <li><kbd>g</kbd><kbd>c</kbd><kbd>a</kbd><span>Categories</span></li>
+          <li><kbd>g</kbd><kbd>c</kbd><kbd>o</kbd><span>Collections</span></li>
+          <li><kbd>g</kbd><kbd>t</kbd><span>Tags</span></li>
+          <li><kbd>g</kbd><kbd>r</kbd><span>Relations</span></li>
+          <li><kbd>g</kbd><kbd>s</kbd><span>Settings</span></li>
+          <li data-when="form[hx-post=&#34;/internal/sync&#34;]"><kbd>Y</kbd><span>Sync gallery</span></li>
+          <li><kbd>,</kbd><kbd>.</kbd><span>Rating ceiling switch</span></li>
+          <li data-when="#gallery-switch-dialog"><kbd>\</kbd><span>Switch gallery</span></li>
+          <li data-when=".pagination"><kbd>[</kbd><kbd>]</kbd><span>Previous / next page</span></li>
+          <li data-when=".pagination"><kbd>G</kbd><span>Last page</span></li>
+          <li data-when=".pagination"><kbd>p</kbd><span>Page-jump dialog</span></li>
+        </ul>
+      </section>
+      <section data-surface="gallery">
+        <h4>Gallery</h4>
+        <ul>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Move grid cursor</span></li>
+          <li><kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd><span>Move grid cursor</span></li>
+          <li><kbd>Enter</kbd><kbd>o</kbd><span>Open focused image</span></li>
+          <li><kbd>Space</kbd><span>Toggle selection</span></li>
+          <li><kbd>Drag</kbd><span>Rubber-band select</span></li>
+          <li><kbd>Alt</kbd>+<kbd>Drag</kbd><span>Rubber-band remove</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last visible</span></li>
+          <li><kbd>F</kbd><span>Toggle favorites filter</span></li>
+          <li><kbd>R</kbd><span>Random sort</span></li>
+          <li data-when="#slideshow-btn"><kbd>w</kbd><span>Slideshow</span></li>
+          <li><kbd>O</kbd><span>Cycle sort</span></li>
+          <li><kbd>D</kbd><span>Flip direction</span></li>
+          <li data-when="#thumb-size-ramp"><kbd>-</kbd><kbd>=</kbd><span>Thumbnail size</span></li>
+          <li data-when="#select-mode-btn"><kbd>V</kbd><span>Select mode</span></li>
+          <li data-when="#batch-bar:not(.visible)"><kbd>S</kbd><span>Save search dialog</span></li>
+          <li><kbd>Ctrl</kbd>+<kbd>A</kbd><span>Select page</span></li>
+          <li data-when="#batch-select-all-matching:not([hidden])"><kbd>A</kbd><span>Select all matching</span></li>
+        </ul>
+      </section>
+      <section data-surface="selection">
+        <h4>Selection active</h4>
+        <ul>
+          <li data-when="#batch-bar.visible"><kbd>a</kbd><span>Add tags</span></li>
+          <li data-when="#batch-bar.visible"><kbd>r</kbd><span>Remove tags</span></li>
+          <li data-when="#batch-bar.visible .btn-autotag:not([disabled])"><kbd>t</kbd><span>Auto-tag</span></li>
+          <li data-when="#batch-bar.visible"><kbd>m</kbd><span>Rename / move</span></li>
+          <li data-when="#batch-bar.visible"><kbd>i</kbd><span>Toggle archive</span></li>
+          <li data-when="#batch-bar.visible"><kbd>f</kbd><span>Toggle favorite</span></li>
+          <li data-when="#batch-bar.visible"><kbd>c</kbd><span>Set collection</span></li>
+          <li data-when="#batch-bar.visible"><kbd>d</kbd><span>Download as a zip</span></li>
+          <li data-when="#batch-bar.visible #batch-transfer"><kbd>T</kbd><span>Transfer</span></li>
+          <li data-when="#batch-invert"><kbd>I</kbd><span>Invert</span></li>
+          <li data-when="#batch-bar.visible .peer-accent:not([disabled])"><kbd>L</kbd><span>Find tags (monloader)</span></li>
+          <li data-when="#batch-bar.visible"><kbd>Delete</kbd><span>Delete</span></li>
+          <li><kbd>Shift</kbd>+<kbd>click</kbd><span>Extend the selection</span></li>
+          <li data-when=".plugin-card .plugin-btn, #plugin-batch-bar.visible .plugin-btn"><kbd>x</kbd><kbd>1-9</kbd><span>Run Nth plugin</span></li>
+          <li><kbd>Esc</kbd><span>Clear selection</span></li>
+        </ul>
+      </section>
+      <section data-surface="detail">
+        <h4>Image detail</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><kbd>j</kbd><kbd>k</kbd><span>Previous / next</span></li>
+          <li data-when=".coll-nav-keyed .coll-step"><kbd>[</kbd><kbd>]</kbd><span>Previous / next in collection</span></li>
+          <li data-when="#slideshow-btn"><kbd>w</kbd><span>Slideshow from here</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to gallery</span></li>
+          <li><kbd>o</kbd><span>Open in tab</span></li>
+          <li data-when=".detail-actions a[download]"><kbd>d</kbd><span>Download</span></li>
+          <li data-when=".tag-mode-toggle"><kbd>B</kbd><span>Group tags by...</span></li>
+          <li><kbd>a</kbd><span>Focus tag input</span></li>
+          <li><kbd>r</kbd><span>Tag-focus mode</span></li>
+          <li data-when=".btn-autotag:not([disabled])"><kbd>t</kbd><span>Auto-tag dialog</span></li>
+          <li><kbd>f</kbd><kbd>i</kbd><span>Toggle fav / inbox</span></li>
+          <li><kbd>m</kbd><span>Rename / move dialog</span></li>
+          <li><kbd>Delete</kbd><span>Delete image</span></li>
+          <li data-when=".detail-video"><kbd>Space</kbd><span>Play / pause</span></li>
+          <li><kbd>e</kbd><kbd>s</kbd><span>Edit Source</span></li>
+          <li><kbd>e</kbd><kbd>c</kbd><span>Add to collection</span></li>
+          <li><kbd>e</kbd><kbd>n</kbd><span>Edit Note</span></li>
+          <li data-when=".btn-add-annotation"><kbd>e</kbd><kbd>a</kbd><span>Add annotation</span></li>
+          <li data-when="[data-relations-add]"><kbd>e</kbd><kbd>r</kbd><span>Add a relation</span></li>
+          <li data-when="#remove-tags-btn"><kbd>e</kbd><kbd>t</kbd><span>Remove tags</span></li>
+          <li data-when="#transfer-image-btn"><kbd>e</kbd><kbd>g</kbd><span>Transfer gallery</span></li>
+          <li data-when=".btn-edit-collection"><kbd>e</kbd><kbd>1-9</kbd><span>Edit Nth collection</span></li>
+          <li data-when=".add-tag-form .btn-hash-lookup:not([disabled])"><kbd>L</kbd><span>Lookup online boorus</span></li>
+          <li data-when=".btn-manga-action.btn-read"><kbd>R</kbd><span>Open in reader</span></li>
+          <li data-when=".btn-manga-action.btn-pages"><kbd>P</kbd><span>See all pages</span></li>
+          <li data-when=".btn-manga-action.btn-generate-collection"><kbd>C</kbd><span>Generate collection</span></li>
+          <li data-when=".plugin-card .plugin-btn, #plugin-batch-bar.visible .plugin-btn"><kbd>x</kbd><kbd>1-9</kbd><span>Run Nth plugin</span></li>
+          <li data-when=".detail-img-link"><kbd>v</kbd><span>Open image viewer</span></li>
+        </ul>
+      </section>
+      <section data-surface="lightbox">
+        <h4>Image viewer</h4>
+        <ul>
+          <li><kbd>Wheel</kbd><span>Zoom toward cursor</span></li>
+          <li><kbd>Drag</kbd><span>Pan</span></li>
+          <li><kbd>Double click</kbd><span>Toggle fit / 1:1</span></li>
+          <li><kbd>+</kbd><kbd>-</kbd><span>Zoom in / out</span></li>
+          <li><kbd>0</kbd><kbd>1</kbd><span>Fit / 1:1</span></li>
+          <li><kbd>Esc</kbd><kbd>Click outside</kbd><span>Close</span></li>
+        </ul>
+      </section>
+      <section data-surface="slideshow">
+        <h4>Slideshow</h4>
+        <ul>
+          <li><kbd>Space</kbd><span>Play / pause</span></li>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Previous / next</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last</span></li>
+          <li><kbd>r</kbd><span>Restart video</span></li>
+          <li><kbd>l</kbd><span>Loop videos</span></li>
+          <li><kbd>m</kbd><span>Sound on / off</span></li>
+          <li><kbd>f</kbd><span>Fullscreen</span></li>
+          <li><kbd>Esc</kbd><span>Exit slideshow</span></li>
+        </ul>
+      </section>
+      <section data-surface="tags">
+        <h4>Tags page</h4>
+        <ul>
+          <li><kbd>s</kbd><span>Focus filter</span></li>
+          <li data-when=".tag-row"><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>j</kbd><kbd>k</kbd><span>Move row cursor</span></li>
+          <li data-when=".tag-row"><kbd>Space</kbd><span>Toggle selection</span></li>
+          <li data-when=".tag-row"><kbd>Enter</kbd><span>Open the tag</span></li>
+          <li data-when="#tag-select-page"><kbd>Ctrl</kbd>+<kbd>A</kbd><span>Select page</span></li>
+          <li><kbd>n</kbd><kbd>N</kbd><span>New tag / alias</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-category"><kbd>t</kbd><kbd>c</kbd><span>Change category</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-merge"><kbd>t</kbd><kbd>m</kbd><span>Merge</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-alias"><kbd>t</kbd><kbd>a</kbd><span>Alias to</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-imply"><kbd>t</kbd><kbd>i</kbd><span>Imply</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-merge-folded"><kbd>t</kbd><kbd>f</kbd><span>Merge old spellings</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-distinct"><kbd>t</kbd><kbd>d</kbd><span>Mark distinct</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-undistinct"><kbd>t</kbd><kbd>d</kbd><span>Unmark distinct</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-ptr:not([disabled])"><kbd>t</kbd><kbd>p</kbd><span>Find aliases (PTR)</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-delete"><kbd>Delete</kbd><span>Delete selected</span></li>
+        </ul>
+      </section>
+      <section data-surface="tag-detail">
+        <h4>Tag detail</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><span>Previous / next tag</span></li>
+          <li data-when="#btn-detail-rename"><kbd>t</kbd><kbd>r</kbd><span>Rename</span></li>
+          <li data-when="#btn-detail-category"><kbd>t</kbd><kbd>c</kbd><span>Change category</span></li>
+          <li data-when="#btn-detail-alias"><kbd>t</kbd><kbd>a</kbd><span>Alias / repoint</span></li>
+          <li data-when="#btn-detail-note"><kbd>t</kbd><kbd>n</kbd><span>Note</span></li>
+          <li data-when="#btn-detail-delete"><kbd>Delete</kbd><span>Delete tag</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to the listing</span></li>
+        </ul>
+      </section>
+      <section data-surface="categories">
+        <h4>Categories page</h4>
+        <ul>
+          <li><kbd>n</kbd><span>Focus Add category</span></li>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><span>Move the category whose &equiv; has focus</span></li>
+        </ul>
+      </section>
+      <section data-surface="settings">
+        <h4>Settings page</h4>
+        <ul>
+          <li><kbd>1-9</kbd><kbd>0</kbd><span>Jump to section</span></li>
+        </ul>
+      </section>
+      <section data-surface="reader">
+        <h4>Manga reader</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><kbd>Space</kbd><span>Previous / next page</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last page</span></li>
+          <li><kbd>p</kbd><span>Jump to page</span></li>
+          <li><kbd>P</kbd><span>See all pages</span></li>
+          <li><kbd>o</kbd><span>Open page in new tab</span></li>
+          <li><kbd>e</kbd><span>Extract page as image</span></li>
+          <li><kbd>v</kbd><span>Zoom page in viewer</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back</span></li>
+        </ul>
+      </section>
+      <section data-surface="pages">
+        <h4>Archive pages grid</h4>
+        <ul>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Move grid cursor</span></li>
+          <li><kbd>Enter</kbd><kbd>o</kbd><span>Open in the reader</span></li>
+          <li><kbd>R</kbd><span>Read from page 1</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last cell</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to detail</span></li>
+        </ul>
+      </section>
+      <section data-surface="relations">
+        <h4>Relations session</h4>
+        <ul>
+          <li><kbd>1</kbd><span>Right duplicates left</span></li>
+          <li><kbd>2</kbd><span>Right is an alternate</span></li>
+          <li><kbd>3</kbd><span>Right is newer version</span></li>
+          <li><kbd>4</kbd><span>Right is based on left</span></li>
+          <li><kbd>5</kbd><span>Not related</span></li>
+          <li><kbd>6</kbd><kbd>Space</kbd><span>Skip</span></li>
+          <li><kbd>W</kbd><span>Swap sides</span></li>
+          <li><kbd>C</kbd><span>Open compare slider</span></li>
+          <li><kbd>Esc</kbd><span>Back to Relations</span></li>
+        </ul>
+      </section>
+    </div>
+    <div class="dialog-actions">
+      <button type="button" id="shortcuts-all" class="btn-link-accent">[all surfaces]</button>
+      <button type="button" onclick="document.getElementById('shortcuts-help').close()">Close</button>
+    </div>
+  </dialog>
+  <dialog id="page-jump-dialog">
+    <form id="page-jump-form" onsubmit="event.preventDefault(); submitPageJump();">
+      <p class="dlg-title">Go to page (1–<span id="page-jump-total">1</span>):<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <input type="number" id="page-jump-input" name="page" min="1" required>
+      </div>
+      <div class="dialog-actions">
+  <button type="submit">Go</button>
+  <button type="button" onclick="document.getElementById('page-jump-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+  
+<dialog id="image-lightbox" class="lightbox-dialog" aria-label="Image viewer">
+  <div class="lightbox-stage" id="lightbox-stage">
+    <img id="lightbox-img" class="lightbox-img" alt="">
+  </div>
+  <div class="lightbox-bar">
+    <button type="button" id="lightbox-close" title="Close (Esc)">× Close</button>
+    <span class="lightbox-zoom" id="lightbox-zoom">100%</span>
+    <a id="lightbox-open" class="lightbox-open" href="" target="_blank" rel="noopener" title="Open original in new tab">↗</a>
+  </div>
+</dialog>
+
+  
+</body>
+</html>
+

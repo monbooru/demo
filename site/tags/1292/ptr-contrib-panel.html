@@ -1,0 +1,23 @@
+
+<div class="ptr-contrib-card peer-accent">
+  <div class="ptr-contrib-head">
+    <span class="ptr-contrib-title">Public Tag Repository</span>
+    <button type="button" class="btn-link-accent peer-accent btn-ptr-lookup"
+            hx-get="/tags/1292/ptr-lookup-dialog"
+            hx-target="#ptr-contrib-dialog-host" hx-swap="innerHTML"
+            hx-on::after-request="var d=document.getElementById('ptr-lookup-dialog'); if(d){d.showModal(); d.querySelector('#ptr-lookup-as').focus();} else htmx.trigger(document.body,'ptr-contrib-closed');">[look up as...]</button>
+  </div>
+  
+  <p class="field-hint">the Public Tag Repository holds no relations for this spelling.</p>
+  
+  <div class="ptr-contrib-row">
+    <div class="ptr-contrib-lines">
+      <p class="field-hint">nothing new to contribute for this tag.</p>
+    </div>
+    <div class="ptr-contrib-actions">
+      
+      <button type="button" class="btn-ptr-contribute"
+        disabled title="a contribution account in monloader is required to contribute">Contribute...</button>
+    </div>
+  </div>
+</div>

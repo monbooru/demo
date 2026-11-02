@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en" data-app="monbooru" data-demo-root="../../" data-demo-version="v1.23.0">
+<head>
+
+
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, noimageindex">
+  <meta name="htmx-config" content='{"historyEnabled":false}'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>reimari_4koma.cbz - Reader - Monbooru</title>
+  <meta name="csrf-token" content="demo">
+  <link rel="icon" type="image/png" href="../../static/favicon.png">
+  <link rel="stylesheet" href="../../static/shared/base.css?v=f1bf4f227d">
+  <link rel="stylesheet" href="../../static/main.css?v=f53bf38008">
+  <link rel="stylesheet" href="../../_demo/demo.css?v=4306714f76">
+  
+
+  <link rel="manifest" href="../../manifest.json">
+
+  <script src="../../_demo/index.js?v=23863755c3" defer></script>
+  <script src="../../_demo/shim.js?v=dd6688d25d" defer></script>
+  <script src="../../static/shared/base.js?v=538cda393b" defer></script>
+  <script src="../../static/main.js?v=0cca1aa876" defer></script>
+  
+  <link rel="prefetch" href="../../images/64/page/6.jpg">
+  
+</head>
+
+
+<body class="reader-body" data-gallery="default">
+<div id="demo-banner" role="note"><span class="demo-banner-title">Read-only demo of monbooru <b>v1.23.0</b></span><span class="demo-banner-note">Some features are disabled or a bit off.</span><span class="demo-banner-links"><a href="https://monbooru.github.io/mondocs/getting-started/install.html">Install</a><a href="https://monbooru.github.io/mondocs/index.html">Docs</a><a href="https://github.com/monbooru/monbooru">GitHub</a></span><span class="demo-banner-try"><span class="demo-banner-label">Try:</span><a href="../../index.html?q=hakurei_reimu+smile">hakurei_reimu smile</a><a href="../../index.html?q=touhou+-hakurei_reimu">touhou -hakurei_reimu</a><a href="../../index.html?q=%2A_hair">*_hair</a><a href="../../index.html?q=blonde_hair+OR+blue_hair">blonde_hair OR blue_hair</a><a href="../../index.html?q=ai%3Aany">ai:any</a></span><span class="demo-banner-credit">Artwork by the credited artists, linked on each image.</span></div>
+  <main id="reader" data-image-id="64" data-page="5" data-total="13" data-detail-url="/images/64">
+    <div id="page-notice" class="degraded-banner" hidden></div>
+    <div class="reader-stage">
+      <a href="../../images/64/page/5.jpg" target="_blank" rel="noopener" class="reader-page-link" title="Zoom page (v)" onclick="return lightbox.open(event, this.href)">
+        <img src="../../images/64/page/5.jpg" alt="Page 5" class="reader-img">
+      </a>
+      
+      <a class="reader-side reader-side-prev" href="../../images/64/read._q_page=4.html" title="Previous page (←)" aria-label="Previous page">‹</a>
+      
+      
+      <a class="reader-side reader-side-next" href="../../images/64/read._q_page=6.html" title="Next page (→)" aria-label="Next page">›</a>
+      
+    </div>
+    <nav class="reader-bar">
+      <a class="reader-back" href="../../images/64.html" title="Back (to detail) (Esc)">← Back</a>
+      
+      <a class="reader-pages" href="../../images/64/pages.html#page-5" title="See all pages (P)">≡ Pages <span class="btn-key-hint">(P)</span></a>
+      
+      
+      <a class="reader-nav reader-first" href="../../images/64/read._q_page=1.html" title="First page (Home)">|&lt;</a>
+      <a class="reader-nav reader-prev" href="../../images/64/read._q_page=4.html" title="Previous page (←)">&lt;</a>
+      
+      <button type="button" class="reader-counter" id="reader-counter" title="Jump to page (p)" onclick="openReaderJumpDialog()">5 / 13</button>
+      
+      <a class="reader-nav reader-next" href="../../images/64/read._q_page=6.html" title="Next page (→)">&gt;</a>
+      <a class="reader-nav reader-last" href="../../images/64/read._q_page=13.html" title="Last page (End)">&gt;|</a>
+      
+      <form class="reader-extract" method="POST" action="../../images/64/page/5/extract.html"
+            onsubmit="event.preventDefault(); extractReaderPage(this)">
+        <input type="hidden" name="_csrf" value="demo">
+        <input type="hidden" name="_gallery" value="default">
+        <button type="submit" title="Extract page as image (e)">Extract</button>
+      </form>
+      <a class="reader-open" href="../../images/64/page/5.jpg" target="_blank" rel="noopener" title="Open page in new tab (o)">↗</a>
+    </nav>
+  </main>
+  
+<dialog id="image-lightbox" class="lightbox-dialog" aria-label="Image viewer">
+  <div class="lightbox-stage" id="lightbox-stage">
+    <img id="lightbox-img" class="lightbox-img" alt="">
+  </div>
+  <div class="lightbox-bar">
+    <button type="button" id="lightbox-close" title="Close (Esc)">× Close</button>
+    <span class="lightbox-zoom" id="lightbox-zoom">100%</span>
+    <a id="lightbox-open" class="lightbox-open" href="" target="_blank" rel="noopener" title="Open original in new tab">↗</a>
+  </div>
+</dialog>
+
+  <dialog id="reader-jump-dialog">
+    <form onsubmit="event.preventDefault(); submitPageJump('reader-jump-input');">
+      <p class="dlg-title">Jump to page (1 - 13)<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <input type="number" name="page" id="reader-jump-input" min="1" max="13" data-max="13" value="5" autocomplete="off">
+      </div>
+      <div class="dialog-actions">
+  <button type="submit">Go</button>
+  <button type="button" onclick="document.getElementById('reader-jump-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+</body>
+</html>

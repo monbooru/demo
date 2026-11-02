@@ -1,0 +1,40 @@
+
+<dialog id="ptr-lookup-dialog" class="ptr-contrib-dialog" onclose="htmx.trigger(document.body,'ptr-contrib-closed')">
+  <header class="ptr-contrib-dialog-head">
+    <strong>look up in the Public Tag Repository</strong>
+    <span class="mono-small">tag close-up</span>
+  </header>
+  <form id="ptr-lookup-form" hx-get="/tags/998/ptr-lookup-preview"
+        hx-target="#ptr-lookup-result" hx-swap="innerHTML"
+        onsubmit="disarmSuggest('ptr-lookup-as')">
+    <div class="field">
+      <div class="ptr-lookup-head">
+        <label for="ptr-lookup-as">spelling to look up (category:name, general when bare)</label>
+        <label class="ptr-lookup-anywhere">
+          <input type="checkbox" id="ptr-lookup-anywhere" onchange="document.getElementById('ptr-lookup-as').focus()">
+          match anywhere in the name <span class="field-hint">(slower)</span>
+        </label>
+      </div>
+      <div class="ptr-lookup-input">
+        <div class="series-input-wrap">
+          <input type="text" name="as" id="ptr-lookup-as" required autocomplete="off"
+                 hx-get="/tags/998/ptr-lookup-search"
+                 hx-trigger="input changed delay:250ms, change from:#ptr-lookup-anywhere"
+                 hx-target="#ptr-lookup-suggest"
+                 hx-vals='js:{q: document.getElementById("ptr-lookup-as").value, anywhere: document.getElementById("ptr-lookup-anywhere").checked ? "1" : ""}'
+                 hx-sync="closest form:abort"
+                 hx-on::before-request="if (suggestDisarmed(this)) event.preventDefault()"
+                 oninput="delete this.dataset.suggestStale"
+                 onkeydown="handleSuggestKey(event, 'ptr-lookup-suggest', 'ptr-lookup-as')">
+          <div id="ptr-lookup-suggest" class="suggest-dropdown tag-suggest-dropdown"></div>
+        </div>
+        <button type="submit" class="peer-accent">look up</button>
+      </div>
+    </div>
+  </form>
+  <div id="ptr-lookup-result" hx-get="/tags/998/ptr-lookup-search" hx-trigger="load" hx-swap="innerHTML">
+    <div class="dialog-actions">
+      <button type="button" onclick="document.getElementById('ptr-lookup-dialog').close()">cancel</button>
+    </div>
+  </div>
+</dialog>

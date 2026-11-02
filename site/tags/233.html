@@ -1,0 +1,767 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" data-app="monbooru" data-demo-root="../" data-demo-version="v1.23.0">
+<head>
+
+
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, noimageindex">
+  <meta name="htmx-config" content='{"historyEnabled":false}'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>senbei - Monbooru</title>
+  <meta name="csrf-token" content="demo">
+  <link rel="icon" type="image/png" href="../static/favicon.png">
+  <link rel="stylesheet" href="../static/shared/base.css?v=f1bf4f227d">
+  <link rel="stylesheet" href="../static/main.css?v=f53bf38008">
+  <link rel="stylesheet" href="../_demo/demo.css?v=4306714f76">
+  
+
+  <link rel="manifest" href="../manifest.json">
+
+  <script src="../_demo/index.js?v=23863755c3" defer></script>
+  <script src="../_demo/shim.js?v=dd6688d25d" defer></script>
+  <script src="../static/shared/htmx.min.js" defer></script>
+  <script src="../static/shared/base.js?v=538cda393b" defer></script>
+  <script src="../static/main.js?v=0cca1aa876" defer></script>
+</head>
+<body data-gallery="default">
+<div id="demo-banner" role="note"><span class="demo-banner-title">Read-only demo of monbooru <b>v1.23.0</b></span><span class="demo-banner-note">Some features are disabled or a bit off.</span><span class="demo-banner-links"><a href="https://monbooru.github.io/mondocs/getting-started/install.html">Install</a><a href="https://monbooru.github.io/mondocs/index.html">Docs</a><a href="https://github.com/monbooru/monbooru">GitHub</a></span><span class="demo-banner-try"><span class="demo-banner-label">Try:</span><a href="../index.html?q=hakurei_reimu+smile">hakurei_reimu smile</a><a href="../index.html?q=touhou+-hakurei_reimu">touhou -hakurei_reimu</a><a href="../index.html?q=%2A_hair">*_hair</a><a href="../index.html?q=blonde_hair+OR+blue_hair">blonde_hair OR blue_hair</a><a href="../index.html?q=ai%3Aany">ai:any</a></span><span class="demo-banner-credit">Artwork by the credited artists, linked on each image.</span></div>
+  <div id="topbar">
+    <button id="sidebar-toggle" aria-label="Toggle sidebar">☰</button>
+    <a href="../index.html" id="logo">
+      <img src="../static/logo.png" alt="" class="topbar-logo">
+      <span>Mon<span class="wordmark-accent">booru</span></span>
+    </a>
+    <nav id="nav">
+      <a href="../index.html" class="nav-images">Images</a>
+      <a id="inbox-nav" href="../index.html?q=inbox:true" class="nav-inbox">Inbox<span id="inbox-nav-count"> (8)</span></a>
+      <a href="../categories.html" class="nav-categories">Categories</a>
+      <a href="../tags.html" class="nav-tags active">Tags</a>
+      <a href="../collections.html" class="nav-collections">Collections</a>
+      <a href="../relations.html" class="nav-relations">Relations</a>
+      <a href="../settings.html" class="nav-settings">Settings</a>
+      <a id="pair-notice" class="pair-notice" href="../settings.html#plugins" hidden></a>
+    </nav>
+    <div id="topbar-right">
+      <div id="job-status"
+           hx-get="/internal/job/status"
+           hx-trigger="load, every 2s"
+           hx-swap="outerHTML"
+           hx-vals='{"pair":""}'></div>
+      
+      <span id="sync-flash"></span>
+      <form id="sync-form" hx-post="/internal/sync" hx-swap="none"
+            hx-on:htmx:before-request="document.getElementById('job-status').innerHTML='<span class=&quot;job-running&quot;>syncing…</span>'"
+            hx-on:sync-started="document.getElementById('job-status').setAttribute('hx-trigger','every 2s');htmx.process('#job-status')"
+            hx-on:htmx:response-error="document.getElementById('sync-flash').innerHTML=event.detail.xhr.responseText;refreshJobStatus();setTimeout(function(){var el=document.getElementById('sync-flash');if(el)el.innerHTML='';},5000)"
+            style="display:inline">
+        <button type="submit" class="topbar-action" title="Look for files added, moved or deleted in the gallery folder (Y)">[⟳ sync]</button>
+      </form>
+      
+      
+    </div>
+  </div>
+  
+  <div id="page-notice" class="degraded-banner" data-login-url="/login" hidden></div>
+  <div id="main-layout">
+    <aside id="sidebar">
+
+<div id="sidebar-inner"></div>
+
+    </aside>
+    <button id="sidebar-rail" type="button" aria-label="Toggle sidebar"></button>
+    <main id="content">
+
+
+
+
+<div id="tag-detail-page" data-esc-back="../tags.html">
+  <div class="tag-detail-crumb">
+    <p><a href="../tags.html">‹ Tags</a> <span class="field-hint">/ #233</span></p>
+    
+  </div>
+
+  <h2 id="tag-detail-header">
+    <span id="tag-detail-name" style="color:var(--cat-3d90e3,#3d90e3)">senbei</span>
+    
+    
+    <span class="field-hint" id="tag-detail-cat">general</span>
+    
+    <span class="tag-detail-actions">
+      
+      <button type="button" id="btn-detail-rename" class="btn-sm" data-id="233" data-name="senbei" onclick="openRenameDialog(this)">Rename</button>
+      <button type="button" id="btn-detail-category" class="btn-sm" onclick="document.getElementById('detail-category-dialog').showModal()">Change category…</button>
+      <button type="button" id="btn-detail-alias" class="btn-sm" onclick="openDetailAlias()">Alias to…</button>
+      
+      <button type="button" id="btn-detail-delete" class="btn-sm btn-danger" onclick="deleteThisTag(this)"
+              data-name="senbei" data-category="general"
+              title="Delete this tag from every image">Delete</button>
+    </span>
+  </h2>
+
+  <p class="tag-detail-meta">
+    usage <strong>1</strong>
+    · origin
+    
+      
+      <span class="origin-chip origin-site" title="danbooru">danbooru</span>
+    
+    · created <strong>2026-11-02</strong>
+    · last used <strong>2026-11-02</strong>
+  </p>
+
+  <div id="tag-flash" data-action-flash></div>
+
+  
+
+  
+  <div class="tag-detail-cols">
+    <div>
+      <div class="tag-detail-inbound" style="border-color:var(--cat-3d90e3,#3d90e3)">
+        <section class="tag-detail-section">
+          <h3>Aliases pointing here</h3>
+          
+          <p class="field-hint">No aliases point at this tag.</p>
+          
+          <form class="add-tag-form" hx-post="/tags/233/aliases"
+                hx-target="#alias-add-flash" hx-swap="innerHTML">
+            <input type="text" name="name" placeholder="Alias name(s)..." required autocomplete="off">
+            <button type="submit" class="btn-sm">Add</button>
+          </form>
+          <div id="alias-add-flash"></div>
+        </section>
+
+        <section class="tag-detail-section">
+          <h3>Implied by</h3>
+          
+          <p class="field-hint">Nothing implies this tag.</p>
+          
+          <form class="add-tag-form" hx-post="/tags/233/implied-by"
+                hx-target="#implied-by-add-flash" hx-swap="innerHTML">
+            <div class="add-tag-input-wrap">
+              
+      <input type="text" name="parent_id" id="implied-by-add-input" data-multi-tags="1"
+             placeholder="Implied by tags..." required autocomplete="off"
+             hx-get="/internal/tags/suggest"
+             hx-trigger="input changed delay:200ms"
+             hx-target="#implied-by-add-suggest"
+             hx-swap="innerHTML"
+             hx-vals='js:{ q: wordAtCaret(document.getElementById("implied-by-add-input")).word}'
+             onkeydown="handleSuggestKey(event, 'implied-by-add-suggest', 'implied-by-add-input')">
+      <div id="implied-by-add-suggest" class="suggest-dropdown tag-suggest-dropdown"></div>
+
+            </div>
+            <button type="submit" class="btn-sm">Add</button>
+          </form>
+          <div id="implied-by-add-flash"></div>
+        </section>
+      </div>
+    </div>
+
+    <div>
+      <div class="tag-detail-outbound" style="border-color:var(--cat-3d90e3,#3d90e3)">
+        <section class="tag-detail-section">
+          <h3>Implies</h3>
+          <div id="implications-editor" data-tag-id="233">
+            
+
+<ul class="tag-list"><li class="no-tags">No implications declared.</li></ul>
+
+<form id="implication-add-form" class="add-tag-form"
+      hx-post="/tags/233/implications"
+      hx-target="#implication-add-flash"
+      hx-on::after-request="handleImplicationAdded(event)">
+  <div class="add-tag-input-wrap">
+    
+      <input type="text" name="implied_id" id="implication-add-input" data-multi-tags="1"
+             placeholder="Imply tags..." required autocomplete="off"
+             hx-get="/internal/tags/suggest"
+             hx-trigger="input changed delay:200ms"
+             hx-target="#implication-add-suggest"
+             hx-swap="innerHTML"
+             hx-vals='js:{ q: wordAtCaret(document.getElementById("implication-add-input")).word}'
+             onkeydown="handleSuggestKey(event, 'implication-add-suggest', 'implication-add-input')">
+      <div id="implication-add-suggest" class="suggest-dropdown tag-suggest-dropdown"></div>
+
+  </div>
+  <button type="submit" class="btn-sm">Add</button>
+</form>
+<div id="implication-add-flash"></div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <hr class="tag-detail-sep">
+
+  <div class="tag-detail-cols">
+    <div>
+      <section class="tag-detail-section" id="tag-note">
+        <h3>Note
+          
+          <button type="button" id="btn-detail-note" class="btn-link-accent" title="Add a note" onclick="openTagNote('tag-note-body')">[+ add note]</button>
+          <button type="button" id="btn-detail-links" class="btn-link-accent" title="Add links" onclick="openTagNote('tag-note-links')">[+ add links]</button>
+          
+        </h3>
+        
+        
+      </section>
+      <section class="tag-detail-section"
+               hx-get="/tags/233/usage" hx-trigger="load" hx-swap="innerHTML">Loading…</section>
+    </div>
+
+    <div>
+      
+      <div id="ptr-contrib-panel" hx-get="/tags/233/ptr-contrib-panel" hx-trigger="load, implication-added from:body, tag-relations-changed from:body, ptr-contrib-closed from:body, monloader-status-changed from:body" hx-swap="innerHTML"></div>
+      <div id="ptr-contrib-dialog-host"></div>
+      <dialog id="ptr-contrib-loading" class="ptr-contrib-loading">
+  <p class="field-hint">reading the Public Tag Repository...</p>
+</dialog>
+      
+      <section class="tag-detail-section">
+        <h3>Recent images</h3>
+        
+        <div class="tag-recent-strip">
+          
+          <a href="../images/6.html"><img src="../thumbnails/default/6.jpg" alt="image 6" loading="lazy"></a>
+          
+        </div>
+        <p><a id="tag-gallery-link" href="../index.html?q=general:senbei">all 1 in gallery →</a></p>
+        
+      </section>
+    </div>
+  </div>
+  
+</div>
+
+
+<dialog id="rename-dialog">
+  <form id="rename-form"
+        hx-post=""
+        hx-target="#rename-error">
+    <p class="dlg-title">Rename <strong id="rename-src-name"></strong><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+    <div class="field">
+      <label>New name</label>
+      <input type="text" name="name" id="rename-new-name" required autocomplete="off">
+    </div>
+    
+    <div id="rename-keep-alias-row">
+      <label style="display:block;font-size:12px">
+        <input type="checkbox" name="keep_alias" value="1" id="rename-keep-alias">
+        Keep the old name as an alias
+      </label>
+      <span class="field-hint">Without it, saved searches naming the old spelling match nothing.</span>
+    </div>
+    
+    <div id="rename-error"></div>
+    <div class="dialog-actions">
+  <button type="submit">Rename</button>
+  <button type="button" onclick="document.getElementById('rename-dialog').close()">Cancel</button>
+</div>
+  </form>
+</dialog>
+
+
+
+<dialog id="detail-category-dialog">
+  <form hx-patch="/tags/233/category"
+        hx-target="#tag-flash"
+        hx-on::after-request="onDetailCategoryChanged(event)">
+    <p class="dlg-title">Move <strong>senbei</strong> to:<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+    <div class="field">
+      <label>Target category</label>
+      <select name="category_id" id="detail-category-select">
+        
+        <option value="9" data-color="var(--cat-4a8fa8,#4a8fa8)" >year</option>
+        
+        <option value="5" data-color="var(--cat-ffaa00,#ffaa00)" >meta</option>
+        
+        <option value="7" data-color="var(--cat-7d4fbf,#7d4fbf)" >medium</option>
+        
+        <option value="8" data-color="var(--cat-b85c9e,#b85c9e)" >person</option>
+        
+        <option value="3" data-color="var(--cat-cc0000,#cc0000)" >artist</option>
+        
+        <option value="4" data-color="var(--cat-aa00aa,#aa00aa)" >copyright</option>
+        
+        <option value="2" data-color="var(--cat-00aa00,#00aa00)" >character</option>
+        
+        <option value="10" data-color="var(--cat-ed5d1f,#ed5d1f)" >species</option>
+        
+        <option value="1" data-color="var(--cat-3d90e3,#3d90e3)" selected>general</option>
+        
+      </select>
+    </div>
+    
+    <label style="display:block;font-size:12px">
+      <input type="checkbox" name="keep_alias" value="1">
+      Keep <span id="detail-keep-alias-name">general:senbei</span> as an alias
+    </label>
+    
+    <div class="dialog-actions">
+  <button type="submit">Move</button>
+  <button type="button" onclick="document.getElementById('detail-category-dialog').close()">Cancel</button>
+</div>
+  </form>
+</dialog>
+
+
+<dialog id="detail-alias-dialog">
+  <form onsubmit="event.preventDefault(); confirmDetailAlias()">
+    <p class="dlg-title">Alias <strong>senbei</strong> to:<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+    <div class="field">
+      <label>Target tag</label>
+      
+      <div class="series-input-wrap">
+        <input type="text" name="canonical_id" id="detail-alias-canon"
+               placeholder="tag name, category:name, or ID" required autocomplete="off"
+               hx-get="/internal/tags/suggest"
+               hx-trigger="input changed delay:200ms"
+               hx-target="#detail-alias-suggest"
+               hx-include="this"
+               onkeydown="handleSuggestKey(event, 'detail-alias-suggest', 'detail-alias-canon')">
+        <div id="detail-alias-suggest" class="suggest-dropdown tag-suggest-dropdown"></div>
+      </div>
+
+    </div>
+    
+    <p style="color:var(--error);font-size:12px">Every image tagged senbei gets the target tag instead, and its implications move with it. senbei keeps working as an alias. This cannot be undone.</p>
+    
+    <p style="color:var(--fg-dim);font-size:12px">The target is created if it does not exist.</p>
+    <div id="detail-alias-flash"></div>
+    <div class="dialog-actions">
+  <button type="submit" class="btn-danger">Alias</button>
+  <button type="button" onclick="document.getElementById('detail-alias-dialog').close()">Cancel</button>
+</div>
+  </form>
+</dialog>
+
+
+<dialog id="tag-note-dialog">
+  <form hx-post="/tags/233/note"
+        hx-target="#tag-note-error"
+        hx-on::after-request="onExternalEditResponse(event, 'tag-note-dialog')">
+    <p class="dlg-title">Note on <strong style="color:var(--cat-3d90e3,#3d90e3)">senbei</strong><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+    <div class="field">
+      <label for="tag-note-body">Note (max 10000 chars)</label>
+      <textarea id="tag-note-body" name="note" rows="6" maxlength="10000"></textarea>
+      
+<div class="markup-bar" data-target="tag-note-body">
+  <button type="button" class="btn-link-accent" data-wrap="b" title="Bold">[b]</button>
+  <button type="button" class="btn-link-accent" data-wrap="i" title="Italic">[i]</button>
+  <button type="button" class="btn-link-accent" data-wrap="u" title="Underline">[u]</button>
+  <button type="button" class="btn-link-accent" data-wrap="s" title="Struck through">[s]</button>
+  <button type="button" class="btn-link-accent" data-wrap="code" title="Code">[code]</button>
+  <button type="button" class="btn-link-accent" data-wrap="tn" title="Translator note">[tn]</button>
+  <span class="markup-bar-sep">|</span>
+  <button type="button" class="btn-link-accent" data-wrap="tag" title="Link a tag search">[tag]</button>
+  <button type="button" class="btn-link-accent" data-wrap="url" title="Link a URL">[link]</button>
+  <button type="button" class="btn-link-accent" data-wrap="image" title="Link an image in this gallery">[image]</button>
+  <span class="markup-bar-sep">|</span>
+  <button type="button" class="btn-link-accent"
+          hx-post="/tags/233/markup/preview"
+          hx-include="closest form"
+          hx-vals='js:{body: document.getElementById("tag-note-body").value}'
+          hx-target="#tag-note-body-preview">[preview]</button>
+</div>
+<div id="tag-note-body-preview" class="markup-preview"></div>
+
+    </div>
+    <div class="field">
+      <label for="tag-note-links">Links</label>
+      <textarea id="tag-note-links" name="links" rows="4"></textarea>
+      <p class="field-hint">One per line. Start a line with - for a dead link.</p>
+    </div>
+    <div id="tag-note-error"></div>
+    <div class="dialog-actions">
+  <button type="submit">Save</button>
+  <button type="button" onclick="document.getElementById('tag-note-dialog').close()">Cancel</button>
+</div>
+  </form>
+</dialog>
+
+
+<script>
+var TAG_ID =  233 ;
+var TAG_NAME = "senbei";
+
+function openTagNote(focusID) {
+  var note = document.getElementById('btn-detail-note');
+  document.getElementById('tag-note-body').value = note.dataset.note || '';
+  document.getElementById('tag-note-links').value = note.dataset.links || '';
+  clearSlots('tag-note-error', 'tag-note-body-preview');
+  document.getElementById('tag-note-dialog').showModal();
+  document.getElementById(focusID).focus();
+}
+
+
+
+function onDetailCategoryChanged(event) {
+  document.getElementById('detail-category-dialog').close();
+  if (!event.detail.successful) return;
+  if (event.detail.xhr.responseText.indexOf('flash-err') !== -1) return;
+  var keep = event.target.querySelector('input[name=keep_alias]');
+  if (keep && keep.checked) {
+    
+    stashActionFlash('Category updated.', 'ok');
+    location.reload();
+    return;
+  }
+  var sel = document.getElementById('detail-category-select');
+  updateDetailColor(sel);
+  var cat = document.getElementById('tag-detail-cat');
+  var opt = sel.options[sel.selectedIndex];
+  if (!opt) return;
+  if (cat) cat.textContent = opt.text;
+  var link = document.getElementById('tag-gallery-link');
+  if (link) link.href = '/?q=' + encodeURIComponent(opt.text + ':' + TAG_NAME);
+  var keepName = document.getElementById('detail-keep-alias-name');
+  if (keepName) keepName.textContent = opt.text + ':' + TAG_NAME;
+  var own = document.querySelector('.tag-item[data-spelling="' + CSS.escape(opt.text + ':' + TAG_NAME) + '"] .tag-remove-btn');
+  if (own) pruneRelationRow(own);
+}
+
+function openDetailAlias(canon) {
+  clearSlots('detail-alias-flash', 'detail-alias-suggest');
+  document.getElementById('detail-alias-canon').value = canon || '';
+  document.getElementById('detail-alias-dialog').showModal();
+  document.getElementById('detail-alias-canon').focus();
+}
+
+function confirmDetailAlias() {
+  clearSlots('detail-alias-flash');
+  var params = new URLSearchParams();
+  params.set('ids', String(TAG_ID));
+  params.set('canonical_id', document.getElementById('detail-alias-canon').value);
+  postForm('/tags/batch-alias', params, {
+    dialogId: 'detail-alias-dialog',
+    flashId: 'detail-alias-flash',
+    failMsg: 'Alias failed.',
+    catchMsg: 'Alias request failed.',
+    onOK: armGalleryReload
+  });
+}
+
+function postTagPTRPull(params) {
+  clearSlots('tag-flash');
+  postForm('/tags/' + TAG_ID + '/ptr-lookup', params, {
+    flashId: 'tag-flash',
+    failMsg: 'PTR lookup failed.',
+    catchMsg: 'PTR lookup request failed.',
+    onOK: armGalleryReload
+  });
+}
+
+function pullTagPTR(okLabel, question) {
+  showConfirm(question, function() { postTagPTRPull(null); }, null, okLabel);
+}
+
+function pullTagPTRAs(spelling) {
+  var d = document.getElementById('ptr-lookup-dialog');
+  if (d) d.close();
+  postTagPTRPull({as: spelling});
+}
+
+
+
+function pullTagPTRKeeping(spelling) {
+  var d = document.getElementById('ptr-lookup-dialog');
+  if (d) d.close();
+  showConfirm('Pull and keep ' + spelling + '?', function() {
+    postTagPTRPull({as: spelling, merge: '1'});
+  }, 'Every image tagged ' + TAG_NAME + ' gets it instead, and ' + TAG_NAME + ' keeps working as an alias. This cannot be undone.', 'Pull and keep');
+}
+
+function deleteThisTag(btn) {
+  deleteTagFlow(btn, TAG_ID, function() { window.location.href = __demo.url('/tags'); });
+}
+
+function updateDetailColor(sel) {
+  var opt = sel.options[sel.selectedIndex];
+  var name = document.getElementById('tag-detail-name');
+  if (opt && name && opt.dataset.color) name.style.color = opt.dataset.color;
+}
+
+</script>
+
+
+    </main>
+  </div>
+  <footer id="footer">
+    <div id="footer-left">
+      
+      <span class="footer-gallery">[default]</span>
+      
+      <span class="footer-wide">
+      <span class="footer-sep">·</span>
+      <span id="footer-count-images">59 img</span>
+      <span class="footer-sep">·</span>
+      <span id="footer-count-tags">1376 tags</span>
+      <span class="footer-sep">·</span>
+      <span id="footer-count-collections">5 collections</span>
+      </span>
+      
+      <span class="footer-sep-strong">::</span>
+      <span class="footer-rating-label footer-wide">show up to:</span>
+      <form hx-post="/internal/rating-ceiling?level=general" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above sfw (this browser only)">sfw</button></form><span class="footer-sep">·</span><form hx-post="/internal/rating-ceiling?level=sensitive" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above sensitive (this browser only)">sensitive</button></form><span class="footer-sep">·</span><form hx-post="/internal/rating-ceiling?level=questionable" hx-swap="none" hx-on::after-request="if(event.detail.successful){clearSelection();window.location.reload()}" style="display:inline"><button type="submit" class="footer-rating-link" title="Hide images rated above questionable (this browser only)">questionable</button></form><span class="footer-sep">·</span><span class="footer-rating-active" title="Show every rating (this browser only)">[explicit]</span>
+      <span id="footer-hidden" class="footer-hidden"></span>
+    </div>
+    <div id="footer-right">
+      <span id="peer-light" class="footer-conn" data-conn="ok" data-peer-off="" hx-get="/internal/monloader-status" hx-trigger="load delay:1s, every 15s" hx-vals='{"seen":"true,false,false,false,0"}' hx-swap="outerHTML"><button type="button" class="footer-dot footer-dot-ok footer-conn-kill" title="Pause the connection to monloader" hx-post="/internal/monloader/disconnect" hx-target="#peer-light" hx-swap="outerHTML"></button>connected to monloader v1.13.4</span><span class="footer-peer-sep"> · </span><span class="footer-wide"><span id="footer-version"><a href="https://github.com/monbooru/monbooru" target="_blank" rel="noopener">monbooru (tarball)</a> v1.23.0</span> · <a href="#" id="footer-shortcuts" onclick="openShortcutSheet();return false">shortcuts</a> · </span><a href="https://monbooru.github.io/mondocs/index.html" target="_blank" rel="noopener">help</a><span class="footer-wide"> · <a href="../api/v1/docs.html" target="_blank" rel="noopener">API</a></span>
+    </div>
+  </footer>
+  
+  <dialog id="confirm-dialog">
+    <p class="dlg-title"><span id="confirm-dialog-msg"></span><span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+    <p id="confirm-dialog-danger" class="confirm-dialog-danger"></p>
+    <div class="dialog-actions">
+      <button type="button" id="confirm-dialog-ok" class="btn-danger">OK</button>
+      <button type="button" id="confirm-dialog-alt" hidden></button>
+      <button type="button" id="confirm-dialog-cancel">Cancel</button>
+    </div>
+  </dialog>
+
+  <dialog id="shortcuts-help">
+    <h3 class="dlg-title">Keyboard Shortcuts<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></h3>
+    <div class="shortcuts-help-grid">
+      <section data-surface="anywhere">
+        <h4>Anywhere</h4>
+        <ul>
+          <li><kbd>?</kbd><span>Toggle this overlay</span></li>
+          <li data-when="#search-input, #sidebar-inner input[name=&#34;q&#34;]"><kbd>s</kbd><kbd>/</kbd><span>Focus search</span></li>
+          <li><kbd>b</kbd><span>Show / hide sidebar</span></li>
+          <li><kbd>Esc</kbd><span>Close dialog &middot; back</span></li>
+          <li><kbd>g</kbd><kbd>g</kbd><span>Gallery</span></li>
+          <li><kbd>g</kbd><kbd>i</kbd><span>Inbox</span></li>
+          <li><kbd>g</kbd><kbd>c</kbd><kbd>a</kbd><span>Categories</span></li>
+          <li><kbd>g</kbd><kbd>c</kbd><kbd>o</kbd><span>Collections</span></li>
+          <li><kbd>g</kbd><kbd>t</kbd><span>Tags</span></li>
+          <li><kbd>g</kbd><kbd>r</kbd><span>Relations</span></li>
+          <li><kbd>g</kbd><kbd>s</kbd><span>Settings</span></li>
+          <li data-when="form[hx-post=&#34;/internal/sync&#34;]"><kbd>Y</kbd><span>Sync gallery</span></li>
+          <li><kbd>,</kbd><kbd>.</kbd><span>Rating ceiling switch</span></li>
+          <li data-when="#gallery-switch-dialog"><kbd>\</kbd><span>Switch gallery</span></li>
+          <li data-when=".pagination"><kbd>[</kbd><kbd>]</kbd><span>Previous / next page</span></li>
+          <li data-when=".pagination"><kbd>G</kbd><span>Last page</span></li>
+          <li data-when=".pagination"><kbd>p</kbd><span>Page-jump dialog</span></li>
+        </ul>
+      </section>
+      <section data-surface="gallery">
+        <h4>Gallery</h4>
+        <ul>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Move grid cursor</span></li>
+          <li><kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd><span>Move grid cursor</span></li>
+          <li><kbd>Enter</kbd><kbd>o</kbd><span>Open focused image</span></li>
+          <li><kbd>Space</kbd><span>Toggle selection</span></li>
+          <li><kbd>Drag</kbd><span>Rubber-band select</span></li>
+          <li><kbd>Alt</kbd>+<kbd>Drag</kbd><span>Rubber-band remove</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last visible</span></li>
+          <li><kbd>F</kbd><span>Toggle favorites filter</span></li>
+          <li><kbd>R</kbd><span>Random sort</span></li>
+          <li data-when="#slideshow-btn"><kbd>w</kbd><span>Slideshow</span></li>
+          <li><kbd>O</kbd><span>Cycle sort</span></li>
+          <li><kbd>D</kbd><span>Flip direction</span></li>
+          <li data-when="#thumb-size-ramp"><kbd>-</kbd><kbd>=</kbd><span>Thumbnail size</span></li>
+          <li data-when="#select-mode-btn"><kbd>V</kbd><span>Select mode</span></li>
+          <li data-when="#batch-bar:not(.visible)"><kbd>S</kbd><span>Save search dialog</span></li>
+          <li><kbd>Ctrl</kbd>+<kbd>A</kbd><span>Select page</span></li>
+          <li data-when="#batch-select-all-matching:not([hidden])"><kbd>A</kbd><span>Select all matching</span></li>
+        </ul>
+      </section>
+      <section data-surface="selection">
+        <h4>Selection active</h4>
+        <ul>
+          <li data-when="#batch-bar.visible"><kbd>a</kbd><span>Add tags</span></li>
+          <li data-when="#batch-bar.visible"><kbd>r</kbd><span>Remove tags</span></li>
+          <li data-when="#batch-bar.visible .btn-autotag:not([disabled])"><kbd>t</kbd><span>Auto-tag</span></li>
+          <li data-when="#batch-bar.visible"><kbd>m</kbd><span>Rename / move</span></li>
+          <li data-when="#batch-bar.visible"><kbd>i</kbd><span>Toggle archive</span></li>
+          <li data-when="#batch-bar.visible"><kbd>f</kbd><span>Toggle favorite</span></li>
+          <li data-when="#batch-bar.visible"><kbd>c</kbd><span>Set collection</span></li>
+          <li data-when="#batch-bar.visible"><kbd>d</kbd><span>Download as a zip</span></li>
+          <li data-when="#batch-bar.visible #batch-transfer"><kbd>T</kbd><span>Transfer</span></li>
+          <li data-when="#batch-invert"><kbd>I</kbd><span>Invert</span></li>
+          <li data-when="#batch-bar.visible .peer-accent:not([disabled])"><kbd>L</kbd><span>Find tags (monloader)</span></li>
+          <li data-when="#batch-bar.visible"><kbd>Delete</kbd><span>Delete</span></li>
+          <li><kbd>Shift</kbd>+<kbd>click</kbd><span>Extend the selection</span></li>
+          <li data-when=".plugin-card .plugin-btn, #plugin-batch-bar.visible .plugin-btn"><kbd>x</kbd><kbd>1-9</kbd><span>Run Nth plugin</span></li>
+          <li><kbd>Esc</kbd><span>Clear selection</span></li>
+        </ul>
+      </section>
+      <section data-surface="detail">
+        <h4>Image detail</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><kbd>j</kbd><kbd>k</kbd><span>Previous / next</span></li>
+          <li data-when=".coll-nav-keyed .coll-step"><kbd>[</kbd><kbd>]</kbd><span>Previous / next in collection</span></li>
+          <li data-when="#slideshow-btn"><kbd>w</kbd><span>Slideshow from here</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to gallery</span></li>
+          <li><kbd>o</kbd><span>Open in tab</span></li>
+          <li data-when=".detail-actions a[download]"><kbd>d</kbd><span>Download</span></li>
+          <li data-when=".tag-mode-toggle"><kbd>B</kbd><span>Group tags by...</span></li>
+          <li><kbd>a</kbd><span>Focus tag input</span></li>
+          <li><kbd>r</kbd><span>Tag-focus mode</span></li>
+          <li data-when=".btn-autotag:not([disabled])"><kbd>t</kbd><span>Auto-tag dialog</span></li>
+          <li><kbd>f</kbd><kbd>i</kbd><span>Toggle fav / inbox</span></li>
+          <li><kbd>m</kbd><span>Rename / move dialog</span></li>
+          <li><kbd>Delete</kbd><span>Delete image</span></li>
+          <li data-when=".detail-video"><kbd>Space</kbd><span>Play / pause</span></li>
+          <li><kbd>e</kbd><kbd>s</kbd><span>Edit Source</span></li>
+          <li><kbd>e</kbd><kbd>c</kbd><span>Add to collection</span></li>
+          <li><kbd>e</kbd><kbd>n</kbd><span>Edit Note</span></li>
+          <li data-when=".btn-add-annotation"><kbd>e</kbd><kbd>a</kbd><span>Add annotation</span></li>
+          <li data-when="[data-relations-add]"><kbd>e</kbd><kbd>r</kbd><span>Add a relation</span></li>
+          <li data-when="#remove-tags-btn"><kbd>e</kbd><kbd>t</kbd><span>Remove tags</span></li>
+          <li data-when="#transfer-image-btn"><kbd>e</kbd><kbd>g</kbd><span>Transfer gallery</span></li>
+          <li data-when=".btn-edit-collection"><kbd>e</kbd><kbd>1-9</kbd><span>Edit Nth collection</span></li>
+          <li data-when=".add-tag-form .btn-hash-lookup:not([disabled])"><kbd>L</kbd><span>Lookup online boorus</span></li>
+          <li data-when=".btn-manga-action.btn-read"><kbd>R</kbd><span>Open in reader</span></li>
+          <li data-when=".btn-manga-action.btn-pages"><kbd>P</kbd><span>See all pages</span></li>
+          <li data-when=".btn-manga-action.btn-generate-collection"><kbd>C</kbd><span>Generate collection</span></li>
+          <li data-when=".plugin-card .plugin-btn, #plugin-batch-bar.visible .plugin-btn"><kbd>x</kbd><kbd>1-9</kbd><span>Run Nth plugin</span></li>
+          <li data-when=".detail-img-link"><kbd>v</kbd><span>Open image viewer</span></li>
+        </ul>
+      </section>
+      <section data-surface="lightbox">
+        <h4>Image viewer</h4>
+        <ul>
+          <li><kbd>Wheel</kbd><span>Zoom toward cursor</span></li>
+          <li><kbd>Drag</kbd><span>Pan</span></li>
+          <li><kbd>Double click</kbd><span>Toggle fit / 1:1</span></li>
+          <li><kbd>+</kbd><kbd>-</kbd><span>Zoom in / out</span></li>
+          <li><kbd>0</kbd><kbd>1</kbd><span>Fit / 1:1</span></li>
+          <li><kbd>Esc</kbd><kbd>Click outside</kbd><span>Close</span></li>
+        </ul>
+      </section>
+      <section data-surface="slideshow">
+        <h4>Slideshow</h4>
+        <ul>
+          <li><kbd>Space</kbd><span>Play / pause</span></li>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Previous / next</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last</span></li>
+          <li><kbd>r</kbd><span>Restart video</span></li>
+          <li><kbd>l</kbd><span>Loop videos</span></li>
+          <li><kbd>m</kbd><span>Sound on / off</span></li>
+          <li><kbd>f</kbd><span>Fullscreen</span></li>
+          <li><kbd>Esc</kbd><span>Exit slideshow</span></li>
+        </ul>
+      </section>
+      <section data-surface="tags">
+        <h4>Tags page</h4>
+        <ul>
+          <li><kbd>s</kbd><span>Focus filter</span></li>
+          <li data-when=".tag-row"><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>j</kbd><kbd>k</kbd><span>Move row cursor</span></li>
+          <li data-when=".tag-row"><kbd>Space</kbd><span>Toggle selection</span></li>
+          <li data-when=".tag-row"><kbd>Enter</kbd><span>Open the tag</span></li>
+          <li data-when="#tag-select-page"><kbd>Ctrl</kbd>+<kbd>A</kbd><span>Select page</span></li>
+          <li><kbd>n</kbd><kbd>N</kbd><span>New tag / alias</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-category"><kbd>t</kbd><kbd>c</kbd><span>Change category</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-merge"><kbd>t</kbd><kbd>m</kbd><span>Merge</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-alias"><kbd>t</kbd><kbd>a</kbd><span>Alias to</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-imply"><kbd>t</kbd><kbd>i</kbd><span>Imply</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-merge-folded"><kbd>t</kbd><kbd>f</kbd><span>Merge old spellings</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-distinct"><kbd>t</kbd><kbd>d</kbd><span>Mark distinct</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-undistinct"><kbd>t</kbd><kbd>d</kbd><span>Unmark distinct</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-ptr:not([disabled])"><kbd>t</kbd><kbd>p</kbd><span>Find aliases (PTR)</span></li>
+          <li data-when="#tag-batch-bar:not([hidden]) #btn-batch-delete"><kbd>Delete</kbd><span>Delete selected</span></li>
+        </ul>
+      </section>
+      <section data-surface="tag-detail">
+        <h4>Tag detail</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><span>Previous / next tag</span></li>
+          <li data-when="#btn-detail-rename"><kbd>t</kbd><kbd>r</kbd><span>Rename</span></li>
+          <li data-when="#btn-detail-category"><kbd>t</kbd><kbd>c</kbd><span>Change category</span></li>
+          <li data-when="#btn-detail-alias"><kbd>t</kbd><kbd>a</kbd><span>Alias / repoint</span></li>
+          <li data-when="#btn-detail-note"><kbd>t</kbd><kbd>n</kbd><span>Note</span></li>
+          <li data-when="#btn-detail-delete"><kbd>Delete</kbd><span>Delete tag</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to the listing</span></li>
+        </ul>
+      </section>
+      <section data-surface="categories">
+        <h4>Categories page</h4>
+        <ul>
+          <li><kbd>n</kbd><span>Focus Add category</span></li>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><span>Move the category whose &equiv; has focus</span></li>
+        </ul>
+      </section>
+      <section data-surface="settings">
+        <h4>Settings page</h4>
+        <ul>
+          <li><kbd>1-9</kbd><kbd>0</kbd><span>Jump to section</span></li>
+        </ul>
+      </section>
+      <section data-surface="reader">
+        <h4>Manga reader</h4>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><kbd>h</kbd><kbd>l</kbd><kbd>Space</kbd><span>Previous / next page</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last page</span></li>
+          <li><kbd>p</kbd><span>Jump to page</span></li>
+          <li><kbd>P</kbd><span>See all pages</span></li>
+          <li><kbd>o</kbd><span>Open page in new tab</span></li>
+          <li><kbd>e</kbd><span>Extract page as image</span></li>
+          <li><kbd>v</kbd><span>Zoom page in viewer</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back</span></li>
+        </ul>
+      </section>
+      <section data-surface="pages">
+        <h4>Archive pages grid</h4>
+        <ul>
+          <li><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Move grid cursor</span></li>
+          <li><kbd>Enter</kbd><kbd>o</kbd><span>Open in the reader</span></li>
+          <li><kbd>R</kbd><span>Read from page 1</span></li>
+          <li><kbd>Home</kbd><kbd>End</kbd><span>First / last cell</span></li>
+          <li><kbd>Esc</kbd><kbd>Backspace</kbd><span>Back to detail</span></li>
+        </ul>
+      </section>
+      <section data-surface="relations">
+        <h4>Relations session</h4>
+        <ul>
+          <li><kbd>1</kbd><span>Right duplicates left</span></li>
+          <li><kbd>2</kbd><span>Right is an alternate</span></li>
+          <li><kbd>3</kbd><span>Right is newer version</span></li>
+          <li><kbd>4</kbd><span>Right is based on left</span></li>
+          <li><kbd>5</kbd><span>Not related</span></li>
+          <li><kbd>6</kbd><kbd>Space</kbd><span>Skip</span></li>
+          <li><kbd>W</kbd><span>Swap sides</span></li>
+          <li><kbd>C</kbd><span>Open compare slider</span></li>
+          <li><kbd>Esc</kbd><span>Back to Relations</span></li>
+        </ul>
+      </section>
+    </div>
+    <div class="dialog-actions">
+      <button type="button" id="shortcuts-all" class="btn-link-accent">[all surfaces]</button>
+      <button type="button" onclick="document.getElementById('shortcuts-help').close()">Close</button>
+    </div>
+  </dialog>
+  <dialog id="page-jump-dialog">
+    <form id="page-jump-form" onsubmit="event.preventDefault(); submitPageJump();">
+      <p class="dlg-title">Go to page (1–<span id="page-jump-total">1</span>):<span class="dlg-x" role="button" aria-label="Close" title="Close (Esc)"></span></p>
+      <div class="field">
+        <input type="number" id="page-jump-input" name="page" min="1" required>
+      </div>
+      <div class="dialog-actions">
+  <button type="submit">Go</button>
+  <button type="button" onclick="document.getElementById('page-jump-dialog').close()">Cancel</button>
+</div>
+    </form>
+  </dialog>
+  
+<dialog id="image-lightbox" class="lightbox-dialog" aria-label="Image viewer">
+  <div class="lightbox-stage" id="lightbox-stage">
+    <img id="lightbox-img" class="lightbox-img" alt="">
+  </div>
+  <div class="lightbox-bar">
+    <button type="button" id="lightbox-close" title="Close (Esc)">× Close</button>
+    <span class="lightbox-zoom" id="lightbox-zoom">100%</span>
+    <a id="lightbox-open" class="lightbox-open" href="" target="_blank" rel="noopener" title="Open original in new tab">↗</a>
+  </div>
+</dialog>
+
+  
+</body>
+</html>
+
